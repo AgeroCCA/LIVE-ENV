@@ -7425,7 +7425,7 @@ The"Retrieve Equipments for a given Facility" API allows user to retrieve  equip
             
 # Group 8 Profile API
 
-## 8.1 Create Profile [/profile]  
+## 8.1 Create Profile [/profile?forUser={username}]
     
 ###Description
 
@@ -7434,10 +7434,20 @@ This resource is forbidden if a profile already exists for the user. The Profile
 the user, cell phone #, email, office email, office phone and preferences for GPS tracking and Auto Assign 
 Jobs to me for Dispatchers only.
 
+If the username in forUser querystring is provided and the role is dispatcher/owner they can add all lower access users profiles. 
+If the forUser querystring is not provided only the logged in user’s profile will be created to whom the api token is issued.
+
+###Request Parameters 
+
+|Schema Property |Description   |Is Required   |Type   |Business Rules|
+|:---------------|:-------------|:-------------|:------|:-------------| 
+|forUser |Represents the unique Username |NO |String| 
+
 ###Sample Request URL
 
-/profile
-
+POST https://api-test.enterprise.agero.com/v1/id/profile?forUser=JohnDoe
+HTTP/1.1
+Host: api-test.enterprise.agero.com 
 
 ###Request JSON
 
@@ -7445,7 +7455,8 @@ Jobs to me for Dispatchers only.
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |userInfo|    User’s Personal and Office Info|YES   |UserInfo|
 |Preferences|  User’s application preferences  |NO   |Preferences|
-
+|facilities|  User’s facilities  |NO   |Facility[]|
+|equipment|  User’s authorized equipment  |NO   |DriverEquipment|
  
 ###Sample Request
 
@@ -7474,7 +7485,7 @@ Jobs to me for Dispatchers only.
             "address" :"275 High Street",
             "city" : "Medford",
             "state" : "MA",
-            "zip" : "02155",
+            "zipcode" : "02155",
             "lat" : "42.0123",
             "lon" : "80.1153"
         },
@@ -7484,7 +7495,7 @@ Jobs to me for Dispatchers only.
             "address" :"100 Main Street",
             "city" : "Medford",
             "state" : "MA",
-            "zip" : "02155",
+            "zipcode" : "02155",
             "lat" : "42.0123",
             "lon" : "80.1153"
         }
@@ -7509,7 +7520,7 @@ object so client side state matches database state.
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |profileId|   Profile ID|YES   |Integer|
 |userInfo|    User’s Personal and Office Info|YES   |UserInfo|
-|Preferences|  User’s application preferences  |NO   |Preferences|
+|preferences|  User’s application preferences  |NO   |Preferences|
 
 ###Errors 
 
@@ -7555,7 +7566,7 @@ object so client side state matches database state.
                     "address" :"275 High Street",
                     "city" : "Medford",
                     "state" : "MA",
-                    "zip" : "02155",
+                    "zipcode" : "02155",
                     "lat" : "42.0123",
                     "lon" : "80.1153"
                 },
@@ -7565,7 +7576,7 @@ object so client side state matches database state.
                     "address" :"100 Main Street",
                     "city" : "Medford",
                     "state" : "MA",
-                    "zip" : "02155",
+                    "zipcode" : "02155",
                     "lat" : "42.0123",
                     "lon" : "80.1153"
                 }
