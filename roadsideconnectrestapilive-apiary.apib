@@ -7824,7 +7824,7 @@ for GPS tracking and Auto Assigned Job to me(for dispatchers only.
             }
             
             
-## 8.3-8.5 Partial Profile UserInfo [/profile/userInfo]
+## 8.3-8.5 Partial Profile UserInfo [/profile/userInfo?forUser={username}]
 
 ## 8.3 Partial Get
 
@@ -7834,7 +7834,7 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
 
 ### SampleURL
 
-/profile/userInfo
+/profile/userInfo?forUser=JohnDoe
 
 ### Response
 
@@ -7856,7 +7856,7 @@ The "Partial Update" API allows client apps to update the userInfo and preferenc
 
 ### SampleURL
 
-/profile/userInfo
+/profile/userInfo?forUser=JohnDoe
 
 ### Request
 
@@ -7920,7 +7920,7 @@ The "Partial Update" API allows client apps to update the userInfo and preferenc
 
 + Response 200 ()
 
-## 8.3.1-8.5.1 Profile Preferences [/profile/preferences]
+## 8.3.1-8.5.1 Profile Preferences [/profile/preferences?forUser={username}]
 
 ## 8.3.1 Get Preferences
 
@@ -7930,7 +7930,7 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
 
 ###SampleURL
 
-/profile/preferences
+/profile/preferences?forUser=JohnDoe
 
 ###Response
 
@@ -7955,15 +7955,21 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
 
 ### SampleURL
 
-/profile/preferences
+/profile/preferences?forUser=JohnDoe
 
 ### Request
 
-    {
-        "JobFilter" : 1,
-        "JobViewOpt" : 0,
-        "gpsTracking" : "true",
-        "etaAlerts" : "true"
+      {
+       "jobFilter":1,
+       "jobViewOpt":null,
+       "gpsTracking":true,
+       "etaAlerts":true,
+       "inactivityAlert":true,
+       "autoAssignAlljobs":false,
+       "subscribeToNewsletterEmail":false,
+       "consentToTextAndPhoneStatusUpdates":false,
+       "passwordManagementPrivilege":false,
+       "jobConfirmationExpectedViaEmailOrFax":false
     }
 
 
