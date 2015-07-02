@@ -8033,7 +8033,7 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
             
 + Response 200 ()
 
-## 8.6 Get Facility List for Profile [/profile/{profileId}/facilities]
+## 8.6 Get Facility List for Profile [/profile/facilities]
 
 ###Description
 
@@ -8044,32 +8044,37 @@ Pagination is supported by this resource.
 
 ###Sample Request URL
 
-/profile/778546/facilities
+/profile/facilities
 
 ###Sample Response
-    [
     {
-        "id" : "1",
-        "name" : "ABC Towing (Turnersville)",
-        "address" : "3400 Route 42",
-        "city" : true,
-        "city" : "Turnersville",
-        "state" : "NJ",
-        "zipCode" : "08012",
-        "lat" :23.5435,
-        "lon" :-35.5435
-    },
-    {
-        "id" : "2",
-        "name" : "ABC Towing (Glassboro)",
-        "address" : "100 Main Street",
-        "city" : "Glassboro",
-        "state" : "NJ",
-        "zipCode" : "08011",
-        "lat" :53.5435,
-        "lon" :-65.5435
+       "totalCount":1,
+       "offSet":0,
+       "limit":10,
+       "results":[
+          {
+             "id":"1",
+             "name":"ABC Towing (Turnersville)",
+             "address":"3400 Route 42",
+             "city":true,
+             "city":"Turnersville",
+             "state":"NJ",
+             "zipCode":"08012",
+             "lat":23.5435,
+             "lon":-35.5435
+          },
+          {
+             "id":"2",
+             "name":"ABC Towing (Glassboro)",
+             "address":"100 Main Street",
+             "city":"Glassboro",
+             "state":"NJ",
+             "zipCode":"08011",
+             "lat":53.5435,
+             "lon":-65.5435
+          }
+       ]
     }
-    ]
     
 ###Response JSON
 
