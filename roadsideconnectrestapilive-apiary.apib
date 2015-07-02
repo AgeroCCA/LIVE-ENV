@@ -7425,13 +7425,7 @@ The"Retrieve Equipments for a given Facility" API allows user to retrieve  equip
             
 # Group 8 Profile API
 
-
- 
-
-
-
-
-## 8.1-8.4 Profile Management [/profile?forUser={username}]
+## 8.1, 8.4 Profile Management [/profile?forUser={username}]
 
 ## 8.1 Create Profile 
     
@@ -7547,16 +7541,29 @@ The "Update Profile" API allows drivers and dispatchers to update an existing pr
 This resource is forbidden if a profile does not exist for the user. The Profile API allows users to update the 
 name of the user, cell phone #, email, office email, office phone and preferences for ETA alerts and GPS tracking.
 
+If the username in forUser querystring is provided and the role is dispatcher/owner they can update all lower access users profiles.
+If the forUser querystring is not provided only the logged in user’s profile will be updated to whom the api token is issued.
+
+###Request Parameters 
+
+|Schema Property |Description   |Is Required   |Type   |Business Rules|
+|:---------------|:-------------|:-------------|:------|:-------------| 
+|forUser |Represents the unique Username |NO |String| 
+
 ###Sample Request URL
 
-/profile/778546
+PUT https://api-test.enterprise.agero.com/v1/id/profile?forUser=JohnDoe
+HTTP/1.1
+Host: api-test.enterprise.agero.com 
 
 ##Request JSON
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |userInfo|    User’s Personal and Office Info|YES   |UserInfo|
-|Preferences|  User’s application preferences  |NO   |Preferences|
+|preferences|  User’s application preferences  |NO   |Preferences|
+|facilities|  Facilities user is associated with  |NO   |Facility[]|
+|equipment|  Driver’s authorized equipment  |NO   |DriverEquipment|
 
 ###Sample Response
 HTTP 200 OK
