@@ -10030,6 +10030,127 @@ The table below shows complete list of Notifications
                 }
             ]
 
+## 12.29 Get Equipment Types [/enumerations/equipmentTypes] 
+
+###Description
+
+The "Get User Role Types" API provides a list of Roles that can be assigned to a user.
+
+###Sample Request URL
+
+/enumerations/equipmentTypes
+
+###Request JSON
+
+N/A
+
+###Sample Request Body
+
+N/A
+
+###Repsonse JSON
+
+| Schema Property|Description   |Is Required |Type|Business Rules|
+|:---------------|:-------------|:-------------|:-------------|:-------------|   
+|  | Array of equipment shift types  |YES   | equipmentShiftType[]|
+
+###Errors 
+
+|HTTP Code |Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|
+|401       |INVALID_CLIENT| Client identifier is required|An API key was not supplied  | 
+|404       |Resource Not Found| NO_VENDOR_FOUND |No vendor exists in the system for the given vendorId| 
+|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+
+
+
+###Get Equipment Types [GET]
+
++ Request ()
+
+    + Header
+
+            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+
+
++ Response 200 ()
+
+  + Body
+             
+            [
+                {
+               
+                "code" : "5WT", "description" : "5th Wheel Transport"
+                },
+                {
+                "code" : "HDLB",
+                "description" : "Heavy Duty Lowboy/Flatbed"
+                },
+                {
+                "code" : "HDRS",
+                "description" : "Heavy Duty Roadservice "
+                },
+                {
+                "code" : "HDTS",
+                "description" : "Heavy Duty Tireservice"
+                },
+                {
+                "code" : "HDUR",
+                "description" : "Heavy Duty Underreach"
+                },
+                {
+                "code" : "HDW",
+                "description" : "Heavy Duty Wrecker"
+                },
+                {
+                "code" : "LDF",
+                "description" : "Light Duty Flatbed"
+                },
+                { "code" : "LDWL",
+                "description" : "Light Duty Wheel Lift"
+                },
+                {
+                "code" : "LRS",
+                "description" : "Lockout Roadservice"
+                },
+                {
+                "code" : "MDF",
+                "description" : "Medium Duty Flatbed"
+                },
+                {
+                "code" : "MDRS",
+                "description" : "Medium Duty Roadservice"
+                },
+                {
+                "code" : "MDTS",
+                "description" : "Medium Duty Tireservice"
+                },
+                {
+                "code" : "MDUR",
+                "description" : "Medium Duty Underreach"
+                },
+                {
+                "code" : "MDW",
+                "description" : "Medium Duty Wrecker"
+                },
+                {
+                "code" : "MRS",
+                "description" : "Minor Roadservice"
+                },
+                {
+                "code" : "MM",
+                "description" : "Mobile Mechanic"
+                },
+                {
+                "code" : "MP",
+                "description" : "Motorcycle Pickup"
+                },
+                {
+                "code" : "MS",
+                "description" : "Motorcycle Service"
+                }
+                ]            
+
 
 # Group 13 Tracking API
 ## 13.1 Get Notify Current Location [/currentLocation]
