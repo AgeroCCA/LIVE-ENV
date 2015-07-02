@@ -7539,37 +7539,6 @@ object so client side state matches database state.
 |403       |RESOURCE_EXISTS |A profile exists for  this user  | Once a profile is created for a user,it cannot be created again. A PUT should be made instead to update the current profile|
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
-## 8.2 Get Profile
-
-###Description
-
-The "Get Profile" API allows drivers and dispatchers to get a new profile for the authenticated user. 
-with an already existed user.This resource is forbidden if a profile does not exist for the user.
-The Get Profile API will return the name of the user, cell phone #, email, office email, office phone a, preferences
-for GPS tracking and Auto Assigned Job to me(for dispatchers only.
-
-###Sample Request URL
-
-/profile/778546
-
-###Response JSON
-
-|Schema Property |Description   |Is Required   |Type   |Business Rules|
-|:---------------|:-------------|:-------------|:------|:-------------| 
-|profileId|   Profile ID|YES   |Integer|
-|userInfo|    User’s Personal and Office Info|YES   |UserInfo|
-|preferences|  User’s application preferences  |YES   |Preferences|
-|facilities|  User’s facilities  |NO   |Facility[]|
-|equipment|  User’s authorized equipments  |NO   |DriverEquipment|
-
-###Errors 
-
-|HTTP Code |Error Code | Message |Reason  | 
-|:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|400       | REQUEST_PARAMETER_MISSING | Request Validation failed| One or more invalid parameters we passed  See the innerErrors collection for a list of invalid parameters| 
-|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
-
 ## 8.4 Update Profile 
 
 ###Description
@@ -7683,71 +7652,7 @@ HTTP 200 OK
                 }
             }
 
-##Get Profile [GET]
-+ Request ()
 
-    + Header
-
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-                "profileId": 645773,
-                "userInfo": {
-                "name": "adfasd",
-                "cellPhone": "215-275-9090",
-                "email": "as@gmail.com",
-                "officeEmail": "as@gmail.com",
-                "officePhone": "317-890-9090",
-                "profilePictureUrl": ""
-                },
-                "preferences": {
-                "jobFilter": 1,
-                "jobViewOpt": null,
-                "gpsTracking": true,
-                "etaAlerts": true,
-                "inactivityAlert": true,
-                "autoAssignAlljobs": false,
-                "subscribeToNewsletterEmail": false,
-                "consentToTextAndPhoneStatusUpdates": false,
-                "passwordManagementPrivilege": false,
-                "jobConfirmationExpectedViaEmailOrFax": false
-                },
-                "facilities": [
-                {
-                "id": "1",
-                "name": "Douglas Transport-ASM",
-                "address": "275 High Street",
-                "city": "Medford",
-                "state": "MA",
-                "zipcode": "02155",
-                "lat": "42.0123",
-                "lon": "80.1153"
-                },
-                {
-                "id": "2",
-                "name": "Douglas Transport-VIMS",
-                "address": "100 Main Street",
-                "city": "Medford",
-                "state": "MA",
-                "zipcode": "02155",
-                "lat": "42.0123",
-                "lon": "80.1153"
-                }
-                ],
-                "equipment": {
-                "vehicleNickname": "blue truck",
-                "equipmentPictureUrl": null,
-                "lastUpdatedAt": "2015-01-28T14:34:16",
-                "addressId": 1,
-                "type": "Light Duty Wheel Lift",
-                "equipmentId": "LDWL" 
-                }
-            }
-            
 ##Update Profile [PUT]
 
 + Request (application/json)
@@ -7814,7 +7719,103 @@ HTTP 200 OK
 
 + Response 200 (application/json)
 
+
+## 8.2 Get Profile [/profile/{profileId}]
+
+###Description
+
+The "Get Profile" API allows drivers and dispatchers to get a new profile for the authenticated user. 
+with an already existed user.This resource is forbidden if a profile does not exist for the user.
+The Get Profile API will return the name of the user, cell phone #, email, office email, office phone a, preferences
+for GPS tracking and Auto Assigned Job to me(for dispatchers only.
+
+###Sample Request URL
+
+/profile/778546
+
+###Response JSON
+
+|Schema Property |Description   |Is Required   |Type   |Business Rules|
+|:---------------|:-------------|:-------------|:------|:-------------| 
+|profileId|   Profile ID|YES   |Integer|
+|userInfo|    User’s Personal and Office Info|YES   |UserInfo|
+|preferences|  User’s application preferences  |YES   |Preferences|
+|facilities|  User’s facilities  |NO   |Facility[]|
+|equipment|  User’s authorized equipments  |NO   |DriverEquipment|
+
+###Errors 
+
+|HTTP Code |Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|400       | REQUEST_PARAMETER_MISSING | Request Validation failed| One or more invalid parameters we passed  See the innerErrors collection for a list of invalid parameters| 
+|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
   
+##Get Profile [GET]
++ Request ()
+
+    + Header
+
+            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+                "profileId": 645773,
+                "userInfo": {
+                "name": "adfasd",
+                "cellPhone": "215-275-9090",
+                "email": "as@gmail.com",
+                "officeEmail": "as@gmail.com",
+                "officePhone": "317-890-9090",
+                "profilePictureUrl": ""
+                },
+                "preferences": {
+                "jobFilter": 1,
+                "jobViewOpt": null,
+                "gpsTracking": true,
+                "etaAlerts": true,
+                "inactivityAlert": true,
+                "autoAssignAlljobs": false,
+                "subscribeToNewsletterEmail": false,
+                "consentToTextAndPhoneStatusUpdates": false,
+                "passwordManagementPrivilege": false,
+                "jobConfirmationExpectedViaEmailOrFax": false
+                },
+                "facilities": [
+                {
+                "id": "1",
+                "name": "Douglas Transport-ASM",
+                "address": "275 High Street",
+                "city": "Medford",
+                "state": "MA",
+                "zipcode": "02155",
+                "lat": "42.0123",
+                "lon": "80.1153"
+                },
+                {
+                "id": "2",
+                "name": "Douglas Transport-VIMS",
+                "address": "100 Main Street",
+                "city": "Medford",
+                "state": "MA",
+                "zipcode": "02155",
+                "lat": "42.0123",
+                "lon": "80.1153"
+                }
+                ],
+                "equipment": {
+                "vehicleNickname": "blue truck",
+                "equipmentPictureUrl": null,
+                "lastUpdatedAt": "2015-01-28T14:34:16",
+                "addressId": 1,
+                "type": "Light Duty Wheel Lift",
+                "equipmentId": "LDWL" 
+                }
+            }
+            
             
 ## 8.3-8.5 Partial Profile UserInfo [/profile/userInfo]
 
