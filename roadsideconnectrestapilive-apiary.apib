@@ -10162,8 +10162,8 @@ Http 200 OK
     + Body
     
             {
-                "latitude" : 40.1234,
-                "longitude" : -70.1234
+                "Latitude" : 40.1234,
+                "Longitude" : -70.1234
             }
 
 + Response 200 ()
@@ -10325,10 +10325,10 @@ URI that a client app calls to for authorization . Redirects app end user to Log
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|    Client_id           |   Represents the consumer  key of the app        |YES|String|
-|    Response_type        |    Represents the response  type  |YES|Enum| Static Value: code|
-|    Scope        |    Represents the privileges being requested   |YES|Enum|PossibleValues: READ WRITE|   
-|    State        |    This parameter is designed  to prevent cross-site request forgery attacks  The server sends this  string back in the|YES|String| 
+|    client_id           |   Represents the consumer  key of the app        |YES|String|
+|    response_type        |    Represents the response  type  |YES|Enum| Static Value: code|
+|    scope        |    Represents the privileges being requested   |YES|Enum|PossibleValues: READ WRITE|   
+|    state        |    This parameter is designed  to prevent cross-site request forgery attacks  The server sends this  string back in the|YES|String| 
 
 ### Sample Request
 
@@ -10391,8 +10391,8 @@ Authorization: THZ3dm8zUWVHaVdOYFtdmRoU1dTUmVaODhzdTg6Qk5nNmF4bklSSm93bThHUw==
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|    Username           | The service provider’s AgeroSupport.com username       |YES|String|
-|    Password           |   The service provider’s AgeroSupport.com password    |YES|String|
+|    username           | The service provider’s AgeroSupport.com username       |YES|String|
+|    password           |   The service provider’s AgeroSupport.com password    |YES|String|
 |    clientId           | Represents the unique    client identifier of the app |YES|String|
 
 ### Sample Request Body
