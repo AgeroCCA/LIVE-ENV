@@ -8114,29 +8114,34 @@ Returns an HTTP 500 if a server side exception occurs.
 
     + Body
     
-            [
-                {
-                    "id" : "1",
-                    "name" : "ABC Towing (Turnersville)",
-                    "address" : "3400 Route 42",
-                    "city" : true,
-                    "city" : "Turnersville",
-                    "state" : "NJ",
-                    "zipCode" : "08012",
-                    "lat" :23.5435,
-                    "lon" :-35.5435
-                },
-                {
-                    "id" : "2",
-                    "name" : "ABC Towing (Glassboro)",
-                    "address" : "100 Main Street",
-                    "city" : "Glassboro",
-                    "state" : "NJ",
-                    "zipCode" : "08011",
-                    "lat" :53.5435,
-                    "lon" :-65.5435
-                }
-            ]
+            {
+               "totalCount":1,
+               "offSet":0,
+               "limit":10,
+               "results":[
+                  {
+                     "id":"1",
+                     "name":"ABC Towing (Turnersville)",
+                     "address":"3400 Route 42",
+                     "city":true,
+                     "city":"Turnersville",
+                     "state":"NJ",
+                     "zipCode":"08012",
+                     "lat":23.5435,
+                     "lon":-35.5435
+                  },
+                  {
+                     "id":"2",
+                     "name":"ABC Towing (Glassboro)",
+                     "address":"100 Main Street",
+                     "city":"Glassboro",
+                     "state":"NJ",
+                     "zipCode":"08011",
+                     "lat":53.5435,
+                     "lon":-65.5435
+                  }
+               ]
+            }
             
 ## 8.11 Add a preferred facility [/profile/facilities]
 
