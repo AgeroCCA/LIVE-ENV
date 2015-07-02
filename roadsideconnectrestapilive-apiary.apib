@@ -8019,10 +8019,16 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
     + Body
     
             {
-                "JobFilter" : 1,
-                "JobViewOpt" : 0,
-                "gpsTracking" : "true",
-                "etaAlerts" : "true"
+               "jobFilter":1,
+               "jobViewOpt":null,
+               "gpsTracking":true,
+               "etaAlerts":true,
+               "inactivityAlert":true,
+               "autoAssignAlljobs":false,
+               "subscribeToNewsletterEmail":false,
+               "consentToTextAndPhoneStatusUpdates":false,
+               "passwordManagementPrivilege":false,
+               "jobConfirmationExpectedViaEmailOrFax":false
             }
             
 + Response 200 ()
