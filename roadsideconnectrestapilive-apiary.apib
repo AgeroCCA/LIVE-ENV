@@ -7635,7 +7635,9 @@ for GPS tracking and Auto Assigned Job to me(for dispatchers only.
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |profileId|   Profile ID|YES   |Integer|
 |userInfo|    User’s Personal and Office Info|YES   |UserInfo|
-|Preferences|  User’s application preferences  |NO   |Preferences|
+|preferences|  User’s application preferences  |YES   |Preferences|
+|facilities|  User’s facilities  |NO   |Facility[]|
+|equipment|  User’s authorized equipments  |NO   |DriverEquipment|
 
 ###Errors 
 
@@ -7716,7 +7718,7 @@ HTTP 200 OK
                 "address": "275 High Street",
                 "city": "Medford",
                 "state": "MA",
-                "zip": "02155",
+                "zipcode": "02155",
                 "lat": "42.0123",
                 "lon": "80.1153"
                 },
@@ -7726,7 +7728,7 @@ HTTP 200 OK
                 "address": "100 Main Street",
                 "city": "Medford",
                 "state": "MA",
-                "zip": "02155",
+                "zipcode": "02155",
                 "lat": "42.0123",
                 "lon": "80.1153"
                 }
