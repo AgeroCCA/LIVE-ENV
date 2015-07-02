@@ -6727,7 +6727,7 @@ responseType|Represents the level of details needed in response|NO|String|Possib
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
-|Driverlist|List of Driver locations|YES          |String|
+|Driverlist|List of Driver locations|YES          |Driver[]|
 |onDuty    |Represents the availability mode of Driver   |No|Boolean  |If not provided, all the drivers  will be returned  |
 
 
@@ -7208,7 +7208,7 @@ HTTP 201 Resource Created
             }
             
 
-## 7.12 Get Facility list [/vendors/{vendorId}/facilities?%5BaccessMode=anonymous%5D]
+## 7.12 Get Facility list [/vendors/{vendorId}/facilities]
 
 ###Description
 
@@ -7220,20 +7220,19 @@ and Facility address,
 
 /vendors/5447/facilities
 
-/vendors/5447/facilities?accessMode=anonymous
+/vendors/5447/facilities
 
 ###Request Parameters
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |vendorId|    Represents the unique tax identification number of the  vendor|YES   |String|
-|accessMode|  Represents if this resource is being accessed in anonymous mode     |No   |String|Allowed Value:anonymous If present, Authorization Header has to be the consumerkey of the app|                                                                                            
- 
+
 ###Response Schema
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
-|Facilities|    List of facilities|YES   |Facility[]|
+|facilities|    List of facilities|YES   |Facility[]|
 
 ###Errors 
 
@@ -7264,7 +7263,7 @@ and Facility address,
                 "address" : "275 High Street",
                 "city" : "Medford",
                 "state" : "MA",
-                "zip" : "02155",
+                "zipcode" : "02155",
                 "lat" : "42.0123",
                 "lon" : "80.1153" 
             },
@@ -7274,11 +7273,12 @@ and Facility address,
                 "address" : "100 Main Street",
                 "city" : "Malden",
                 "state" : "MA",
-                "zip" : "02155",
+                "zipcode" : "02155",
                 "lat" : "42.0123",
                 "lon" : "80.1153"
             }
             ]
+            
             
 
 
