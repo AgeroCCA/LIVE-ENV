@@ -4530,7 +4530,8 @@ has been accepted or rejected by Agero. The push notification process is documen
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job you are tyring to retrive is not allowed by the current user|Drivers cannot see jobs aren't unassingned or assigned to them|
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job has expired, it cannot be accepted|The job cannot be accepted|  
-|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.||  
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.||
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: eDispatch unavailable. Callback requested|If the request a callback is made on new job offer, only agent can accept/refuse.|  
 |404       | No Jobs Found    |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
