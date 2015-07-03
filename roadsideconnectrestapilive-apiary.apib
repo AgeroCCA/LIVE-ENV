@@ -8159,7 +8159,9 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
             
 + Response 200 ()
 
-## 8.6 Get Facility List for Profile [/profile/facilities]
+## 8.6,8.11 Facility List [/profile/facilities]
+
+## 8.6 Get Facility List for Profile 
 
 ###Description
 
@@ -8269,7 +8271,7 @@ Returns an HTTP 500 if a server side exception occurs.
                ]
             }
             
-## 8.11 Add a preferred facility [/profile/{profileId}/facilities]
+## 8.11 Add a preferred facility
 
 ###Description
 
@@ -8412,7 +8414,7 @@ HTTP 201 Resource Created
            
 + Response 201 ()
 
-## 8.8-8.10 Retrieve,Update,Delete Profile API [/profile/{profileId}/picture]
+## 8.8-8.10 Retrieve,Update,Delete Profile API [/profile/picture?driverId={driverId}]
 
 ## 8.8 Retrieve a profile picture
 
@@ -8595,7 +8597,7 @@ HTTP 200 OK
 + Response 200 ()
 
 
-## 8.12 Remove a preferred facility [/profile/{profileId}/facilities{facilityId}] 
+## 8.12 Remove a preferred facility [/profile/facilities/{facilityId}] 
 
 ###Description
 
@@ -8603,7 +8605,7 @@ The "Remove a preferred facility" API allows a dispatcher to remove a facility f
 of facilities for which he wants to receive jobs.
 
 ###Sample Request URL
-/profile/645773/facilities/3
+/profile/facilities/3
 
 ###Request Parameters
 
