@@ -4663,6 +4663,7 @@ Dispatcher can select one of the following Rejection reasons codes:
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the the current user| Drivers view or accept job offers|
 |403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.||  
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job has expired, it cannot be accepted|The job cannot be accepted|
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: eDispatch unavailable. Callback requested|If the request a callback is made on new job offer, only agent can accept/refuse.|  
 |404       | No Jobs Found    |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
    
@@ -5603,6 +5604,63 @@ HTTP 200 OK
             }
 
 ###Delete a Dispatch Document [DELETE]
+
++ Request ()
+
+    + Header
+
+            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            
++ Response 200 ()
+
+## 5.18 Request Phone Call [/dispatches/{id}/requestPhoneCall]
+
+###Description
+
+The "Request Phone Call" API is used to request an Agero agent to call back the SP
+
+###Sample Request URL
+
+/dispatches/{id}/requestPhoneCall
+
+###Request Schema
+
+
+Schema Property  | Description | Is Required | Type |Business Rules| 
+|:---------------|:------------|:------------|:-----|:-------------|
+||Represents the callback contact info| YES|Contact| |
+
+
+###Sample Request
+{
+    "callbackNumber": "2222222222",
+    "name": "BRENDA  MORGAN",
+    "phone": "1111111111"
+}
+    
+###Response Schema
+N/A
+
+###Sample Response
+HTTP 200 OK    
+An Agero agent will contact you shortly
+
+###Errors 
+
+|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
+|:---------|:-----------------|:----------|:--------|:--------|
+|400       |Invalid Request  |Invalid Dispatch request number/Status| Invalid dispatch request|| 
+|400       |Invalid Request  |Invalid Format| Dispatch Request number/Status|| 
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: duplicate callback request|More than one call back request attempt on the the same job|  
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: New job offer expired. An Agero agent will attempt to call you shortly|Callback request attempt on an expired job|
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: Callback request allowed for New Job offers only||
+|401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the current user.|Driver's are not allowed to request for phone call.|
+|404       | Job Not Found    |             |  No Job found     |The requested job record doesn’t exist| 
+|500       | Server Error     |Callback Request Failed      |Error: Callback request failed  |General exception occurred while serving the request| 
+|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
+
+###Request Phone Call [PUT]
 
 + Request ()
 
