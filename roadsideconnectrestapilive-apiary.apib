@@ -8228,49 +8228,6 @@ Returns an HTTP 500 if a server side exception occurs.
          "message" : "Unknown Error Occurred."
          }
     
-
-###Get Facility List for Profile [GET]
-
-+ Request ()
-
-    + Header
-
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-            
-            
-+ Response 200 (application/json)
-
-    + Body
-    
-            {
-               "totalCount":1,
-               "offSet":0,
-               "limit":10,
-               "results":[
-                  {
-                     "id":"1",
-                     "name":"ABC Towing (Turnersville)",
-                     "address":"3400 Route 42",
-                     "city":true,
-                     "city":"Turnersville",
-                     "state":"NJ",
-                     "zipCode":"08012",
-                     "lat":23.5435,
-                     "lon":-35.5435
-                  },
-                  {
-                     "id":"2",
-                     "name":"ABC Towing (Glassboro)",
-                     "address":"100 Main Street",
-                     "city":"Glassboro",
-                     "state":"NJ",
-                     "zipCode":"08011",
-                     "lat":53.5435,
-                     "lon":-65.5435
-                  }
-               ]
-            }
-            
 ## 8.11 Add a preferred facility
 
 ###Description
@@ -8321,6 +8278,48 @@ HTTP/1.1 200 OK
 |403       |Forbidden  |FORBIDDEN |Request is forbidden for the  current user    |User making this request does not have enough privileges to submit / approve an addition of additional territories   for a facility| 
 |404       |Job Not Found  |   |  |  The requested job record  doesn’t exist| 
 |500       |Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+
+###Get Facility List for Profile [GET]
+
++ Request ()
+
+    + Header
+
+            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            
+            
++ Response 200 (application/json)
+
+    + Body
+    
+            {
+               "totalCount":1,
+               "offSet":0,
+               "limit":10,
+               "results":[
+                  {
+                     "id":"1",
+                     "name":"ABC Towing (Turnersville)",
+                     "address":"3400 Route 42",
+                     "city":true,
+                     "city":"Turnersville",
+                     "state":"NJ",
+                     "zipCode":"08012",
+                     "lat":23.5435,
+                     "lon":-35.5435
+                  },
+                  {
+                     "id":"2",
+                     "name":"ABC Towing (Glassboro)",
+                     "address":"100 Main Street",
+                     "city":"Glassboro",
+                     "state":"NJ",
+                     "zipCode":"08011",
+                     "lat":53.5435,
+                     "lon":-65.5435
+                  }
+               ]
+            }
             
 ### Add a preferred facility [POST]
                                                                                                      
