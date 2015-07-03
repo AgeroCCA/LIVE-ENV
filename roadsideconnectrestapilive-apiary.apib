@@ -32,31 +32,32 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |    dispatchRequestNumber           |The dispatch Request ID from OneRoad  |YES|String||
-|    referenceNumber           |The reference number from OneRoad |YES|String||
-|    poNumber           |The PO Number from OneRoad |YES/NO|String|Jobs in the "NEW" status  will not have PO Numbers|
+|    referenceNumber           |The reference number from OneRoad |NO|String||
+|    poNumber           |The PO Number from OneRoad |NO|String|Jobs in the "NEW" status  will not have PO Numbers|
 |    currentStatus           | The current status of the job|YES|DispatchStatus||
 |    etaStatusCode           |Represents the ETA Status Code |NO | Enum| Refer to section 12.9 for possible ETA Status Codes|
 |    eta           |Represents the original estimated  time of arrival in UTC time  |NO|DateTime  |Only available if the job is accepted |
 |    etaInMinutes           |Represents the original ETA provided   |NO|Integer|Only available if the job is accepted |
 |    revisedEta           |Represents the revised estimated time of arrival in UTC time |NO|DateTime| Only available if the SP provides callsback and  provides a new ETA |
-|    revisedEtaInMinutes           |Represents the revised ETA in mins provided |YES|Double|
+|    revisedEtaInMinutes           |Represents the revised ETA in mins provided |NO|Integer|
 |    etaRevisionCount           |Represents the # of times ETA has been revised|NO|Integer|Only applicable if the ETA  is revised at least once|
 |    responseTimeExtCount           |Represents the # of times accepted counter has been extended|NO|Integer||
 |    serviceType           |Type of service  |YES | String|Possible Values: Tow to Storage  Door Unlock Fuel Delivery Jump Start Flat Tire Winch Reunite|            
 |    disablementLocation           |The disablement location|YES|ServiceLocation||
-|    towDestination           |The tow destination if  the service is tow|YES/NO|ServiceLocation|Required if service type is tow|
-|    assignedDriver           |The name of the driver,if any, |YES/NO |Driver|             Required if driver is assigned|
-|    coverage           |Indicates the coverage  information | YES   |String |  Example: Customer covered on this service to the Designated Tow Destination.Your service is only eligible to be paid by CCAS if the customer vehicle arrives at the Designated Tow Destination specified on vehicle arrives at the Designated  Tow Destination specified on this dispatch summary or we provide approval for a change to the tow  destination before service is rendered.<BR><B>Included: </B><BR>Storage    Cost<BR><!--EXCLUDEDTEXT--> |
+|    towDestination           |The tow destination if  the service is tow|NO|towDestination|Required if service type is tow|
+|    assignedDriver           |The name of the driver,if any, |NO |Driver|             Required if driver is assigned|
+|    coverage           |Indicates the coverage  information | NO   |String |  Example: Customer covered on this service to the Designated Tow Destination.Your service is only eligible to be paid by CCAS if the customer vehicle arrives at the Designated Tow Destination specified on vehicle arrives at the Designated  Tow Destination specified on this dispatch summary or we provide approval for a change to the tow  destination before service is rendered.<BR><B>Included: </B><BR>Storage    Cost<BR><!--EXCLUDEDTEXT--> |
 |    urgency           |The urgency of the request.|YES|String|Possible Values: STANDARD PRIORITY|
 |    problem           |   The type of problem.    |YES|String|Example(s): Inoperable Problem Stuck Would not Start|
 |    equipment           |The equipment required   to perform the service. |YES |Equipment|
 |    receivedTime           ||YES      |           UTCTime|
 |    acceptedTime           ||NO      |           UTCTime|
-|    vehicle           | vehicleData |                       | vehicle|
+|    vehicle           | vehicleData |    YES                   | vehicle|
 |    comments           |An Array of dispatch comments |          NO        |          DispatchComment[]|
 |    signatures           |An array of signatures  captured for the dispatch|                NO |                 Signature[]|
 |    dispatcherContactNumber           |  Represents the dispatcher Contact Details |        NO    |              String|Phone number of the Dispatcher|
 |    dispatcher           |  Represents the Dispatcher Complete details    |        NO    | Dispatcher||
+     equipmentList           |  Array of equipments used    |        NO    | Equipment[]||
 
 
 
@@ -65,35 +66,35 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|   Vin         |            Vehicle Identification Number|            YES/NO  |            String|
+|   Vin         |            Vehicle Identification Number|            NO  |            String|
 |  Year         |           Vehicle Model Year             |          YES    |             String|
 |  make         |           Vehicle Make               |              YES  |               String|
-| model         |          vehicle Model             |               YES/NO  |            String|
-|color          |         vehicle color               |             YES/NO  |            String |
+| model         |          vehicle Model             |               YES  |            String|
+|color          |         vehicle color               |             NO  |            String |
 |  plate        |           Vehicle State and plate |                 NO   |               String  |
 |state         |          State in which the vehicle |              NO    |              String  |
-|vehicleType  |           Vehicle Type/class          |             YES  |               String |
-|drivetrainType |         Vehicle drivetrain type   |               YES   |              String|
-|fuelType  |              Vehicle fuel type     |                   YES    |             String|
-|   Mileage    |             Current OD Reading |                      YES/NO  |            String|            
+|vehicleType  |           Vehicle Type/class          |             NO  |               String |
+|drivetrainType |         Vehicle drivetrain type   |               NO   |              String|
+|fuelType  |              Vehicle fuel type     |                   NO    |             String|
+|   Mileage    |             Current OD Reading |                      NO  |            String|            
 
 ## 3.3 DispatchStatus
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |code       |             The status code     |                     YES      |           String  |
-| reason   |               Reason for the status.|                   YES/NO |             String  |       Some statuses require a  reason|
+| reason   |               Reason for the status.|                   NO |             String  |       Some statuses require a  reason|
 | description   |      Details about the current status|                  NO |             String  |    |
-| reasonCode   |     Reason code|              YES/NO|             Int  |  Some statuses require the code  |
-|eta        |             Service Provider ETA    |                 YES/NO  |            Integer  |      Required to accept a    dispatch request.|
+| reasonCode   |     Reason code|              NO|             Int  |  Some statuses require the code  |
+|eta        |             Service Provider ETA    |             NO  |            Integer  |      Required to accept a    dispatch request.|
 |  extJobId  |              External Job Id      |                    NO   |               String  |
-|source     |             Source System    |                        YES/NO|              String    |     Required if 3rd party|
+|source     |             Source System    |     NO|              String    |     Required if 3rd party|
 | latitude   |             Current GPS Latitude  |                   NO |                 Double |
 |longitude  |             Current GPS Longitude  |                  NO  |                Double |
 |statusTime   |            Date and Time when the status   was reported  |        YES      |           UTC Time |
 | driverId   |    DriverId of the current assigned Driver |                   NO |                 String |
 |reportedBy  |            User Role who took action on the Distpatch |                  NO  |                String |
-|Event   |           Details available with PTO  |        NO      |          String|
+|event   |           Details available with PTO  |        NO      |          String|
 
 
 ## 3.4 Location
@@ -110,8 +111,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | locationType |                                     |               NO    |              String|
 |poi1        |            First Point of Interest   |               NO      |            String|
 | poi2        |            Second Point of Interest  |               NO      |            String|
-| lat         |            latitude          |                       YES/NO  |            Double|         lat/Long is required for    navigation and mapping operations|  
-|long         |           Longitude          |                      Yes/NO   |            Double|
+| lat         |            latitude          |                       YES/NO  |            Double|         lat/lng is required for    navigation and mapping operations|  
+|lng         |           Longitude          |                      Yes/NO   |            Double|
 
    
 ## 3.5 ServiceLocation extends Location
@@ -126,6 +127,13 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |  NightDropOff   |                                                |  NO   |               Boolean |
 | Parked           |                                               | NO    |              Boolean |
 
+## 3.51 TowDestination extends Location
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|  contactInfo          |                                                  | YES  |               Contact|
+|  nightDropOff         |                                                   |NO    |             Boolean|
+
 
 
    
@@ -135,8 +143,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|  name          |                                                  | YES  |               String|
-|  phone         |                                                   |YES    |             String|
+|  name          |                                                  | NO  |               String|
+|  phone         |                                                   |NO    |             String|
 |   callBackNumber|                                                   |YES  |               String|
 
   
@@ -146,15 +154,15 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |:--------------|:-------------|:----------|:---|:-------------|   
 |   driverId    |        Equivalent to the profile ID    |         YES      |           String|
 |  name         |           Driver’s name                |            YES   |           String|
-| status        | represents the status code of the current dispatch driver is working on|       YES  |               Enumeration |     Please refer to Enumerations API   |
+| status        | represents the status code of the current dispatch driver is working on|       NO  |               Enumeration |     Please refer to Enumerations API   |
 |equipment      |         Driver’s equipment type        |          NO     |             DriverEquipment|
-| currentlocation|         Driver’s current location     |           YES    |             Location|
+| currentlocation|         Driver’s current location     |           No    |             Location|
 |  gpsTracking     |  Flag which indicates if the driver is   GPS enabled or not| YES   |              Boolean|  
 | profilePictureUrl  |     Represents the resource URI where a   profile picture of the driver can be    downloaded from |    NO    |              String   |        URL is available  if and only if a   driver uploaded a profile picture READ ONLY  DOES NOT INCLUDE BASE  URI|
-| profileLastUpdatedAt|    Represents the date and time at which the profile picture was last updated at|        YES  |               DateTime |        READ ONLY|
+| profileLastUpdatedAt|    Represents the date and time at which the profile picture was last updated at|        NO  |               DateTime |        READ ONLY|
 |onDuty               |  Represents whether the dispatcher is available or not   |  YES                 |Boolean   |      This is determined by whether the dispatcher is loggedin in to  RoadsideConnect platform|
-| officephone|    Represents the phone numberwhere the Dispatcher can be reached at|        YES  |               String |       |
-|officeEmail               |  Represents the email address of the Dispatcher  |  YES                 |String   |    |
+| officephone|    Represents the phone numberwhere the Dispatcher can be reached at|        NO  |               String |       |
+|officeEmail               |  Represents the email address of the Dispatcher  |  NO                 |String   |    |
 | smartphone               |    Specified if the Driver holds a smartphone    |                            NO      |           Boolean|
 |cellphone            |  Phone number of the driver |           NO   |           String|
 |  disablementLocation              |     Current Job Disablement Location|                NO  |              ServiceLocation|
@@ -167,7 +175,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 | name               |     Full Name    |                            YES      |           String|
-|cellPhone            |   Personal Cell Phone Number   |            YES/NO      |           String|Required for certain roles (Owner/Manager/Dispatcher/Driver) Optional for Staff/Accountant/etc. roles|
+|cellPhone            |   Personal Cell Phone Number   |            NO      |           String|Required for certain roles (Owner/Manager/Dispatcher/Driver) Optional for Staff/Accountant/etc. roles|
 |  email              |     Personal Email Address   |                YES  |               String|
 |officeEmail          |   Office email address    |                 NO    |              String      |
 | officePhone      |       Office Phone Number     |                 NO  |                String|
@@ -182,9 +190,10 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "email" : "jdoe@gmail.com",
         "officeEmail" : "jdoe@abctowing.com",
         "officePhone" : "555-555-1111"
+       "profilePictureURL" :  "/profile/24234/picture"
     }
     
-## 3.8x UserDetail
+## 3.9 UserDetail
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -192,7 +201,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | name               |     Full Name    |                            YES      |           String|
 |userName               |  Username/LoginName   |                            YES      |           String|
 |  email              |     Personal Email Address   |                YES  |               String|
-|  role              |    Role of the User  |                YES  |               Roles[]|User Roles Enumeration|
+|  roles              |    Role of the User  |                YES  |               Roles[]|User Roles Enumeration|
 |isLocked          |   Confirms if the user account is locked    |              YES    |              Boolean      |
 | isActive      |       Confirms if the user account is approved     |               YES  |            Boolean|If not approved then user shall not show up in Manage Users API in Agero Support|
  |createdDate |    UTC Date time when the account was created|        NO    |              DateTime  |       ReadOnly|
@@ -223,30 +232,30 @@ Agero will convey Dispatch Status information to its customers via 5 different m
             "lastActivityDate" : "2014-01-31 08:30 AM"
             }
     
-## 3.9 DriverEquipment
+## 3.10 DriverEquipment
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|equipmentId    |         Equiment Id    |                          YES     |            String|
-| addressId      |         Address Id of the Facility where the |    YES     |            Integer|
-| type          |          Equipment Type              |             Readonly|            String  |
+|equipmentId    |         Equiment Id    |                            NO     |            String|
+| addressId      |         Address Id of the Facility where the |    NO     |            Integer|
+| type          |          Equipment Type              |             NO|            String  |Readonly|
 |vehicleNickname|         Name/Number for the assigned  |           NO       |           String|
 | equipmentPictureUrl |    Url for the picture of the equipment |    NO    |              URL|
-|LastUpdatedAt|    Represents the date and time at which the equipment picture was last updated at|        YES  |               DateTime |        READ ONLY|
+|LastUpdatedAt|    Represents the date and time at which the equipment picture was last updated at|        NO  |               DateTime |        Readonly|
 
 
 ###Sample JSON
 
     {
-        "equipmentId" : "LDWL",
-        "addressId" : 1,
-        "type" : "Light Duty Wheel Lift",
-        "vehicleNickname" : "blue truck",
-        "equipmentPictureUrl" : "/vendors/23424/drivers/24234/driverEquipment/picture",
-        "lastUpdatedAt" : "2013-01-31 08:30 AM"
-    }
+    "equipmentId": "LDWL",
+    "addressId": 1,
+    "type": "Light Duty Wheel Lift",
+    "vehicleNickname": "blue truck",
+    "equipmentPictureUrl": "/vendors/23424/drivers/24234/driverEquipment/picture",
+    "lastUpdatedAt": "2013-01-31 08:30 AM"
+}
 
-## 3.10 Preferences
+## 3.11  Preferences
 
 | Schema Property                      | Description                                                                                   | Is Required | Type    | Business Rules                                                                                      |
 |:--------------------------------------|:-----------------------------------------------------------------------------------------------|:-------------|:---------|:-----------------------------------------------------------------------------------------------------|
@@ -256,7 +265,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | etaAlerts                            | Enable ETA alerts?                                                                            | YES         | Boolean | Default = true                                                                                      |
 | inactivityAlert                      | Enable Inactivity Alerts?                                                                     | YES         | Boolean | Default = true                                                                                      |
 | autoAssignAllJobs                    | Enable auto assignment of all jobs to the authenticated user                                  | YES         | Boolean | Default = false                                                                                     |
-| subscribeToNewsletter                | Boolean flag that indicates if the user wants to subscribe to Newsletter email                | YES         | Boolean | Default=true                                                                                        |
+| subscribeToNewsletterEmail                | Boolean flag that indicates if the user wants to subscribe to Newsletter email                | YES         | Boolean | Default=true                                                                                        |
 | consentToTextAndPhoneStatusUpdates   | Boolean flag that indicates if the user wants to be located for text and phone status updates | YES         | Boolean | Default=true                                                                                        |
 | passwordManagementPrivilege          | Boolean flag that indicates if a user can see/reset password of other users                   | NO          | Boolean | Default=false READ ONLY except for an Owner. Only an owner can change the value for a given Manager |
 | jobConfirmationExpectedViaEmailOrFax | Boolean flag that indicates if a job confirmation needs to be sent over via fax / email       | YES         | Boolean | READ ONLY flag                                                                                      |
@@ -275,13 +284,14 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "subscribeToNewsletterEmail" : true,
         "consentToTextAndPhoneStatusUpdates" : true,
         "passwordManagementPrivilege" : false"
+        "jobConfirmationExpectedViaEmailOrFax":false
     }
     
-## 3.11 Equipment
+## 3.12 Equipment
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|  equipmentId|             Equiment Id    |                          YES  |               String|
+|  equipmentId|             Equiment Id    |                          NO  |               String|
 | type        |            Equipment Type Name   |                   Readonly       |     String|
 
  
@@ -293,33 +303,36 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "type" : "Light Duty Wheel Lift"
     }
     
-## 3.12 VendorEquipment
+## 3.13 VendorEquipment
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |  equipmentId|             Equiment Id    |                          YES  |               String|
-|  vendorId  |              Vendor ID of the service provider  owning the equipment|      YES    |             String|
+|  vendorId  |              Vendor ID of the service provider  owning the equipment|      NO    |             String|
 |  addressId |              Address Id of the Facility where the  equipment is registered with Agero|   YES   |              Integer  |
 | type    |                Equipment Type      |                     Readonly |           String|
-|quantity |               Represents the count of equipment available at the facility |      YES   |              Integer|
-|  shiftType |              Represents the type of shift the equipment is available for  |       YES        |         Enum   | 
+|quantity |               Represents the count of equipment available at the facility |      NO   |              Integer|
+|  shiftType |              Represents the type of shift the equipment is available for  |       NO        |         Enum   | 
 |startDate  |             Represents the start date the   equipment is available from  |       YES       |          Date|
+|location  |             Location of the the vendor equipment  |       NO       |          String|
 
 
 ###Sample JSON
 
     {
-        "equipmentId" : "LDWL",
+        "equipmentId" : "LDWL", 
         "addressId" : 1,
         "type" : "Light Duty Wheel Lift",
-        "quantity" : {
+        "quantity" : 1,
+        "shiftType":
+        {
                 "code":"ALL",
-                "desc":"24 hour"
+                "description":"24 hour"
         },
         "startDate" : "11/6/2007"
     }
 
-## 3.13 Signature
+## 3.14 Signature
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
@@ -351,7 +364,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "signatureUrl" : "/dispatches/354235235/signatures/234234/picture"        
     }
     
-## 3.14 EnumerationType
+## 3.15 EnumerationType
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
@@ -360,7 +373,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
   
     
-## 3.15 DriverType extends EnumerationType
+## 3.16 DriverType extends EnumerationType
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
@@ -376,7 +389,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description" : "GPS enabled driver"
     }
 
-## 3.16 SigneeType extends EnumerationType
+## 3.17 SigneeType extends EnumerationType
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
@@ -391,7 +404,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description" : "Vehicle Owner / Driver"
     }
 
-## 3.17 SignatureReasonType extends EnumerationType
+## 3.18 SignatureReasonType extends EnumerationType
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
@@ -407,7 +420,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description" : "Pre-existing Damages"
     }
 
-## 3.18 SignatureLocationType  extends EnumerationType
+## 3.19 SignatureLocationType  extends EnumerationType
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
@@ -423,12 +436,12 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description" : "Tow Location"
     }
 
-###ApiError
+## 3.20 ApiError
 
 | Schema Property    | Description                                                              | Is Required | Type                     | Business Rules                                           |
 |:--------------------|:--------------------------------------------------------------------------|:-------------|:--------------------------|:----------------------------------------------------------|
 | errorCode        |Short code identifying the error   signature location   | YES         | String                   | |
-|          | Error Description                 | YES         | String         |
+|  error      | Error Description                 | YES         | String         |
 | innerErrors         | An array of errors that caused this   error          | NO         | ApiError         |
 
   
@@ -460,14 +473,14 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.19 Dispatcher
+## 3.21 Dispatcher
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |   dispatcherId    |        Equivalent to the profile ID    |         YES      |           String|
 |  name         |          Dispatcher’s name                  |            YES   |           String|
-| officephone        | Represents the phone number where the Dispatcher can be reached at|       YES  |               String |   |
-|officeEmail      |     Represents the email address of the Dispatcher    |          YES     |             String|
+| officephone        | Represents the phone number where the Dispatcher can be reached at|       NO  |               String |   |
+|officeEmail      |     Represents the email address of the Dispatcher    |          NO     |             String|
 | profilePictureUrl  |     Represents the resource URI where a   profile picture of the driver can be    downloaded from |    NO    |              String   |        URL is available  if and only if a   driver uploaded a profile picture READ ONLY  DOES NOT INCLUDE BASE  URI|
 | profileLastUpdatedAt|    Represents the date and time at which the profile picture was last updated at|        YES  |               DateTime |        READ ONLY|
 |onDuty               |  Represents whether the dispatcher is available or not   |  YES                 |Boolean   |      This is determined by whether the dispatcher is loggedin in to  RoadsideConnect platform|
@@ -486,7 +499,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
                                                                                                         
                                                                                                         
-## 3.20 Facility
+## 3.22 Facility
 
 | Schema Property       | Description                                                   | Is Required | Type                | Business Rules                                              |
 |:-----------------------|:---------------------------------------------------------------|:-------------|:---------------------|:-------------------------------------------------------------|
@@ -573,7 +586,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         
     }
 
-## 3.21 GeographicalCoordinates
+## 3.23 GeographicalCoordinates
 
 | Schema Property       | Description                                                   | Is Required | Type                | Business Rules                                              |
 |:-----------------------|:---------------------------------------------------------------|:-------------|:---------------------|:-------------------------------------------------------------|
@@ -581,7 +594,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | longitude                  |       Represents longitude of the       location                                                     | YES         | Double              |                                                             |
 
  
-## 3.22 FleetMapDriver extends Driver
+## 3.24 FleetMapDriver extends Driver
 
 
 | Schema Property      | Description                                                                                                                           | Is Required | Type       | Business Rules                                             |
@@ -712,7 +725,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
            ]
         }
         
-## 3.23 Dispatch Status
+## 3.25 Dispatch Status
 
 | Schema Property | Description                                                       | Is Required | Type      | Business Rules                                                                |
 |:----------------|:------------------------------------------------------------------|:------------|:----------|:------------------------------------------------------------------------------|
@@ -732,7 +745,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
   
 
-## 3.24 SpecialCircumstanceType  extends EnumerationType
+## 3.26 SpecialCircumstanceType  extends EnumerationType
 
 | Schema Property | Description                                                       | Is Required | Type      | Business Rules                                                                |
 |:----------------|:------------------------------------------------------------------|:------------|:----------|:------------------------------------------------------------------------------|
@@ -747,7 +760,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
     
-## 3.25 JobFilterType  extends EnumerationType
+## 3.27 JobFilterType  extends EnumerationType
 
 | Schema Property | Description                                                       | Is Required | Type      | Business Rules                                                                |
 |:----------------|:------------------------------------------------------------------|:------------|:----------|:------------------------------------------------------------------------------|
@@ -762,7 +775,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description" : "All jobs"
     }
     
-## 3.26 JobStatusCodeType  extends EnumerationType
+## 3.28 JobStatusCodeType  extends EnumerationType
 
 | Schema Property | Description                                                       | Is Required | Type      | Business Rules                                                                |
 |:----------------|:------------------------------------------------------------------|:------------|:----------|:------------------------------------------------------------------------------|
@@ -802,7 +815,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
                             
 
-## 3.27 ETAStatus  Extends EnumerationType
+## 3.29 ETAStatus  Extends EnumerationType
 
 | Schema Property | Description                                                       | Is Required | Type      | Business Rules                                                                |
 |:----------------|:------------------------------------------------------------------|:------------|:----------|:------------------------------------------------------------------------------|
@@ -822,7 +835,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
                                                                                                         
-## 3.28 DispatchSummary
+## 3.30 DispatchSummary
 
 
 | Schema Property        | Description                                                                         | Is Required | Type                          | Business Rules                    |
@@ -864,7 +877,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }
 
-## 3.29 Document
+## 3.31 Document
 
 | Schema Property      | Description                                                   | Is Required | Type     | Business Rules                                  |
 |:----------------------|:---------------------------------------------------------------|:-------------|:----------|:-------------------------------------------------|
@@ -885,7 +898,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.30 UserGuide
+## 3.32 UserGuide
 
 | Schema Property      | Description                                                                          | Is Required | Type     | Business Rules                                   |
 |:----------------------|:--------------------------------------------------------------------------------------|:-------------|:----------|:--------------------------------------------------|
@@ -905,12 +918,12 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.31 Point
+## 3.33 Point
 
 | Schema Property      | Description                                                                          | Is Required | Type     | Business Rules                                   |
 |:----------------------|:--------------------------------------------------------------------------------------|:-------------|:----------|:--------------------------------------------------|
-| latitude          | Represents latitude of the location                      | YES         | Double   |                                                  |
-| longitude       | Represents longitude of the   location                                            | YES         | Double   |                                                  |
+| lat          | Represents latitude of the location                      | YES         | Double   |                                                  |
+| lon       | Represents longitude of the   location                                            | YES         | Double   |                                                  |
 
     
 
@@ -921,7 +934,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "lon" : -71.225446386661915
     }
                             
-## 3.32 RouteSummary
+## 3.34 RouteSummary
 
 | Schema Property      | Description                                                                          | Is Required | Type     | Business Rules                                   |
 |:----------------------|:--------------------------------------------------------------------------------------|:-------------|:----------|:--------------------------------------------------|
@@ -949,7 +962,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.33 Route
+## 3.35 Route
 
 | Schema Property      | Description                                                                          | Is Required | Type     | Business Rules                                   |
 |:----------------------|:--------------------------------------------------------------------------------------|:-------------|:----------|:--------------------------------------------------|
@@ -1096,7 +1109,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.34 Vendor
+## 3.36 Vendor
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -1331,7 +1344,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
         
  
-## 3.35 SecurityQuestion  extends EnumerationType
+## 3.37 SecurityQuestion  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1347,7 +1360,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
      }
 
     
-## 3.36 IdentityInfo
+## 3.38 IdentityInfo
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1368,7 +1381,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.37 Security Info
+## 3.39 Security Info
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1399,7 +1412,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
     
-## 3.38 Profile
+## 3.40 Profile
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1416,7 +1429,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
                 "cellPhone" : "555-555-5555",
                 "email" : "jdoe@gmail.com",
                 "officeEmail" : "jdoe@abctowing.com",
-                "officePhone" : "555-555-1111"
+                "officePhone" : "555-555-1111",
+                "profilePictureURL" :  "/profile/24234/picture"
         },
         "preferences" : {
                 "jobFilter" : 1,
@@ -1461,7 +1475,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
                                                                                                         
-## 3.39 User
+## 3.41 User
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1539,7 +1553,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
     
-## 3.40 UserInvitation Extends User  
+## 3.42 UserInvitation Extends User  
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1609,7 +1623,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
         
     
-## 3.41 Rate
+## 3.43 Rate
 
 | Schema Property     | Description                                                    | Is Required | Type      | Business Rules                             |
 |:---------------------|:----------------------------------------------------------------|:-------------|:-----------|:--------------------------------------------|
@@ -1643,7 +1657,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "effectiveDate":"06/11/2007"
     }
     
-## 3.42 InsurancePolicy
+## 3.44 InsurancePolicy
 
 | Schema Property   | Description                                                      | Is Required | Type                  | Business Rules                                  |
 |:-------------------|:------------------------------------------------------------------|:-------------|:-----------------------|:-------------------------------------------------|
@@ -1675,6 +1689,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "agentPhoneNumber":"7813061632",
         "effectiveDate":"06/11/2007",
         "expirationDate":"06/11/2017",
+        "certificateUrl": "vendors/57515/insurancePolicies/123456/coi",
         "certificateHolder":true,
         "expirationDate":"06/11/2017",
         "status":{
@@ -1684,7 +1699,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.43 FacilityPreferences
+## 3.45 FacilityPreferences
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1701,7 +1716,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
 
-## 3.44 EquipmentShift  extends EnumerationType
+## 3.46 EquipmentShift  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1717,7 +1732,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
     
-## 3.45 Territory
+## 3.47 Territory
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1730,7 +1745,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
                             
 
-## 3.46 ContactInfo
+## 3.48 ContactInfo
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1752,7 +1767,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
 
-## 3.47 HourType  extends EnumerationType
+## 3.49 HourType  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1762,7 +1777,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
 
-## 3.48 InsuranceCoverageType  extends EnumerationType
+## 3.50 InsuranceCoverageType  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1778,7 +1793,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
 
-## 3.49 BusinessUnitType  extends EnumerationType
+## 3.51 BusinessUnitType  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1795,7 +1810,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
 
-## 3.50 PerformanceCategoryType  extends EnumerationType
+## 3.52 PerformanceCategoryType  extends EnumerationType
 
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
@@ -1812,7 +1827,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
                             
     
 
-## 3.51 KPIMetricType  extends EnumerationType
+## 3.53 KPIMetricType  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1834,7 +1849,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
     
 
-## 3.52 KPIMetric
+## 3.54 KPIMetric
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1857,7 +1872,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
                             
-## 3.53 PerformanceData
+## 3.55 PerformanceDashboardData
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1887,7 +1902,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
 
-## 3.54 UserInvitationStatusType  extends EnumerationType
+## 3.56 UserInvitationStatusType  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1904,7 +1919,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     
         
 
-## 3.55 ETAExtensionReason  Extends EnumerationType
+## 3.57 ETAExtensionReason  Extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1919,7 +1934,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Prior Job Delayed"
     }                            
 
-## 3.56 ServiceType  extends EnumerationType
+## 3.58 ServiceType  extends EnumerationType
 
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
@@ -1935,7 +1950,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Door Unlock "
     }  
 
-## 3.57 DispatchCountBreakdownItem
+## 3.59 DispatchCountBreakdownItem
 
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
@@ -1954,7 +1969,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "count": 5
     }
 
-## 3.58 UserInvitationStatus  extends EnumerationType
+## 3.60 UserInvitationStatus  extends EnumerationType
 
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
@@ -1970,7 +1985,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }  
     
 
-## 3.59 BusinessType  extends EnumerationType
+## 3.61 BusinessType  extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -1985,7 +2000,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Door Unlock "
     }  
         
-## 3.60 TrendData 
+## 3.62 TrendData 
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -2020,7 +2035,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }  
     
-## 3.61 TrendDataItem 
+## 3.63 TrendDataItem 
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -2035,7 +2050,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "value":"275"
     }  
     
-## 3.62 TrendCategoryType extends EnumerationType
+## 3.64 TrendCategoryType extends EnumerationType
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -2050,7 +2065,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Calls"
     }  
     
-## 3.63 PerformanceDataItem
+## 3.65 PerformanceDashboardDataItem
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
@@ -2091,7 +2106,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
       
       
-## 3.64 Claim
+## 3.66 Claim
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -2165,7 +2180,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "additionalCharge5Amount": null
     }
     
-## 3.65 TowInfo
+## 3.67 TowInfo
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -2185,7 +2200,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "actualTowLocation":"123 Main Street, Kansas City, KS 22232"
         }
 
-## 3.65 ClaimDataProcess
+## 3.68 ClaimDataProcess
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2204,7 +2219,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
     
-## 3.66 ClaimDataProcessResponse
+## 3.69 ClaimDataProcessResponse
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2237,7 +2252,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }
 
-## 3.67 Adjustment
+## 3.70 Adjustment
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2252,7 +2267,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "adjustmentAmount": "82"
     }
     
-## 3.68 Check
+## 3.71 Check
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2285,7 +2300,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "status": "Paid",
         "adjustments": null
     }            
-## 3.69 FeedbackCategoryType extends EnumerationType
+## 3.72 FeedbackCategoryType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2300,7 +2315,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Job Details"
     } 
     
-## 3.70 FeedbackSubjectType extends EnumerationType
+## 3.73 FeedbackSubjectType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2377,7 +2392,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         }
     ]
     
-## 3.71 FeedbackOptionBranch
+## 3.74 FeedbackOptionBranch
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2432,7 +2447,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }
     
-## 3.72 FeedbackPost
+## 3.75 FeedbackPost
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2465,7 +2480,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
     
     
-## 3.73 ServerNotificationSubscription
+## 3.76 ServerNotificationSubscription
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2485,7 +2500,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }   
     
     
-## 3.74 ClientNotificationSubscription
+## 3.77 ClientNotificationSubscription
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2507,7 +2522,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }  
     
     
-## 3.75 HeatMapEnrollment
+## 3.78 HeatMapEnrollment
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2524,7 +2539,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "authorizationToken" : "TmxhbG9YYTNwYTQ6TFk1VWhPY2"
     }
     
-## 3.76 HeatMapDataRequest
+## 3.79 HeatMapDataRequest
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2560,7 +2575,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "vendorList" : "57515,16540,32511…"
     }
     
-## 3.77  HeatMapDataItem
+## 3.80  HeatMapDataItem
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2630,7 +2645,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "timestamp":"2014-05-14T17:22:00Z "
     }
 
-## 3.78 EquipmentType extends EnumerationType
+## 3.81 EquipmentType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2644,7 +2659,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     "description":"Light Duty Wheel Lift"
     }  
     
-## 3.79 TerritoryType extends EnumerationType
+## 3.82 TerritoryType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2658,7 +2673,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     "description":"Performance Advantage"
     }
     
-## 3.80 BusinessUnitType extends EnumerationType
+## 3.83 BusinessUnitType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2672,7 +2687,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     "description":"Medium / Heavy Duty"
     }
 
-## 3.81 TimePeriodType extends EnumerationType
+## 3.84 TimePeriodType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2686,7 +2701,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     "description":"Week Over Week"
     }
 
-## 3.82 feedbackCategoryType extends EnumerationType
+## 3.85 feedbackCategoryType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2715,7 +2730,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     "description":"Week Over Week"
     }
 
-## 3.83 UrgencyType extends EnumerationType
+## 3.86 UrgencyType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2729,7 +2744,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Priority"
     }
 
-## 3.84 ATAType extends EnumerationType
+## 3.87 ATAType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2742,96 +2757,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "code" : "1",
         "description":"On Time"
     }
-
-## 3.85 CallMethodType extends EnumerationType
-
-| Schema Property|Description  |Is Required|Type|Business Rules|
-|:--------------|:-------------|:----------|:---|:-------------|   
-|code| Provides unique identifier of the Call Method Type |YES|String|
-|Description  |Description of the Call Method Type |YES|String|
-
-###Sample JSON
-
-    {
-        "code" : "IVR",
-        "description":"IVR Calls"
-    }
     
-## 3.86 ReportCriterionType extends EnumerationType
-
-| Schema Property|Description  |Is Required|Type|Business Rules|
-|:--------------|:-------------|:----------|:---|:-------------|   
-|code| Provides unique identifier of the Report Criterion Type |YES|String|
-|Description  |Description of the Report Criterion Type |YES|String|
-
-###Sample JSON
-
-    {
-        "code" : "ETA_IN_MIN",
-        "description":"Represents the provided ETA in minutes"
-    }
-
-## 3.87 ReportCriterion
-
-| Schema Property|Description  |Is Required|Type|Business Rules|
-|:--------------|:-------------|:----------|:---|:-------------|   
-|type  | |YES|ReportCriterionType|
-|value|Provides input  value for the criterion  |NO|String|
-
-###Sample JSON
-    {
-    "type":
-        {
-        "code" : "ETA_IN_MIN",
-        "description":"ETA Minutes"
-        },
-        "value" : ""
-    }    
-
-## 3.88 ReportCriteriaBranch
-
-| Schema Property|Description  |Is Required|Type|Business Rules|
-|:--------------|:-------------|:----------|:---|:-------------|   
-|type| Provides a unique name for the criteria |YES|ReportCriteriaBranchType|
-|criteria  | |YES|ReportCriterion[]|
-
-## 3.89 KPIMetricBranch
-
-| Schema Property|Description  |Is Required|Type|Business Rules|
-|:--------------|:-------------|:----------|:---|:-------------|   
-|performanceCategory| Represents the category of the performance data |YES|PerformanceCategoryType|
-|metric  | Represents the performance metrics|YES|KPIMetricType[]|
-
-###Sample JSON
-
-    {
-        "performanceCategory":{
-        "code":"PERF",
-        "description":"Performance"
-        },
-        "metrics":[
-        {
-        "type":{
-        "code":"CALLACC",
-        "description":"Call Acceptance",
-        "mesaurementUnit":"Percentage",
-        "goalThreshholdType":"MIN",
-        "goal":95
-        }
-        },
-        {
-        "type": {
-        "code":"GOA",
-        "description":"GOA",
-        "mesaurementUnit":"Percentage",
-        "goalThreshholdType":"MAX",
-        "goal":5
-        }
-        }
-        ]
-    }
-
-## 3.90 ReportCriteriaTree
+## 3.88 ReportCriteriaTree
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -2893,7 +2820,97 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         }
         ]
 
-## 3.91 KPIMetriGroupType extends EnumerationType
+
+## 3.89 CallMethodType extends EnumerationType
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|code| Provides unique identifier of the Call Method Type |YES|String|
+|Description  |Description of the Call Method Type |YES|String|
+
+###Sample JSON
+
+    {
+        "code" : "IVR",
+        "description":"IVR Calls"
+    }
+    
+## 3.90 ReportCriterionType extends EnumerationType
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|code| Provides unique identifier of the Report Criterion Type |YES|String|
+|Description  |Description of the Report Criterion Type |YES|String|
+
+###Sample JSON
+
+    {
+        "code" : "ETA_IN_MIN",
+        "description":"Represents the provided ETA in minutes"
+    }
+
+## 3.91 ReportCriterion
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|type  | |YES|ReportCriterionType|
+|value|Provides input  value for the criterion  |NO|String|
+
+###Sample JSON
+    {
+    "type":
+        {
+        "code" : "ETA_IN_MIN",
+        "description":"ETA Minutes"
+        },
+        "value" : ""
+    }       
+
+## 3.92 ReportCriteriaBranch
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|type| Provides a unique name for the criteria |YES|ReportCriteriaBranchType|
+|criteria  | |YES|ReportCriterion[]|
+
+## 3.93 KPIMetricBranch
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|performanceCategory| Represents the category of the performance data |YES|PerformanceCategoryType|
+|metric  | Represents the performance metrics|YES|KPIMetricType[]|
+
+###Sample JSON
+
+    {
+        "performanceCategory":{
+        "code":"PERF",
+        "description":"Performance"
+        },
+        "metrics":[
+        {
+        "type":{
+        "code":"CALLACC",
+        "description":"Call Acceptance",
+        "mesaurementUnit":"Percentage",
+        "goalThreshholdType":"MIN",
+        "goal":95
+        }
+        },
+        {
+        "type": {
+        "code":"GOA",
+        "description":"GOA",
+        "mesaurementUnit":"Percentage",
+        "goalThreshholdType":"MAX",
+        "goal":5
+        }
+        }
+        ]
+    }
+
+
+## 3.94 KPIMetriGroupType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -3021,7 +3038,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
 
     
-## 3.92 HeatMapDataResponse
+## 3.95 HeatMapDataResponse
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -3030,7 +3047,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 
     
-## 3.93 KPIMetricGroup
+## 3.96 KPIMetricGroup
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -3088,7 +3105,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }
     
-## 3.94 KPICategory
+## 3.97 KPICategory
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -3142,7 +3159,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }
     
-## 3.95 KPIBusinessUnit
+## 3.98 KPIBusinessUnit
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
@@ -3205,7 +3222,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         ]
     }
     
-## 3.96 ReportDataItem
+## 3.99 ReportDataItem
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3287,7 +3304,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     }
     }
     
-## 3.97  CallAcceptanceFlag extends EnumerationType
+## 3.100  CallAcceptanceFlag extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3301,7 +3318,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Refused"
       }
       
-## 3.98 GOAClaimedFlag extends EnumerationType
+## 3.101 GOAClaimedFlag extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3315,7 +3332,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Yes"
       }
       
-## 3.99 ReportTemplate
+## 3.102 ReportTemplate
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3418,7 +3435,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "lastUpdatedAt":"2014-07-17T19:13:00Z "
         }
         
-## 3.100 ReportUser
+## 3.103 ReportUser
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3433,8 +3450,24 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "userName":"John Smith",
         "emailAddress":"jsmith@abc towing.com"
         } 
-       
-## 3.101 ReportFrequencyType extends EnumerationType
+      
+## 3.104 ReportSchedule
+
+| Schema Property          | Description                                    | Is Required | Type     | Business Rules |
+|:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
+| frequency         | Represents the frequency the report needs to be run     |YES           | ReportFrequencyType   ||
+| dataTimeframe                  |Represents the timeframe of data to be returned   |Optional           |    |ReportDataTimeFrameType|If not provided, defaulted to 3 months|
+
+
+### Sample JSON
+   
+        {
+        "code":"WKLY",
+        "description":"Weekly",
+        
+        } 
+             
+## 3.105 ReportFrequencyType extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3448,7 +3481,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
       "description":"Weekly"
       }
       
-## 3.102 ReportDataTimeframeType extends EnumerationType
+## 3.106 ReportDataTimeframeType extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3476,7 +3509,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
      "description":"1 Day"
       }
       
-## 3.103 ReportStatusType extends EnumerationType
+## 3.107 ReportStatusType extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3490,21 +3523,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Scheduled"
       }
       
-## 3.104 EquipmentShift Type extends EnumerationType
 
-| Schema Property          | Description                                    | Is Required | Type     | Business Rules |
-|:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
-| Code         |  Provides unique identifier of the  Equipment Shift  |YES           | String   ||
-| Description                  |Description of the Shift Type   |YES           | String   ||
-
-### Sample JSON
-
-      {
-        "code" : "ALL",
-        description":"24 Hour"
-      }
-      
-## 3.105 VendorRequestType extends EnumerationType
+## 3.108 VendorRequestType extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3518,7 +3538,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "description":"Update"
       }
         
-## 3.106 VendorRequestStatus extends EnumerationType
+## 3.109 VendorRequestStatus extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3533,7 +3553,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
       }
         
         
-## 3.107 VendorRequestComment
+## 3.110 RequestComment
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3547,7 +3567,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
         "commentedOn":"10/03/2014 08:00 AM"
       }
       
-## 3.108 Vendor Request History Item
+## 3.111 Vendor Request History Item
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
 |:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
@@ -3611,6 +3631,54 @@ Agero will convey Dispatch Status information to its customers via 5 different m
        }
      ]
     }
+## 3.112 ApiResponse
+
+| Schema Property          | Description                                    | Is Required | Type     | Business Rules |
+|:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
+| responseCode         |  Short code identifying the error  |YES           | Integer   ||
+| responseMessage                  |Response Description |YES           | String   ||
+| responseDetails                  |An array of ApiResponse |NO                | ApiResponse   ||
+
+### Sample JSON
+
+    {
+    "responseCode": 200,
+    "responseMessage": "Your request has been processed successfully.",
+    "responseDetails": [
+        {
+            "responseCode": 200,
+            "responseMessage": "Invoice 234 processed successfully.",
+            "responseDetails": null
+        },
+        {
+            "responseCode": 400,
+            "responseMessage": "Invoice 456 does not exist. Unable to process.",
+            "responseDetails": null
+        },
+        {
+            "responseCode": 400,
+            "responseMessage": "Invoice 789 does not exist. Unable to process.",
+            "responseDetails": null
+        }
+    ]
+}
+
+## 3.113 DispatchComment
+
+| Schema Property          | Description                                    | Is Required | Type     | Business Rules |
+|:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
+| commentCode         |  Provided the comment Code  |YES           | String   ||
+| displayText                  | |YES           | String   ||
+| commentText                  |Provides commented text by the network manager for the request |NO                | String   ||
+
+### Sample JSON
+
+ {   
+    "commentCode": "DLC",
+    "displayText": "Disablement Location",
+    "commentText": "be careful with dog in the back yard."
+}
+
 
 
 ## Group 4 Security API
