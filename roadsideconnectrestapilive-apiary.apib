@@ -10351,8 +10351,11 @@ Http 200 OK
 
 ### Description
 
-The" Get Current Location of a driver" API allows the dispatcher/owner to post their current location for any driver location If he is off or on a job. 
+The "Get Current Location of a driver" API allows the dispatcher/owner to post their current location for any driver location If he is off or on a job. 
 The Client App can call this API based on the business rules predefined for a product.
+
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of Agero
+DriverID.
 
 ### Sample Request URL
 
