@@ -153,7 +153,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|   driverId    |        Equivalent to the profile ID    |         YES      |           String|
+|   driverId    |        Equivalent to the profile ID    |         YES/NO      |           Integer| READ ONLY
+|   externalDriverId    |        Equivalent to the profile ID    |         YES/NO      |           String|
 |  name         |           Driver’s name                |            YES   |           String|
 | status        | represents the status code of the current dispatch driver is working on|       NO  |               Enumeration |     Please refer to Enumerations API   |
 |equipment      |         Driver’s equipment type        |          NO     |             DriverEquipment|
@@ -162,8 +163,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | profilePictureUrl  |     Represents the resource URI where a   profile picture of the driver can be    downloaded from |    NO    |              String   |        URL is available  if and only if a   driver uploaded a profile picture READ ONLY  DOES NOT INCLUDE BASE  URI|
 | profileLastUpdatedAt|    Represents the date and time at which the profile picture was last updated at|        NO  |               DateTime |        READ ONLY|
 |onDuty               |  Represents whether the dispatcher is available or not   |  YES                 |Boolean   |      This is determined by whether the dispatcher is loggedin in to  RoadsideConnect platform|
-| officephone|    Represents the phone numberwhere the Dispatcher can be reached at|        NO  |               String |       |
-|officeEmail               |  Represents the email address of the Dispatcher  |  NO                 |String   |    |
+| officephone|    Represents the phone numberwhere the Dispatcher can be reached at|        YES  |               String |       |
+|officeEmail               |  Represents the email address of the Dispatcher  |  YES                 |String   |    |
 | smartphone               |    Specified if the Driver holds a smartphone    |                            NO      |           Boolean|
 |cellphone            |  Phone number of the driver |           NO   |           String|
 |  disablementLocation              |     Current Job Disablement Location|                NO  |              ServiceLocation|
