@@ -12678,9 +12678,10 @@ N/A
 ## 23.1 Get Notification Subscriptions [/vendors/{vendorId}/notifications/subscriptions] 
 ### Description
 
-The "Get  Notifications Subscritions " API is a façade 
-API that allows users to retrieve all notifications 
-including client notifications & server notifications in one call
+The Notification Subscriptions API allows the clients to retrieve all notification subscriptions which include client notification subscriptions
+and server to server notification subscriptions
+
+This is meant to for Agero’s internal usage 
 
 ### Sample Request URL
 
@@ -12725,7 +12726,7 @@ HTTP 200
 |:---------|:--------- |:--------|:--------|
 |400       |INVALID_REQUEST |Missing callback URL | 
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 
 
 
