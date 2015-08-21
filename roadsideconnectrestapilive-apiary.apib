@@ -3881,6 +3881,7 @@ Login API
 
 In order to login into a Client App, users will have to create a new account in Agerosupport.com.
 Users will be able to log into an application by entering the user id and password. The Security API will validate these credentials along with the API key provided by the client application. Once the validation is successful, the Security API will create and return a valid SWT token along with a flag that indicates if the logged in user has to accept a new version of terms & conditions. (If the Terms and Condition flag is true, the client application can follow the terms & conditions accept / decline workflow that is documented in the Terms and Conditions API section of this document).
+
 If the users provide an incorrect username and/or password, security API will return an error code that could be mapped to a user friendly authentication failure message on the client application.
 
 ###Sample Request URL
@@ -3913,10 +3914,7 @@ Authorization: THZ3dm8zUWVHaVdOYFtdmRoU1dTUmVaODhzdTg6Qk5nNmF4bklSSm93bThHUw==
 |:--------------- |:-----------|:-----------|:----|:-------------|
 |userClaim        |The User Claim containing role information|YES |UserClaim| 
 |Token            |Valid OAuth 2.0 SWT token information     |YES |Token    |
-|newVersionOfTermsAndConditionsAvailable |Indicator if user has to accept/decline new revision of terms and conditions  |YES |Boolean| 
-|profileCompletenessPercentage |Indicates the percentage of profile that's completed |YES |Int| READ ONLY| 
-|profileIncompleteNotificationSentOn |Represents a timestamp the end-user was last notified about profile incompleteness |YES |DateTime |READ ONLY UTC Time  Format|
- 
+
 ###Errors 
 
 |HTTP Code |Error Code |Message |Reason  | 
@@ -3925,9 +3923,10 @@ Authorization: THZ3dm8zUWVHaVdOYFtdmRoU1dTUmVaODhzdTg6Qk5nNmF4bklSSm93bThHUw==
 |401       |INVALID_CLIENT            |Client identifier is required       |An API key was not supplied| 
 |401       |INVALID_CLIENT            |Client credentials are invalid      |The API key supplied is invalid|
 |401       |INVALID_CREDENTIALS       |Invalid Username or Password        |Could not authenticate with the supplied credentials| 
-|401       |ACCOUNT_LOCKED            |Account is Locked                   |The User's account is locked| 
-|404       |RESOURCE_NOT_FOUND        |Facility location is not available for this user, the location must be provided and approved by Agero administrator.                   |Facility location is not available for this user, the location must be provided and approved by Agero administrator.| 
-|500       |UNKNOWN                   |Unknown Error                       |An unknown error occurred at the server|
+|401       |ACCOUNT_LOCKED            |Account is Locked                   |The User's account is locked|
+|404       |RESOURCE_NOT_FOUND        |Facility location is not available for this user, the location must be provided and approved by Agero administrator. |Facility location is not available for this user, the location must be provided and approved by Agero administrator.| 
+|500       |UNKNOWN                   |Unknown Error                       |An unknown error occurred at the server| 
+
 
 ### Login [POST]
 
@@ -3939,34 +3938,35 @@ Authorization: THZ3dm8zUWVHaVdOYFtdmRoU1dTUmVaODhzdTg6Qk5nNmF4bklSSm93bThHUw==
 
     + Body
 
-            {
-            "username" : "Auto1 Owner",
-            "password" : "666666",
-            "clientId":"123456786543210"
-            }
+                {
+                "username" : "Auto1 Owner",
+                "password" : "666666",
+                "clientId":"123456786543210"
+                }
+                
 + Response 200 (application/json)
 
     + Body
 
-            { 
-                "userClaim":
-                {
-                    "id" : "56789",
-                    "vendorId":"1234",
-                    "username":"efudd",
-                    "role":"Driver",
-                    "acceptedVersionOfTermsAndConditions": "1.0",
-                    "profileCompletenessPercentage":75,
-                    "profilenIncompleteNotificationSentOn": "2014-04-09T09:54:34Z"
-                },
-                "token" :
-                {
-                    "expires_in":1799,
-                    "refresh_token":"vyUeuNQrrKvgdQeGh5HpaxtUuV88wQyb",
-                    "access_token":"7z9ZeGyweG98YMAyB0iSm2EiB6bD",
-                    "refresh_count":0
-                },
-                "newVersionOfTermsAndConditionsAvailable":true 
+            {  
+               "userClaim":{  
+                      "profileCompletenessPercentage":100,
+                      "profileIncompleteNotificationSentOn":"2015-01-07T16:00:36Z",
+                      "newVersionOfTermsAndConditionsAvailable":false,
+                      "vendorId":"30275",
+                      "profileId":"342551",
+                      "username":"fastdp1",
+                      "role":"Dispatching",
+                      "dispatchClientId":"9e89096e-259c-45e4-aec2-c62e1f96912a",
+                      "acceptedVersionOfTermsAndConditions":"1021",
+                      "termsAndConditionsNonAcceptanceCounter":0
+               },
+               "token":{  
+                      "access_token":"q9UPsnIODo0TZPtOrSmG9ZP8VEm5",
+                      "expires_in":"28799",
+                      "refresh_token":"yAlW8QaZnPjQlRNISZAUW0PQQ4lZi0nW",
+                      "refresh_count":"0"
+               }
             }
 
 
@@ -3975,7 +3975,11 @@ Authorization: THZ3dm8zUWVHaVdOYFtdmRoU1dTUmVaODhzdTg6Qk5nNmF4bklSSm93bThHUw==
 ###Description
 Refresh Token API
 
-The "Refresh Token " API allows client applications to protect user accounts if the application has been left idle for a certain number of minutes. The inactivity period can be configured in the backend. When the configured expiration time period has passed (without having the user responding to the job requests, assigning jobs, setting job status, or updating profile, driver, facilities, equipment, or other activities), the user will be able to refresh the token or opt to logout of the app.
+The "Refresh Token " API allows client applications to protect user accounts if the application has been left idle for a certain number of minutes. The 
+inactivity period can be configured in the backend. When the configured expiration time period has passed (without having the user responding to the job requests,
+assigning jobs, setting job status, or updating profile, driver, facilities, equipment, or other activities), the user will be able to refresh the token or opt to
+logout of the app.
+
 If the user decides to extend the login session before token expiration, the Refresh Token API will refresh the access token based on the supplied refresh_token.
 
 See: http://tools.ietf.org/html/rfc6749#page-47 for more information.
@@ -4070,8 +4074,8 @@ HTTP/1.1 200 OK
 
 |HTTP Code |Error Code | Message  |Reason  | 
 |:---------|:---------|:-------|:-------|
-|400       |BAD_REQUEST               |Request Validation failed |Client Identifier is Required| 
-|401       |INVALID_CLIENT            |Invalid ClientId for Given Resource       |A valid API key was not supplied. Apigee App not approved| 
+|400       |BAD_REQUEST             |Request Validation failed. |Client Identifier is Required| 
+|401       |INVALID_CLIENT            |Invalid ClientId for Given Resource       |A validAPI key was not supplied Apigee App not approved| 
 |401       |INVALID_TOKEN             |oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |500       |UNKNOWN                   |Unknown Error                       |An unknown error occurred at the server| 
    
