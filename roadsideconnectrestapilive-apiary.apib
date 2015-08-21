@@ -4097,7 +4097,7 @@ HTTP/1.1 200 OK
 + Response 200
 
 # Group 5 Dispatch API
-## 5.1 Get Dispatch List [/dispatches]
+## 5.1 Get Dispatch List [/dispatches?forDriver={driverIds}&forExternalDriver={csv_list_of_external_driverIds}&dispatchStatusList={dipatchStatusCodes}&startDateTime={startDate}&endDateTime={endDate}&poNumbers={POs}&serviceTypes={ServiceTypes}]
 
 ### Description
 Once dispatches are generated in One Road and assigned to Vendors through the Automated Dispatch process, the "Get Dispatch list" API will allow user to get a list of dispatches based on role:
@@ -4124,6 +4124,8 @@ Pagination is available and enforced for this request.
 /dispatches
 
 /dispatches?forDriver=12345
+
+/dispatches?forExternalDriver=232322,224432
 
 /dispatches?dispatchStatusList=2,20,30
 
@@ -4158,7 +4160,7 @@ Pagination is available and enforced for this request.
 |403       |Forbidden    |Invalid Profile|Required a valid Profile || 
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |404       | No Jobs Found    |             |   No Jobs Found.    |No jobs were found for the query| 
-|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
 
 ###Get Dispatch List [GET]
@@ -4167,7 +4169,7 @@ Pagination is available and enforced for this request.
 
     + Header
 
-            Authorization: Bearer t7RUbsjGojsX2PG2irhh5rxcGQsi
+            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
    
 
 + Response 200 (application/json)
@@ -4210,7 +4212,8 @@ Pagination is available and enforced for this request.
                             "latitude": 0,
                             "longitude": 0,
                             "statusTime": "20150121T09: 55: 26",
-                            "driverId": 0,
+                            "driverId": 0123456, 
+                            "externalDriverId": "232133",
                             "reportedBy": "Dispatcher",
                             "event": null
                         },
@@ -4275,6 +4278,7 @@ Pagination is available and enforced for this request.
                         },
                         "assignedDriver": {
                             "driverId": 309542,
+                            "externalDriverId": "232133",
                             "name": "tom123",
                             "status": null,
                             "equipment": null,
@@ -4364,7 +4368,7 @@ The "Get a Single Dispatch by DispatchRequestNumber " API will return informatio
 |:---------|:----------------|:---------|:-------|:--------|
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job you are tyring to retrive is not allowed by the current user|Drivers cannot see jobs aren't unassingned or assigned to them|  
-|404       | Job Not Found   |             |       |No jobs were found for the query| 
+|404       | Job Not Found   |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
 
@@ -4412,7 +4416,8 @@ The "Get a Single Dispatch by DispatchRequestNumber " API will return informatio
                 "latitude": 0,
                 "longitude": 0,
                 "statusTime": "20150121T09: 55: 26",
-                "driverId": 0,
+                "driverId": 123456,
+                "externalDriverId": "232332",
                 "reportedBy": "Dispatcher",
                 "event": null
             },
@@ -4476,7 +4481,8 @@ The "Get a Single Dispatch by DispatchRequestNumber " API will return informatio
                 "lng": 95.6785
             },
             "assignedDriver": {
-                "driverId": 309542,
+                "driverId": 123456,
+                "externalDriverId": "232332",
                 "name": "tom123",
                 "status": null,
                 "equipment": null,
@@ -4567,7 +4573,7 @@ The "Get a Single Dispatch by PO Number" API will return information related to 
 |:---------|:----------------|:---------|:-------|:--------|
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job you are tyring to retrive is not allowed by the current user|Drivers cannot see jobs aren't unassingned or assigned to them|  
-|404       |Job Not Found   |             |       |The requested job record doesn’t exist.| 
+|404       | Job Not Found    |             |       |The requested job record doesn’t exist.| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
 
@@ -4582,161 +4588,163 @@ The "Get a Single Dispatch by PO Number" API will return information related to 
 
 + Response 200 (application/json)
 
-                {
-                "comments": [
-                    {
-                        "commentCode": "DLC",
-                        "displayText": "Disablement Location",
-                        "commentText": "be careful with dog in the back yard."
-                    }
-                ],
-                "statusHistory": null,
-                "serviceType": "Tow",
-                "coverage": "",
-                "dispatchRequestNumber": "457460776",
-                "urgency": "STANDARD",
-                "referenceNumber": null,
-                "poNumber": "115315731",
-                "problem": "FlatTire",
-                "equipment": {
-                    "type": "LightDutyFlatbed",
-                    "equipmentId": null
-                },
-                "receivedTime": "20150121T14: 55: 06Z",
-                "acceptedTime": "20150121T14: 55: 26Z",
-                "currentStatus": {
-                    "code": "10",
-                    "description": "ASSIGNED",
-                    "eta": 0,
-                    "reason": null,
-                    "reasonCode": 0,
-                    "source": "RoadsideconnectquOgmrMA3Da8ttvuJiI1OhoL6C0slWfU",
-                    "extJobId": null,
-                    "latitude": 0,
-                    "longitude": 0,
-                    "statusTime": "20150121T09: 55: 26",
-                    "driverId": 0,
-                    "reportedBy": "Dispatcher",
-                    "event": null
-                },
-                "etaStatusCode": 0,
-                "vehicle": {
-                    "vin": null,
-                    "year": "2007",
-                    "state": null,
-                    "make": "Hyundai",
-                    "mileage": 0,
-                    "model": "SantaFe",
-                    "color": "Unknown",
-                    "plate": null,
-                    "VehicleType": null,
-                    "driveTrainType": null,
-                    "fuelType": null
-                },
-                "disablementLocation": {
-                    "contactInfo": {
-                        "callbackNumber": "1212112112",
-                        "name": "",
-                        "phone": null
-                    },
-                    "dropInstructions": null,
-                    "garageClearanceHeight": null,
-                    "garageLevel": null,
-                    "isDriverWithVehicle": true,
-                    "nightDropOff": false,
-                    "parked": false,
-                    "address1": "22147LeiropDr",
-                    "address2": null,
-                    "crossStreet": "DrewfallsDr",
-                    "landmark": null,
-                    "locationType": null,
-                    "city": "Richmond",
-                    "poi1": null,
-                    "poi2": null,
-                    "state": "TX",
-                    "postalCode": "77407",
-                    "lat": 29.68697143715451,
-                    "lng": 95.7644752123639
-                },
-                "towDestination": {
-                    "contactInfo": {
-                        "callbackNumber": null,
-                        "name": "HUBHYUNDAIWEST",
-                        "phone": "7813063258"
-                    },
-                    "nightDropOff": false,
-                    "address1": "17007KATYFREEWAY",
-                    "address2": null,
-                    "crossStreet": null,
-                    "landmark": "",
-                    "locationType": "Dealership",
-                    "city": "HOUSTON",
-                    "poi1": null,
-                    "poi2": null,
-                    "state": "TX",
-                    "postalCode": "77094",
-                    "lat": 29.7845,
-                    "lng": 95.6785
-                },
-                "assignedDriver": {
-                    "driverId": 309542,
-                    "name": "tom123",
-                    "status": null,
-                    "equipment": null,
-                    "currentLocation": null,
-                    "gpsTracking": false,
-                    "profilePictureUrl": null,
-                    "smartPhone": false,
-                    "cellPhone": null,
-                    "officePhone": null,
-                    "officeEmail": null,
-                    "disablementLocation": null,
-                    "serviceType": null,
-                    "username": null,
-                    "onDuty": false,
-                    "profileLastUpdatedAt": "00010101T00: 00: 00"
-                },
-                "eta": "20150121T15: 40: 26",
-                "etaInMinutes": 45,
-                "revisedEta": "20150121T15: 40: 26",
-                "revisedEtaInMinutes": 0,
-                "etaRevisionCount": 1,
-                "responseTimeExtCount": 0,
-                "dispatcherContactNumber": null,
-                "dispatcher": null,
-                "signatures": [
-                    {
-                        "signatureId": "244254",
-                        "signeeName": "Smith",
-                        "signeeType": "Employee",
-                        "signatureReason": "Pre-existing Damages",
-                        "locationType": "Tow Location",
-                        "latitude": 72.3434,
-                        "longitude": -182.43543,
-                        "dispatchStatusCode": "20",
-                        "capturedDateTime": "12/21/2012 11:28 AM",
-                        "signatureUrl": "/dispatches/354235235/signatures/234234/picture"
-                    },
-                    {
-                        "signatureId": "24424",
-                        "signeeName": "Joe",
-                        "signeeType": "Employee",
-                        "signatureReason": "Pre-existing Damages",
-                        "locationType": "Tow Location",
-                        "latitude": 72.3434,
-                        "longitude": -182.43543,
-                        "dispatchStatusCode": "20",
-                        "capturedDateTime": "12/21/2012 11:45 AM",
-                        "signatureUrl": "/dispatches/354235235/signatures/24424/picture"
-                    }
-                ],
-                "equipmentList": [
-                    {
+                        {
+                    "comments": [
+                        {
+                            "commentCode": "DLC",
+                            "displayText": "Disablement Location",
+                            "commentText": "be careful with dog in the back yard."
+                        }
+                    ],
+                    "statusHistory": null,
+                    "serviceType": "Tow",
+                    "coverage": "",
+                    "dispatchRequestNumber": "457460776",
+                    "urgency": "STANDARD",
+                    "referenceNumber": null,
+                    "poNumber": "115315731",
+                    "problem": "FlatTire",
+                    "equipment": {
                         "type": "LightDutyFlatbed",
                         "equipmentId": null
-                    }
-                ]
-            }
+                    },
+                    "receivedTime": "20150121T14: 55: 06Z",
+                    "acceptedTime": "20150121T14: 55: 26Z",
+                    "currentStatus": {
+                        "code": "10",
+                        "description": "ASSIGNED",
+                        "eta": 0,
+                        "reason": null,
+                        "reasonCode": 0,
+                        "source": "RoadsideconnectquOgmrMA3Da8ttvuJiI1OhoL6C0slWfU",
+                        "extJobId": null,
+                        "latitude": 0,
+                        "longitude": 0,
+                        "statusTime": "20150121T09: 55: 26",
+                        "driverId": 23232,
+                        "externalDriverId": null,
+                        "reportedBy": "Dispatcher",
+                        "event": null
+                    },
+                    "etaStatusCode": 0,
+                    "vehicle": {
+                        "vin": null,
+                        "year": "2007",
+                        "state": null,
+                        "make": "Hyundai",
+                        "mileage": 0,
+                        "model": "SantaFe",
+                        "color": "Unknown",
+                        "plate": null,
+                        "VehicleType": null,
+                        "driveTrainType": null,
+                        "fuelType": null
+                    },
+                    "disablementLocation": {
+                        "contactInfo": {
+                            "callbackNumber": "1212112112",
+                            "name": "",
+                            "phone": null
+                        },
+                        "dropInstructions": null,
+                        "garageClearanceHeight": null,
+                        "garageLevel": null,
+                        "isDriverWithVehicle": true,
+                        "nightDropOff": false,
+                        "parked": false,
+                        "address1": "22147LeiropDr",
+                        "address2": null,
+                        "crossStreet": "DrewfallsDr",
+                        "landmark": null,
+                        "locationType": null,
+                        "city": "Richmond",
+                        "poi1": null,
+                        "poi2": null,
+                        "state": "TX",
+                        "postalCode": "77407",
+                        "lat": 29.68697143715451,
+                        "lng": 95.7644752123639
+                    },
+                    "towDestination": {
+                        "contactInfo": {
+                            "callbackNumber": null,
+                            "name": "HUBHYUNDAIWEST",
+                            "phone": "7813063258"
+                        },
+                        "nightDropOff": false,
+                        "address1": "17007KATYFREEWAY",
+                        "address2": null,
+                        "crossStreet": null,
+                        "landmark": "",
+                        "locationType": "Dealership",
+                        "city": "HOUSTON",
+                        "poi1": null,
+                        "poi2": null,
+                        "state": "TX",
+                        "postalCode": "77094",
+                        "lat": 29.7845,
+                        "lng": 95.6785
+                    },
+                    "assignedDriver": {
+                        "driverId": 309542,
+                        "externalDriverId": null,
+                        "name": "tom123",
+                        "status": null,
+                        "equipment": null,
+                        "currentLocation": null,
+                        "gpsTracking": false,
+                        "profilePictureUrl": null,
+                        "smartPhone": false,
+                        "cellPhone": null,
+                        "officePhone": null,
+                        "officeEmail": null,
+                        "disablementLocation": null,
+                        "serviceType": null,
+                        "username": null,
+                        "onDuty": false,
+                        "profileLastUpdatedAt": "00010101T00: 00: 00"
+                    },
+                    "eta": "20150121T15: 40: 26",
+                    "etaInMinutes": 45,
+                    "revisedEta": "20150121T15: 40: 26",
+                    "revisedEtaInMinutes": 0,
+                    "etaRevisionCount": 1,
+                    "responseTimeExtCount": 0,
+                    "dispatcherContactNumber": null,
+                    "dispatcher": null,
+                    "signatures": [
+                        {
+                            "signatureId": "244254",
+                            "signeeName": "Smith",
+                            "signeeType": "Employee",
+                            "signatureReason": "Pre-existing Damages",
+                            "locationType": "Tow Location",
+                            "latitude": 72.3434,
+                            "longitude": -182.43543,
+                            "dispatchStatusCode": "20",
+                            "capturedDateTime": "12/21/2012 11:28 AM",
+                            "signatureUrl": "/dispatches/354235235/signatures/234234/picture"
+                        },
+                        {
+                            "signatureId": "24424",
+                            "signeeName": "Joe",
+                            "signeeType": "Employee",
+                            "signatureReason": "Pre-existing Damages",
+                            "locationType": "Tow Location",
+                            "latitude": 72.3434,
+                            "longitude": -182.43543,
+                            "dispatchStatusCode": "20",
+                            "capturedDateTime": "12/21/2012 11:45 AM",
+                            "signatureUrl": "/dispatches/354235235/signatures/24424/picture"
+                        }
+                    ],
+                    "equipmentList": [
+                        {
+                            "type": "LightDutyFlatbed",
+                            "equipmentId": null
+                        }
+                    ]
+                }
 
             
 ## 5.4 Submit Dispatch Acceptance [/dispatches/{dispatchRequestNumber}/acceptDispatchRequest]
@@ -4769,7 +4777,7 @@ has been accepted or rejected by Agero. The push notification process is documen
 |:--------------- |:-----------|:-----------|:----|:-------------|
 |eta              |Estimated ETA|YES          |Integer| 
 |reason           |Any special circumstances if applicable |YES/NO |String |Required if ETA is beyond the maximum allowable. Possible Values: * None * Weather Emergency * Extreme Traffic in the Area|
-|reasonCode           |Allowed ReasonCodes |YES/NO |Integer |401/403/0
+|reasonCode           |Allowed ReasonCodes |YES/NO |Integer |401/403/0| 
 
 ###Errors 
 
@@ -4779,7 +4787,7 @@ has been accepted or rejected by Agero. The push notification process is documen
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job you are tyring to retrive is not allowed by the current user|Drivers cannot see jobs aren't unassingned or assigned to them|
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job has expired, it cannot be accepted|The job cannot be accepted|  
-|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.||
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.||  
 |403       |Forbidden         |FORBIDDEN_RESOURCE|Error: eDispatch unavailable. Callback requested|If the request a callback is made on new job offer, only agent can accept/refuse.|  
 |404       | No Jobs Found    |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
@@ -4816,7 +4824,8 @@ Dispatcher can select one of the following Rejection reasons codes:
 |Reason Code |Reason Description 
 |:---------- |:-------------------| 
 |400         |Do not accept payment type| 
-|406         |Proper equipment not available 501 |No longer offer service| 
+|406         |Proper equipment not available |
+|501          |No longer offer service| 
 |409         |Out of my coverage area |
 |503         |Other| 
 
@@ -4842,10 +4851,10 @@ Dispatcher can select one of the following Rejection reasons codes:
 |:---------|:----------------|:---------|:-------|:--------|
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the the current user| Drivers view or accept job offers|
-|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.||  
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The job has expired, it cannot be accepted|The job cannot be accepted|
-|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: eDispatch unavailable. Callback requested|If the request a callback is made on new job offer, only agent can accept/refuse.|  
-|404       | No Jobs Found    |             |       |The requested job record doesn’t exist| 
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already refused/accepted the job.|The job cannot be accepted/refused|  
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Error: eDispatch unavailable. Callback requested|If the request a callback is made on new job offer, only agent can accept/refuse.|
+|404       | Job Not Found    |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
    
 ###Submit Dispatch Refusal [POST]
@@ -4891,7 +4900,9 @@ it will add 1 minute to the job offer expiration time. This request can be done 
 |400       |Invalid Request      |Invalid Request| Invalid dispatch request|| 
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the the current user| Since drivers cannot accept view or accept offers, drivers  also cannot request more time to accept job offers|  
-|404       | No Jobs Found    |             |       |The requested job record doesn’t exist| 
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher has already added a minute to this job||  
+|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher refused/accepted the job|No extension is allowed as job is already accepted/refused|  
+|404       | Job Not Found      |             |  Job Not Found     |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
    
 ###Request More Time to Accept [POST]
@@ -4926,7 +4937,7 @@ business object.
 
 |Schema Property  | Description | Is Required | Type |Business Rules| 
 |:---------------|:-----------|:-----------|:----|:-------------|
-| assignedDriver  |             |YES          |Integer|                  
+| assignedDriver  |             |YES          |Driver|                  
                             
     
 ###Errors 
@@ -4936,7 +4947,6 @@ business object.
 |400       |Invalid Request      |INVALID REQUEST| Dispatch request id must be non-zero || 
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|Driver’s are not allowed to see assigned drivers||  
-|403       |Forbidden         |FORBIDDEN_RESOURCE|Another dispatcher refused/accepted the job|No extension is allowed as job is already accepted/refused|
 |404       |Driver Not Found |             |   Driver not assigned to this job.   |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
    
@@ -4955,6 +4965,7 @@ business object.
             
                 {
                 "driverId": 309542,
+                "externalDriverId": "334443",
                 "name": "tom123 boy",
                 "status": "10",
                 "equipment": {
@@ -5018,6 +5029,13 @@ business object.
 The "Assign Driver" API will allow a dispatcher to assign a driver to a certain job. Once the Driver is assigned to a dispatch, 
 the dispatch will be shown in "Assigned" status.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the profile request body will be used to lookup against External DriverID instead of Agero DriverID.
+
+The profile data sent along will be used to create a new external driver profile, if there is no matching profile found with the provided external driver ID. 
+If the profile already exists but and update is found while comparing the existing profile data with the request body profile data, then the existing profile will be updated.
+
+This API also provides an alternative for external/3rd parties with maintaining (create/update) of the driver Profiles on the fly at runtime
+
 ###Sample Request URL
 /dispatches/329345447/assignedDriver
 
@@ -5025,21 +5043,48 @@ the dispatch will be shown in "Assigned" status.
 
 |Schema Property  | Description | Is Required | Type |Business Rules| 
 |:---------------|:-----------|:-----------|:----|:-------------|
-| driverId       |             |YES          |Integer|          
+| driverId       |             |YES/NO          |Integer|  Not required in case of ExternalDriverAssignment
+| driverProfile  |Profile details for the Driver             |YES/NO          |Driver|  onDuty is not required. Required if ExternalDriverAssignment        
 
 ###Sample Request
 
-200 OK
+            {
+                "driverId" : "132454"
+            }
+            
+            OR
+            
+            {  
+               "driverProfile":{  
+                  "name":"Joe Smith",
+                  "externalDriverId":"344353",
+                  "equipment":{  
+                     "equipmentId":"LDWL",
+                     "addressId":1,
+                     "type":"Light Duty Wheel Lift",
+                     "vehicleNickname":"blue truck"
+                  },
+                  "officeEmail":"jdoe@abctowing.com",
+                  "officePhone":"555-555-1111",
+                  "gpsTracking":true,
+                  "onDuty":true,
+                  "profilePictureURL":"http://www.partnersite.com/drivers/{driverId}/picture"
+               }
+            }
+
+### Sample Request
+    200 OK  
 
 ###Errors 
 
 |HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
 |:---------|:----------------|:---------|:-------|:--------|
-|400       |Bad Request      |REQUEST_PARAMETER_MISSING| Dispatch Request No is not correct Format or Invalid||
+|400       |Bad Request      |REQUEST_PARAMETER_MISSING| DriverID is incorrect format||
+|400       |Bad Request      |External DriverID Missing| External DriverID is required to assign on a dispatch|DriverID is mandatory, but no match was found|
+|400       |Bad Request      |DriverProfile Missing| DriverProfile is required|Profile is mandatory if the External Driver ID is in consideration|
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN|Driver’s are not allowed to see assigned drivers||  
 |403       |Forbidden         |FORBIDDEN|Cancellation requested for this job, cannot update it now|
-|400       |Bad Request      |REQUEST_PARAMETER_MISSING|
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
 
@@ -5060,7 +5105,100 @@ the dispatch will be shown in "Assigned" status.
 
 + Response 200 ()
 
-## 5.9 Cancel a Dispatch [/dispatches/{id}/cancel]
+
+## 5.9 Assign External Driver [/dispatches/{id}/assignExternalDriver]
+
+###Description
+The "Assign Driver" API will allow a dispatcher to assign a driver to a certain job. Once the Driver is assigned to a dispatch, 
+the dispatch will be shown in "Assigned" status.
+
+The profile data sent along will be used to create a new external driver profile, if there is no matching profile found with the provided external driver ID.
+
+If the profile already exists but and update is found while comparing the existing profile data with the request body profile data, then the existing profile
+will be updated.
+
+This API provides as an alternative for external/3rd parties with mainting (create/update) of the driver Profiles
+
+###Sample Request URL
+/dispatches/329345447/assignExternalDriver
+
+###Request JSON
+
+|Schema Property  | Description | Is Required | Type |Business Rules| 
+|:---------------|:-----------|:-----------|:----|:-------------|
+| externalDriverId       |3rd Party Partners Driver ID             |YES          |String|  Not required in case of ExternalDriverAssignment
+| driverProfile  |Profile details for the Driver             |YES          |Driver|  onDuty is not required.        
+
+###Sample Request
+
+            {  
+               "externalDriverId":"132454",
+               "driverProfile":{  
+                  "name":"Joe Smith",
+                  "externalDriverId":"132454",
+                  "equipment":{  
+                     "equipmentId":"LDWL",
+                     "addressId":1,
+                     "type":"Light Duty Wheel Lift",
+                     "vehicleNickname":"blue truck"
+                  },
+                  "officeEmail":"jdoe@abctowing.com",
+                  "officePhone":"555-555-1111",
+                  "gpsTracking":true,
+                  "onDuty":true,
+                  "profilePictureURL":"http://www.partnersite.com/drivers/{driverId}/picture"
+               }
+            }
+
+### Sample Request
+    200 OK  
+
+###Errors 
+
+|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
+|:---------|:----------------|:---------|:-------|:--------|
+|400       |Bad Request      |REQUEST_PARAMETER_MISSING| Dispatch Request No is not correct Format|Invalid Dispatch Request Number|
+|400       |Bad Request      |External DriverID Missing| External DriverID is required to assign on a dispatch||
+|400       |Bad Request      |DriverProfile Missing| DriverProfile is required||
+|401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|403       |Forbidden         |FORBIDDEN|Driver's are not allowed to assign job to other driver||  
+|403       |Forbidden         |FORBIDDEN|Cancellation requested for this job, cannot update it now|
+|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
+
+
+### Assign External Driver [PUT]
+
++ Request (application/json)
+
+    + Header
+
+            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            
+    + Body
+    
+            {  
+               "externalDriverId":"132454",
+               "driverProfile":{  
+                  "name":"Joe Smith",
+                  "externalDriverId":"132454",
+                  "equipment":{  
+                     "equipmentId":"LDWL",
+                     "addressId":1,
+                     "type":"Light Duty Wheel Lift",
+                     "vehicleNickname":"blue truck"
+                  },
+                  "officeEmail":"jdoe@abctowing.com",
+                  "officePhone":"555-555-1111",
+                  "gpsTracking":true,
+                  "onDuty":true,
+                  "profilePictureURL":"http://www.partnersite.com/drivers/{driverId}/picture"
+               }
+            }
+   
+
++ Response 200 ()
+
+## 5.10 Cancel a Dispatch [/dispatches/{id}/cancel]
 
 ###Description
 
@@ -5085,8 +5223,9 @@ data pops in One Road that will require further action on behalf of the One Road
 |80       |Customer Cancel       |210         |GOA REQUEST -CUSTOMER CANCEL (AFTER DEADLINE)|
 |80       |Customer Cancel       |3005          |SP - GOA REQUEST -CUSTOMER CANCEL (AFTER DEADLINE)|
 |90       |Vehicle could not be found        |207         |GOA REQUEST - WRONG LOCATION GIVEN|
-|90       |Vehicle could not be found        |206         |GOA REQUEST - CUSTOMER NOT WITH VEHICLE|
+|90       |Vehicle could not be found        |3002         |SP - GOA REQUEST - WRONG LOCATION GIVEN|
 |95       |Customer not with vehicle         |206         |GOA REQUEST - CUSTOMER NOT WITH VEHICLE|
+|95       |Customer not with vehicle         |3001         |SP - GOA REQUEST - CUSTOMER NOT WITH VEHICLE|
 |99       |Service attempt failed            |208         |GOA REQUEST - INCORRECT SERVICE|
 |99       |Service attempt failed            |209         |GOA REQUEST - INCORRECT EQUIPMENT|
 |99       |Service attempt failed            |214        |SP - UNSUCCESSFUL -  WRONG EQUIPMENT|
@@ -5113,7 +5252,7 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 
 |HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
 |:---------|:----------------|:---------|:-------|:--------|
-|400       |Bad Request      |REQUEST_PARAMETER_MISSING|
+|400       |Bad Request      |REQUEST_PARAMETER_MISSING|Invalid status/reason code
 |401       |Unauthorized     |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |404       |Not Found        |NOT FOUND|Required a valid profile|Valid profile not found|  
 |500       |Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
@@ -5136,9 +5275,9 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 
 + Response 200 ()
 
-## 5.10,5.11 Add/Get Signature [/dispatches/{dispatchRequestNumber}/signatures]
+## 5.11,5.12 Add/Get Signature [/dispatches/{dispatchRequestNumber}/signatures]
 
-## 5.10 Add a Signature
+## 5.11 Add a Signature
 
 ###Description
 
@@ -5198,7 +5337,7 @@ Signature Location:
 
 Schema Property  | Description | Is Required | Type |Business Rules| 
 |:---------------|:------------|:------------|:-----|:-------------|
-| signatureId    |ID of the newly created signature|YES|Integer|                  
+| signatureId    |ID of the newly created signature|YES|String|                  
                     
 ###Errors 
 
@@ -5206,10 +5345,11 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 |:---------|:----------|:--------|:-------|
 |400       |REQUEST_PARAMETER_MISSING      |Request Validation failed/Parameter missing.|One or more invalid parameters we passed.  See the innerErrors collection for a list of invalid parameters.|
 |401       |invalid_token     |oauth.v2.InvalidAccessToken: Invalid access token|A valid OAuth token was not provided.|
-|415       | Unsupported Media Type   |
+|415       | Unsupported Media Type   |Unsupported Media Type||
 |500       |UNKNOWN     |Unknown Error|An unknown error occurred at the server|
+
     
-## 5.11 Get Signatures
+## 5.12 Get Signatures
 
 ###Description
 
@@ -5314,31 +5454,32 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 
     + Body
             
-            [ 
-            { 
-                "signatureId":"532523", 
-                "signeeName":"Smith", 
-                "signeeType":"1", 
-                "signatureReason": "1", 
-                "latitude":72.3434 , 
-                "longitude":-182.43543, 
-                "dispatchStatusCode":"20", 
-                "capturedDateTime":"12/21/2012 11:28 AM", 
-                "signatureUrl":"/dispatches/354235235/signatures/234234/picture" 
-            }, 
-            { 
-                "signatureId":"532524", 
-                "signeeName":"John", 
-                "signeeType":"2", 
-                "signatureReason": "2", 
-                "latitude":80.3434 , 
-                "longitude":-197.43543, 
-                "capturedDateTime":"12/21/2012 11:55 AM", 
-                "signatureUrl":"/dispatches/354235235/signatures/23352/picture" 
-            }
-            ] 
+                [ 
+                    { 
+                        "signatureId":"532523", 
+                        "signeeName":"Smith", 
+                        "signeeType":"1", 
+                        "signatureReason": "1", 
+                        "latitude":72.3434 , 
+                        "longitude":-182.43543, 
+                        "dispatchStatusCode":"20", 
+                        "capturedDateTime":"12/21/2012 11:28 AM", 
+                        "signatureUrl":"/dispatches/354235235/signatures/234234/picture" 
+                    }, 
+                    { 
+                        "signatureId":"532524", 
+                        "signeeName":"John", 
+                        "signeeType":"2", 
+                        "signatureReason": "2", 
+                        "latitude":80.3434 , 
+                        "longitude":-197.43543, 
+                        "capturedDateTime":"12/21/2012 11:55 AM", 
+                        "signatureUrl":"/dispatches/354235235/signatures/23352/picture" 
+                    }
+                ] 
 
-## 5.12 Get a Signature [/dispatches/{dispatchRequestNumber}/signatures/{signatureId}]
+
+## 5.13 Get a Signature [/dispatches/{dispatchRequestNumber}/signatures/{signatureId}]
 
 ###Description
 
@@ -5390,7 +5531,8 @@ Schema Property  | Description | Is Required | Type |Business Rules|
                 "signatureUrl":"/dispatches/354235235/signatures/234234/picturepicture"
             }
 
-## 5.13 Get Dispatch Summary [/dispatchesSummary]
+
+## 5.14 Get Dispatch Summary [/dispatchesSummary]
 
 ###Description
 
@@ -5547,9 +5689,9 @@ Schema Property  | Description | Is Required | Type |Business Rules|
             ] 
 
 
-## 5.14,5.15 Add/Get Dispatch Document [/dispatches/{dispatchRequestNumber}/documents]
+## 5.15,5.16 Add/Get Dispatch Document [/dispatches/{dispatchRequestNumber}/documents]
 
-## 5.14 Add a Dispatch Document
+## 5.15 Add a Dispatch Document
 ###Description
 
 The documents API will allow drivers and dispatchers to save multiple documents per PO.
@@ -5596,7 +5738,7 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
    
-## 5.15 Get Dispatch Documents
+## 5.16 Get Dispatch Documents
 
 ###Description
 
@@ -5623,7 +5765,7 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 |400       |REQUEST_PARAMETER_MISSING|Request Validation failed|One or more invalid parameters we passed. See the innerErrors collection  for a list of invalid parameters|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |404       |DISPATCH_NOT_FOUND|No dispatch found|This is returned if the dispatch request# provided in the resourceURI could not   be found|
-|404       |SIGNATURES_NOT_FOUND|No signatures found| This is returned if a dispatch has no signatures|
+|404       |DOCUMENTS_NOT_FOUND|No documents found| This is returned if a dispatch has no documents|
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
                                
@@ -5689,9 +5831,9 @@ Schema Property  | Description | Is Required | Type |Business Rules|
             ] 
             
             
-## 5.16,5.17 Get/Delete Dispatch Document [/dispatches/{dispatchRequestNumber}/documents/{documentId}]
+## 5.17,5.18 Get/Delete Dispatch Document [/dispatches/{dispatchRequestNumber}/documents/{documentId}]
 
-## 5.16 Get a Dispatch Document
+## 5.17 Get a Dispatch Document
 ###Description
 
 The "Get a Dispatch Document" API will allow drivers and dispatchers to retrieve a document captured for a given 
@@ -5723,7 +5865,7 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
 
-## 5.17 Delete a Dispatch Document
+## 5.18 Delete a Dispatch Document
 
 ###Description
 
@@ -5757,11 +5899,12 @@ HTTP 200 OK
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:----------|:--------|:--------|
-|400       |REQUEST_PARAMETER_MISSING|Request Validation failed|One or more invalid parameters we passed. See the innerErrors collection  for a list of invalid parameters|
+|404       |RESOURCE_NOT_FOUND|Invalid Dispatch Id| If provided  dispatchId is either invalid or does not exist|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|404       |DISPATCH_NOT_FOUND|No dispatch found|This is returned if the dispatch request# provided in the resourceURI could not   be found|
-|404       |SIGNATURES_NOT_FOUND|No signatures found| This is returned if a dispatch has no signatures|
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
+|404       |RESOURCE_NOT_FOUND|No dispatch found|Invalid Document  Id|If provided  documentId is either invalid or does not exist|
+
+
 
                                
 ###Get a Dispatch Document [GET]
@@ -5794,7 +5937,7 @@ HTTP 200 OK
             
 + Response 200 ()
 
-## 5.18 Request Phone Call [/dispatches/{id}/requestPhoneCall]
+## 5.19 Request Phone Call [/dispatches/{id}/requestPhoneCall]
 
 ###Description
 
@@ -5813,11 +5956,11 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 
 
 ###Sample Request
-{
-    "callbackNumber": "2222222222",
-    "name": "BRENDA  MORGAN",
-    "phone": "1111111111"
-}
+        {
+            "callbackNumber": "2222222222",
+            "name": "BRENDA  MORGAN",
+            "phone": "1111111111"
+        }
     
 ###Response Schema
 N/A
@@ -5849,9 +5992,18 @@ An Agero agent will contact you shortly
 
             Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
             
+    + Body
+    
+            {
+                "callbackNumber": "2222222222",
+                "name": "BRENDA  MORGAN",
+                "phone": "1111111111"
+            }
+            
+            
 + Response 200 ()
 
-## 5.19 Extend ETA [/dispatches/{id}?action=extendedETA]
+## 5.20 Extend ETA v4.x [/dispatches/{id}?action=extendedETA]
 
 ###Description
 
@@ -5885,7 +6037,7 @@ HTTP 200 OK
 |400       |Invalid Request  |Invalid Request| Dispatch Request number/Revised ETA is required|| 
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the current user|Since drivers cannot accept view or accept offers,drivers also cannot request more time to accept job offers|  
-|404       | No Jobs Found    |             |       |The requested job record doesn’t exist| 
+|404       | Job Not Found    |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
 
 ### Extend ETA [PUT]
