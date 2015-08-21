@@ -6093,21 +6093,21 @@ User will clarify why the job resulted in a Cancellation or an Unsuccessful Serv
 
 Once a job reaches an end node (any status-node in the "Closed" disposition), then no further updates are permitted.
 
-|Status Code |Description  | 
-|:-----------|:----------- | 
-|2           |New |Readonly| 
-|4           |PO Needed| Readonly| 
-|3           |Pending |Readonly| 
+|Status Code |Description  | |
+|:-----------|:----------- |:-----------| 
+|1           |New |Readonly| 
+|2           |PO Needed| Readonly| 
 |4           |Expired| Readonly| 
+|3           |Pending| Readonly| 
 |5           |Rejected| Readonly| 
-|6           |Refused |Readonly| 
+|6           |Refused| Readonly| 
 |0           |Unassigned| 
 |10          |Assigned| 
 |20          |In Route| 
 |30          |On Scene| 
 |40          |Tow in Progress| 
 |50          |Destination Arrival| 
-|60          |Job Cleared |Readonly|
+|60          |Job Cleared| Readonly|
 |70          |Cancel - SP Cancel| 
 |80          |Cancel - Customer Cancel| 
 |90          |Unsuccessful - No Vehicle| 
@@ -6355,17 +6355,17 @@ coordinates of the disablement location and coordinates of the "tow to" location
 
 /dispatches/3293346787/status
 
-###Request URI Parameters
-
-|Schema Property |Description   |Is Required   |Type   |Business Rules|
-|:---------------|:-------------|:-------------|:------|:-------------| 
-|dispatchRequestNumber|Dispatch Request Number from Agero  |YES      |String| 
-
 ### Response Json
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |Status|Represents the status of the job  |YES      |DispatchStatus| 
+
+###Request URI Parameters
+
+|Schema Property |Description   |Is Required   |Type   |Business Rules|
+|:---------------|:-------------|:-------------|:------|:-------------| 
+|dispatchRequestNumber|Dispatch Request Number from Agero  |YES      |String| 
 
 ###Errors 
 
@@ -6373,7 +6373,7 @@ coordinates of the disablement location and coordinates of the "tow to" location
 |:---------|:----------------|:--------- |:--------|:--------|
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the current user| Drivers view or refuse job offers|  
-|404       | Job Not Found   |             | Job Current Status not found      |The requested job record doesn’t exist| 
+|404       |Job Not Found  |             |  Job Current Status not found     |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
     
  
@@ -6394,7 +6394,7 @@ location coordinates if a GPS feature is available and enabled.
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
-|Status|Represents the status of the job|YES      |DispatchStatus| 
+|status|Represents the status of the job|YES      |DispatchStatus| 
 
 ###Request JSON
 
@@ -6406,7 +6406,7 @@ location coordinates if a GPS feature is available and enabled.
 
 /dispatches/329345447/status
 
-###Errors 
+###Errors
 
 |HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
 |:---------|:----------------|:----------|:--------|:--------|
@@ -6442,6 +6442,7 @@ location coordinates if a GPS feature is available and enabled.
                 "longitude": 0,
                 "statusTime": "2015-01-22T17: 54: 16Z",
                 "driverId": 309542,
+                "externalDriverId": null,
                 "reportedBy": "Agero",
                 "event": null
              }
@@ -6457,14 +6458,29 @@ location coordinates if a GPS feature is available and enabled.
             
     + Body
     
-            {
-                "code" : "20",
-                "eta" : "30",
-                "latitude" : 40.1234,
-                "longitude" : -70.1234,
-                "source" : "TowSoft",
-                "extJobId" : "789239",
-                "statusTime" : "2013-01-31 08:00 AM"
+            {  
+               "code":"20",
+               "eta":"30",
+               "latitude":40.1234,
+               "longitude":-70.1234,
+               "source":"TowSoft",
+               "extJobId":"789239",
+               "statusTime":"2013-01-31 08:00 AM",
+               "driverProfile":{  
+                      "name":"Joe Smith",
+                      "externalDriverId":"344353",
+                      "equipment":{  
+                         "equipmentId":"LDWL",
+                         "addressId":1,
+                         "type":"Light Duty Wheel Lift",
+                         "vehicleNickname":"blue truck"
+                      },
+                      "officeEmail":"jdoe@abctowing.com",
+                      "officePhone":"555-555-1111",
+                      "gpsTracking":true,
+                      "onDuty":true,
+                      "profilePictureURL":"http://www.partnersite.com/drivers/{driverId}/picture"
+                }
             }
                         
 + Response 200 (application/json)
@@ -6483,6 +6499,7 @@ location coordinates if a GPS feature is available and enabled.
             "longitude": 0,
             "statusTime": "2015-01-22T17: 54:35Z",
             "driverId": 0,
+            "externalDriverId": null,
             "reportedBy": "Driver",
             "event": null
             }
@@ -6555,6 +6572,7 @@ The jobs listed on the selected History day will include the following -
                     "longitude": 0,
                     "statusTime": "2015-01-22T17: 52:55Z",
                     "driverId": 0,
+                    "externalDriverId": null,
                     "reportedBy": "Agero",
                     "event": null
                 },
@@ -6570,6 +6588,7 @@ The jobs listed on the selected History day will include the following -
                     "longitude": 0,
                     "statusTime": "2015-01-22T17: 54:04Z",
                     "driverId": 309542,
+                    "externalDriverId": "323232",
                     "reportedBy": "Dispatching",
                     "event": null
                 },
@@ -6585,6 +6604,7 @@ The jobs listed on the selected History day will include the following -
                     "longitude": 0,
                     "statusTime": "2015-01-22T17: 54:35Z",
                     "driverId": 0,
+                    "externalDriverId": null,
                     "reportedBy": "Driver",
                     "event": null
                 }
@@ -6632,7 +6652,7 @@ Host: agero-test.apigee.net
 Content-Type: application/json
 Content-Length: 96
 Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-    
+
 ###Errors 
 
 |HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
@@ -6640,7 +6660,7 @@ Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
 |400       |Bad Request      |Invalid Request|Dispatch Request Number/Revised ETA is required|| 
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the current user| Drivers view or refuse job offers|  
-|404       |Job Not Found   |             |       |The requested job record doesn’t exist| 
+|404       | Job Not Found  |             |       |The requested job record doesn’t exist| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
                                                                                                             
 
@@ -6656,21 +6676,39 @@ Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
 
     + Body
     
-            {
-            "code": "70",
-            "description": "SP Cancellation",
-            "eta": 0,
-            "reason": null,
-            "reasonCode": 0,
-            "source": "Beacon-Proxy-App hPVV9kjE686bMdRLJwoxNlEZ3jGUtkJl",
-            "extJobId": "672239854",
-            "latitude": 0,
-            "longitude": 0,
-            "statusTime": "2015-01-22T17: 54:35Z",
-            "driverId": 0,
-            "reportedBy": "Driver",
-            "event": null
+            {  
+               "code":"70",
+               "description":"SP Cancellation",
+               "eta":0,
+               "reason":null,
+               "reasonCode":0,
+               "source":"Beacon-Proxy-App hPVV9kjE686bMdRLJwoxNlEZ3jGUtkJl",
+               "extJobId":"672239854",
+               "latitude":0,
+               "longitude":0,
+               "statusTime":"2015-01-22T17: 54:35Z",
+               "driverId":0,
+               "externalDriverId":null,
+               "reportedBy":"Driver",
+               "event":null,
+               "driverProfile":{  
+                  "name":"Joe Smith",
+                  "externalDriverId":"344353",
+                  "equipment":{  
+                     "equipmentId":"LDWL",
+                     "addressId":1,
+                     "type":"Light Duty Wheel Lift",
+                     "vehicleNickname":"blue truck"
+                  },
+                  "officeEmail":"jdoe@abctowing.com",
+                  "officePhone":"555-555-1111",
+                  "gpsTracking":true,
+                  "onDuty":true,
+                  "profilePictureURL":"http://www.site.com/drivers/{driverId}/picture"
+               }
             }
+
+
 
 # Group 7 Vendor API
 
