@@ -42,6 +42,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |    revisedEtaInMinutes           |Represents the revised ETA in mins provided |NO|Integer|
 |    etaRevisionCount           |Represents the # of times ETA has been revised|NO|Integer|Only applicable if the ETA  is revised at least once|
 |    responseTimeExtCount           |Represents the # of times accepted counter has been extended|NO|Integer||
+|    statusHistory           |History of the all the status updates dispatch went across|NO|DispatchStatus[]||
 |    serviceType           |Type of service  |YES | String|Possible Values: Tow to Storage  Door Unlock Fuel Delivery Jump Start Flat Tire Winch Reunite|            
 |    disablementLocation           |The disablement location|YES|ServiceLocation||
 |    towDestination           |The tow destination if  the service is tow|NO|towDestination|Required if service type is tow|
@@ -72,7 +73,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | model         |          vehicle Model             |               YES  |            String|
 |color          |         vehicle color               |             NO  |            String |
 |  plate        |           Vehicle State and plate |                 NO   |               String  |
-|state         |          State in which the vehicle |              NO    |              String  |
+|state         |          State in which the vehicle is registered in | NO |              String  |
 |vehicleType  |           Vehicle Type/class          |             NO  |               String |
 |drivetrainType |         Vehicle drivetrain type   |               NO   |              String|
 |fuelType  |              Vehicle fuel type     |                   NO    |             String|
@@ -96,6 +97,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | externalDriverId   |    External DriverId of the assigned Driver |                   NO |                 String |
 |reportedBy  |            User Role who took action on the Distpatch |                  NO  |                String |
 |event   |           Details available with PTO  |        NO      |          String|
+|driverProfile   |           Profile details for the Driver  |        NO      |          Driver|
 
 
 ## 3.4 Location
@@ -241,10 +243,10 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |equipmentId    |         Equiment Id    |                            NO     |            String|
-| addressId      |         Address Id of the Facility where the |    NO     |            Integer|
+| addressId      |         Address Id of the Facility where the equipment is registered with Agero |    NO     |            Integer|
 | type          |          Equipment Type              |             NO|            String  |Readonly|
-|vehicleNickname|         Name/Number for the assigned  |           NO       |           String|
-| equipmentPictureUrl |    Url for the picture of the equipment |    NO    |              URL|
+|vehicleNickname|         Name/Number for the assigned equipment  |           NO       |           String|
+| equipmentPictureUrl |    Url for the picture of   the equipment |    NO    |              URL|
 |LastUpdatedAt|    Represents the date and time at which the equipment picture was last updated at|        NO  |               DateTime |        Readonly|
 
 
@@ -316,7 +318,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |  addressId |              Address Id of the Facility where the  equipment is registered with Agero|   YES   |              Integer  |
 | type    |                Equipment Type      |                     Readonly |           String|
 |quantity |               Represents the count of equipment available at the facility |      NO   |              Integer|
-|  shiftType |              Represents the type of shift the equipment is available for  |       NO        |         Enum   | 
+|  shiftType |              Represents the type of shift the equipment is available for  |       NO        |         Enum   |Please refer to EquipmentShiftCodes Enum for Possible values| 
 |startDate  |             Represents the start date the   equipment is available from  |       YES       |          Date|
 |location  |             Location of the the vendor equipment  |       NO       |          String|
 
@@ -513,15 +515,15 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | city                  |                                                               | YES         | String              |                                                             |
 | state                 |                                                               | YES         | String              |                                                             |
 | zipcode               |                                                               | YES         | String              |                                                             |
-| lat                   | Latitude                                                      | YES         | String              | lat/Long is required for navigation and mapping operations. |
+| lat                   | Latitude                                                      | YES         | Double              | lat/Long is required for navigation and mapping operations. |
 | lon                   | Longitude                                                     | YES         | Double              |                                                             |
-| primaryEmailAddress   | Represents the primary Email Address of the facility          | YES         | Double              |                                                             |
+| primaryEmailAddress   | Represents the primary Email Address of the facility          | NO          | String             |                                                             |
 | alternateEmailAddress | Represents the secondary email address of the facility        | NO          | String              |                                                             |
-| contactInfo           | Represents ph/fax #s of the facility                          | No          | String              |                                                             |
+| contactInfo           | Represents ph/fax #s of the facility                          | YES          |               |                                                             |
 | preferences           | Represents the preferences of the Facility                    | YES         | FacilityPreferences |                                                             |
 | insurancePolicy           |Represents the insurance Policy details for the Facility                | NO         | InsurancePolicy |InsurancePolicy will always be tied to Primary Facility only|                                                             |
-| equipments            | Represents the List of Equipments available at a facility     | YES         | Territory[]         |                                                             |
-| territories           | Represents the list of territories facility can handle jobs   | YES         |                     |                                                             |
+| equipments            | Represents the List of Equipments available at a facility     | YES         | VendorEquipment[]         |                                                             |
+| territories           | Represents the list of territories facility can handle jobs   | YES         |    Territory[]            |                                                             |
 | rates                 | Represents the rates applicable for the equipment   | YES         |           Rate[]          |                                                             |
 
 ###Sample JSON
@@ -1885,28 +1887,221 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 | Schema Property | Description | Is Required | Type     | Business Rules |
 |:----------------|:------------|:-------------|:----------|:----------------|
-| businessUnit |  Represents  the code the business Unit the performance data applies for | YES | String  ||
-| serviceType|Represents the type of the service  the  performance data applies for  |YES|    | |
-| metrics |  List of KPI metrics | YES | String  |KPIMetric[]|
+| totalCallsOffered |  Represents the total# of calls offered | YES | Integer  ||
+| totalClaims|Represents the total# of claims submitted |YES| Integer   | |
+| averageClaimAmount |  Represents the average $ amount of submitted claim | YES | Double  ||
+| totalAssignedterritoryRefusedCalls |  Represents the toal# of assigned territory refused calls in last 30 days | YES | Integer  |For trailing 30 days|
+| averageClaimAmountOnRefusedCalls |   | YES | Double  |For trailing 30 days|
+| missedRevenueOnRefusedCalls |  Represents the missed revenue | YES | Double  |For trailing 30 days #of RefusedClaims * averageClaimAmount|
+| data | Represents the Performance data | YES | KPIBusinessUnit[]  ||
+| startDate | Represents the beginning date of the time period the performance data is applicable for | YES | String  |MM/DD/YYYY format|
+| endDate |  Represents the end date of the time period the performance data is applicable for | YES | String  |MM/DD/YYYY format|
 
 ###Sample JSON
 
-    {
-        "businessUnit":{
-                "code" : "ASM",
-                "description":"Accident Scene Management"
-        },
-        "serviceType":"FX",
-        "metrics":{
-                "type" : {
-                "code" : "6",
-                "description":"Call Acceptance",
-                "goal":"90",
-                "goalUnits":"Percentage",
-                "goalDirection":"Upwards"
+    {  
+       "totalCallsOffered":111,
+       "totalClaims":80,
+       "averageClaimAmount":40,
+       "totalAssignedTerritoryRefusedCalls":34,
+       "averageClaimAmountOnRefusedCalls":25,
+       "missedRevenueOnRefusedCalls":850,
+       "startDate":"02/07/2014",
+       "endDate":"03/09/2014",
+       "data":[  
+          {  
+             "type":{  
+                "code":"M/H",
+                "description":"Medium Heavy"
+             },
+             "performanceCategories":[  
+                {  
+                   "type":{  
+                      "code":"PERF",
+                      "description":"Performance"
+                   },
+                   "metricGroups":[  
+                      {  
+                         "type":{  
+                            "code":"CALLACC",
+                            "description":"Call Acceptance"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"CALLACC",
+                                  "description":"Call Acceptance",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MIN",
+                                  "goal":95
+                               },
+                               "value":90
+                            }
+                         ]
+                      },
+                      {  
+                         "type":{  
+                            "code":"GOA",
+                            "description":"Gone On Arrival"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"GOA",
+                                  "description":"Gone On Arrival",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MAX",
+                                  "goal":5
+                               },
+                               "value":12
+                            }
+                         ]
+                      }
+                   ]
                 },
-                "value":"80"
-        }
+                {  
+                   "type":{  
+                      "code":"CSAT",
+                      "description":"Customer Satisfaction"
+                   },
+                   "metricGroups":[  
+                      {  
+                         "type":{  
+                            "code":"B2B",
+                            "description":"Bottom 2 Box"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"B2B",
+                                  "description":"Bottom 2 Box",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MAX",
+                                  "goal":1.5
+                               },
+                               "value":1.7
+                            }
+                         ]
+                      },
+                      {  
+                         "type":{  
+                            "code":"CSI",
+                            "description":"Top Box CSI"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"CSI",
+                                  "description":"Top Box CSI",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MIN",
+                                  "goal":92
+                               },
+                               "value":94
+                            }
+                         ]
+                      }
+                   ]
+                }
+             ]
+          },
+          {  
+             "type":{  
+                "code":"ASM",
+                "description":"Accident Scene Management"
+             },
+             "performanceCategories":[  
+                {  
+                   "type":{  
+                      "code":"SPD",
+                      "description":"Speed"
+                   },
+                   "metricGroups":[  
+                      {  
+                         "type":{  
+                            "code":"AVGETA",
+                            "description":"Average ETA"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"AVGETA",
+                                  "description":"Average ETA",
+                                  "mesaurementUnit":"MIN",
+                                  "goalThreshholdType":"MAX",
+                                  "goal":40
+                               },
+                               "value":45
+                            }
+                         ]
+                      },
+                      {  
+                         "type":{  
+                            "code":"ETAACC",
+                            "description":"ETA ACCURACY"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"ETA",
+                                  "description":"ETA ACCURACY",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MIN",
+                                  "goal":90
+                               },
+                               "value":82
+                            }
+                         ]
+                      }
+                   ]
+                },
+                {  
+                   "type":{  
+                      "code":"PERF",
+                      "description":"Performance"
+                   },
+                   "metricGroups":[  
+                      {  
+                         "type":{  
+                            "code":"CALLACC",
+                            "description":"Call Acceptance"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"CALLACC",
+                                  "description":"Call Acceptance",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MIN",
+                                  "goal":95
+                               },
+                               "value":96
+                            }
+                         ]
+                      },
+                      {  
+                         "type":{  
+                            "code":"GOA",
+                            "description":"Gone On Arrival"
+                         },
+                         "metrics":[  
+                            {  
+                               "type":{  
+                                  "code":"GOA",
+                                  "description":"Gone On Arrival",
+                                  "mesaurementUnit":"Percentage",
+                                  "goalThreshholdType":"MAX",
+                                  "goal":6
+                               },
+                               "value":5
+                            }
+                         ]
+                      }
+                   ]
+                }
+             ]
+          }
+       ]
     }
 
 
@@ -2142,14 +2337,15 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | towInfo                   |Towing details if the Service type is Tow and the towing was done at a location different then specified on the PO                                  |             | towInfo   |                |
 | adjustments              | List of adjustments for claim                  |             | adjustment|                |
 | additionalCharge1Service | Addtl. service type                            |             | String   |                |
-| additionalCharge2Service | Addtl charge amount                            |             | String   |                |
-| additionalCharge2Amount  | Addtl. service type                            |             | String   |                |
-| additionalCharge3Service | Addtl charge amount                            |             | String   |                |
-| additionalCharge3Amount  | Addtl. service type                            |             | String   |                |
-| additionalCharge4Service | Addtl charge amount                            |             | String   |                |
-| additionalCharge4Amount  | Addtl. service type                            |             | String   |                |
-| additionalCharge5Service | Addtl charge amount                            |             | String   |                |
-| additionalCharge5Amount  | Addtl. service type                            |             | String   |                |
+| additionalCharge1Amount  | Addtl charge amount                            |             | String   |                |
+| additionalCharge2Service | Addtl. service type                            |             | String   |                |
+| additionalCharge2Amount  | Addtl charge amount                            |             | String   |                |
+| additionalCharge3Service | Addtl. service type                            |             | String   |                |
+| additionalCharge3Amount  | Addtl charge amount                            |             | String   |                |
+| additionalCharge4Service | Addtl. service type                            |             | String   |                |
+| additionalCharge4Amount  | Addtl charge amount                            |             | String   |                |
+| additionalCharge5Service | Addtl. service type                            |             | String   |                |
+| additionalCharge5Amount  | Addtl charge amount                            |             | String   |                |
 
     
 ###Sample JSON
@@ -2725,20 +2921,6 @@ Agero will convey Dispatch Status information to its customers via 5 different m
     "description":"Week Over Week"
     }
     
-### FeedbackSubjectType extends EnumerationType
-
-| Schema Property|Description  |Is Required|Type|Business Rules|
-|:--------------|:-------------|:----------|:---|:-------------|   
-|code| Provides unique identifier of the Performance category |YES|String|
-|description  |Description of the performance category |YES|String|
-
-###Sample JSON
-
-    {
-    "code" : "1",
-    "description":"Week Over Week"
-    }
-
 ## 3.86 UrgencyType extends EnumerationType
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
@@ -3504,20 +3686,6 @@ Agero will convey Dispatch Status information to its customers via 5 different m
      "description":"1 Day"
       }
       
-### ReportDataTimeframeType extends EnumerationType
-
-| Schema Property          | Description                                    | Is Required | Type     | Business Rules |
-|:--------------------------|:------------------------------------------------|:-------------|:----------|:----------------|
-| Code         |  Provides unique identifier of the  ATA Type   |YES           | String   ||
-| Description                  |Description of the ATA Type   |YES           | String   ||
-
-### Sample JSON
-
-      {
-     "code" : "DAY",
-     "description":"1 Day"
-      }
-      
 ## 3.107 ReportStatusType extends EnumerationType
 
 | Schema Property          | Description                                    | Is Required | Type     | Business Rules |
@@ -3650,27 +3818,27 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 ### Sample JSON
 
-    {
-    "responseCode": 200,
-    "responseMessage": "Your request has been processed successfully.",
-    "responseDetails": [
         {
-            "responseCode": 200,
-            "responseMessage": "Invoice 234 processed successfully.",
-            "responseDetails": null
-        },
-        {
-            "responseCode": 400,
-            "responseMessage": "Invoice 456 does not exist. Unable to process.",
-            "responseDetails": null
-        },
-        {
-            "responseCode": 400,
-            "responseMessage": "Invoice 789 does not exist. Unable to process.",
-            "responseDetails": null
-        }
-    ]
-}
+        "responseCode": 200,
+        "responseMessage": "Your request has been processed successfully.",
+                "responseDetails": [
+                        {
+                            "responseCode": 200,
+                            "responseMessage": "Invoice 234 processed successfully.",
+                            "responseDetails": null
+                        },
+                        {
+                            "responseCode": 400,
+                            "responseMessage": "Invoice 456 does not exist. Unable to process.",
+                            "responseDetails": null
+                        },
+                        {
+                            "responseCode": 400,
+                            "responseMessage": "Invoice 789 does not exist. Unable to process.",
+                            "responseDetails": null
+                        }
+                ]
+    }
 
 ## 3.113 DispatchComment
 
@@ -3682,13 +3850,12 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 ### Sample JSON
 
- {   
-    "commentCode": "DLC",
-    "displayText": "Disablement Location",
-    "commentText": "be careful with dog in the back yard."
-}
-
-
+         {   
+            "commentCode": "DLC",
+            "displayText": "Disablement Location",
+            "commentText": "be careful with dog in the back yard."
+        }
+        
 
 ## Group 4 Security API
 
@@ -3704,6 +3871,7 @@ from the app.Currently, there are two types of users that can use the Roadside C
 * Driver
 
 A Dispatcher and Manager has the same rights and permissions as the Owner has. They can create and update profiles, accept or reject new jobs, assign jobs to drivers, updated job status and manage fleet map.
+
 A driver can create and update their own profile, update job status for assigned jobs.
 
 ## 4.1 Login [/auth/login]
