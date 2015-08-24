@@ -10814,7 +10814,8 @@ The Client App can call this API based on the business rules predefined for a pr
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |    Latitude           |  Represents the latitude  of driver’s geographic   location at that moment    |YES|Double|
-|    Longitude       | Represents the longitude of  driver’s geographic location  at that moment|YES|Double|
+|        Longitude       | Represents the longitude of  driver’s geographic location  at that moment|YES|Double|
+|driverProfile|Profile details for the Driver|NO |Driver |  
 
 ### Sample Request Body
 
@@ -10826,13 +10827,25 @@ Content-Type: application/json
 
 Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
 
-{
-
-"Latitude" : 40.1234,
-
-"Longitude" : -70.1234
-    
-}
+        {  
+           "Latitude":40.1234,
+           "Longitude":-70.1234,
+           "driverProfile":{  
+              "name":"Joe Smith",
+              "externalDriverId":"344353",
+              "equipment":{  
+                 "equipmentId":"LDWL",
+                 "addressId":1,
+                 "type":"Light Duty Wheel Lift",
+                 "vehicleNickname":"blue truck"
+              },
+              "officeEmail":"jdoe@abctowing.com",
+              "officePhone":"555-555-1111",
+              "gpsTracking":true,
+              "onDuty":true,
+              "profilePictureURL":"http://www.partnersite.com/drivers/{driverId}/picture"
+           }
+        }
 
 ### Response Schema
 
@@ -10847,8 +10860,9 @@ Http 200 OK
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       | UNKNOWN       |Unknown Error   |An unknown error occurred at the server|
 |400       |REQUEST_PARAMETER_MISSING|Request Validation failed | One or more invalid parameters  we passed. See the innerErrors collection for a list of invalid parameters. This is returned if latitude / longitude is not provided | 
-|500       | UNKNOWN     |Unknown Error   |An unknown error occurred at the server|
+
 
 ### Get Notify Current Location [POST]
 + Request (application/json)
@@ -10870,7 +10884,7 @@ Http 200 OK
 
 ### Description
 
-The "Get Current Location of a driver" API allows the dispatcher/owner to post their current location for any driver location If he is off or on a job. 
+The" Get Current Location of a driver" API allows the dispatcher/owner to post their current location for any driver location If he is off or on a job. 
 The Client App can call this API based on the business rules predefined for a product.
 
 If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of Agero
@@ -10884,8 +10898,9 @@ DriverID.
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|    Latitude            |  Represents the latitude  of driver’s geographic   location at that moment    |YES|Double|
+|    Latitude           |  Represents the latitude  of driver’s geographic   location at that moment    |YES|Double|
 |    Longitude       | Represents the longitude of  driver’s geographic location  at that moment|YES|Double|
+|    driverProfile   | Profile details for the Driver|NO|Driver|
 
 ### Sample Request Body
 
@@ -10897,13 +10912,25 @@ Content-Type: application/json
 
 Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
 
-{
-
-"Latitude" : 40.1234,
-
-"Longitude" : -70.1234
-
-}
+        {  
+           "Latitude":40.1234,
+           "Longitude":-70.1234,
+           "driverProfile":{  
+              "name":"Joe Smith",
+              "externalDriverId":"344353",
+              "equipment":{  
+                 "equipmentId":"LDWL",
+                 "addressId":1,
+                 "type":"Light Duty Wheel Lift",
+                 "vehicleNickname":"blue truck"
+              },
+              "officeEmail":"jdoe@abctowing.com",
+              "officePhone":"555-555-1111",
+              "gpsTracking":true,
+              "onDuty":true,
+              "profilePictureURL":"http://www.partnersite.com/drivers/{driverId}/picture"
+           }
+        }
 
 ### Response Schema
 
@@ -10918,8 +10945,8 @@ Http 200 OK
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 |400       |REQUEST_PARAMETER_MISSING|Request Validation failed | One or more invalid parameters  we passed. See the innerErrors collection for a list of invalid parameters. This is returned if latitude / longitude is not provided | 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
 
 ### Provide Current Location of a driver [POST]
 
@@ -10937,6 +10964,7 @@ Http 200 OK
             }
 
 + Response 200 ()
+
 
 # Group 14 Application Metadata API
 ## 14.1 Provide Get Application Metadata [/apps/{appIdd}/vesrions/{version}] 
