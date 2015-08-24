@@ -7055,6 +7055,8 @@ The Update Equipment picture API allows drivers and dispatchers to update a pict
 and driver id. This API can be used only if the equipment picture already exists. The picture is transferred to server by 
 Multipart/Form data (i.e. passing picture data as stream) technique by calling REST API.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of
+Agero DriverID.
 
 ###Request Header
 
@@ -7093,9 +7095,11 @@ HTTP 200 Ok
 |400       |REQUEST_PARAMETER_MISSING |Request Validation failed.| One or more invalid parameters we passed See the innerErrors collection for a list of invalid parameters|
 |401      | INVALID_TOKEN      | oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |404      |  NO_VENDOR_FOUND  | NO Vendor exists for given vendorId|Returned when no Vendor could not be found for the provided Vendor Id|
+500     | UNKNOWN   |Unknown Error   |An unknown error occurred at the server|
 |404      |  NO_DRIVER_FOUND|  NO Driver exists for given driverid| Returned when no driver could not be found  for the provided driver Id
 |404      |NO_RESOURCE_FOUND |   No picture exist       | 
-500     | UNKNOWN   |Unknown Error   |An unknown error occurred at the server|
+
+
 
 ## 7.7 Remove Equipment picture
 
