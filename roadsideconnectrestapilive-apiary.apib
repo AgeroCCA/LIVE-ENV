@@ -8730,15 +8730,16 @@ HTTP/1.1 200 OK
 
 ## 8.7 - 8.9 Upload, Retrieve and Update Profile API [/profile/picture?driverId={driverId}] 
 
-## 8.7 Upload a profile picture  
+## 8.7 Upload a profile picture 
 
 ###Description
 
-The "Upload a profile picture "API allows drivers and dispatchers to upload a
-picture for a given vendor id and driver id. This API will be used by the first 
-time user that is trying to post a picture.Picture is transferred to server by 
-Multipart/Form data (i.e. passing picture data as stream) technique by calling REST API.
+The "Upload a profile picture "API allows drivers and dispatchers to upload a picture for a given vendor id and driver id. This API will be used by the first 
+time user that is trying to post a picture.Picture is transferred to server by Multipart/Form data (i.e. passing picture data as stream) technique by calling
+REST API.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of
+Agero DriverID.
 
 ###Request Header
 
@@ -8752,7 +8753,7 @@ Multipart/Form data (i.e. passing picture data as stream) technique by calling R
 |Schema Property |Description   |Is Required   |Type |Business Rules| 
 |:---------------|:-------------|:-------------|:---------------|:---|
 |profilePicture    |Binary representation  of the profile picture being uploaded |YES| Byte[]| | 
-|Filename| Indicates the name of   the file being uploaded |YES| String| |
+|filename| Indicates the name of   the file being uploaded |YES| String| |
 
  
 ###Sample Request Body
