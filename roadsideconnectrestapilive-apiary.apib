@@ -11514,6 +11514,7 @@ The server to server notification process can be described in brief in following
 •   Receive notification  
 
 •   Acknowledge (Optional)
+
 ## 16.1 Subscribe To Server Notifications [/serverNotifications/subscribe] 
 ### Description
 
@@ -11542,18 +11543,27 @@ can receive notifications from Roadside Connect on their server.
         "notificationEvents" : "1,2,3,…"
     }
 
-     
+### Response Schema
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|  subscriptionId|Represents a unique identifier of the subscription  |YES| String |
+
 ### Sample Response
 
-    HTTP 200
+    HTTP 201 Created
+    {
+        "subscriptionId" : "70900709709"
+    }
 
 ### Errors 
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       |INVALID_REQUEST| Missing callback URL. | 
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |500       | UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+
 ### Subscribe To Server Notifications [POST]
 
 + Request (application/json)
@@ -11570,7 +11580,15 @@ can receive notifications from Roadside Connect on their server.
                 " notificationEvents" : "1,2,3,…"
             }
 
-+ Response 200 ()
+
++ Response 200 (application/json)
+
+    + Body
+
+            HTTP 201 Created
+            {
+                "subscriptionId" : "70900709709"
+            }
 
 ## 16.2 Receive Server Notification [/serverNotifications/notify] 
 
@@ -11622,8 +11640,8 @@ https://yourServerName/…/ serverNotifications/notify
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       |REQUEST_PARAMETER_MISSING|INVALID_REQUEST| Missing callback URL|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |500       | UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 ### Receive Server Notification [POST]
@@ -11736,8 +11754,8 @@ HTTP 20O Ok
   
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       |INVALID_REQUEST|Missing callback URL|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |500       | UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 
@@ -11773,8 +11791,8 @@ HTTP 200
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       |INVALID_REQUEST|Missing callback URL|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |500       | UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 
@@ -11814,8 +11832,8 @@ HTTP 20O Ok
   
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       |INVALID_REQUEST|Missing callback URL|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |500       | UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 
