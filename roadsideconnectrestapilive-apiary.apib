@@ -6900,6 +6900,9 @@ instead of Agero DriverID.
 The "Set Driver Equipment Assignment" API will allow drivers and dispatchers to setup their equipment. 
 The equipment assignment will associate the vehicle nickname with the equipment ID and address ID.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External
+DriverID instead of Agero DriverID.
+
 ###Sample Request URL
 
 /vendors/12345/drivers/1/driverEquipment
@@ -6917,8 +6920,8 @@ The equipment assignment will associate the vehicle nickname with the equipment 
 
 |HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
 |:---------|:----------------|:----------|:------- |:--------|
+|400       | |REQUEST_PARAMETER_MISSING |     Request Validation failed.         | One or more invalid parameters we passed.  See the innerErrors collection for a list of invalid parameters.| 
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|404       | No Equipment Assigned |             |       | Driver not assigned to a piece of equipment.| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 
