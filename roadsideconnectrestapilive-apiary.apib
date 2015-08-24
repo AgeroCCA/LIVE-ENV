@@ -9319,6 +9319,7 @@ N/A
     [
     {
         "name" : "Jon Doe",
+        "externalDriverId" : null,
         "cellPhone" : "555-555-5555",
         "email" : "jdoe@gmail.com",
         "officeEmail" : "jdoe@abctowing.com",
@@ -9326,6 +9327,7 @@ N/A
     },
     {
         "name" : "John smith",
+        "externalDriverId" : null,
         "cellPhone" : "111-111-1111",
         "email" : "jsmith@gmail.com",
         "officeEmail" : "jsmith@abctowing.com",
@@ -9411,6 +9413,7 @@ N/A
         "assignedDriver" :
         {
             "driverId" : "132454",
+            "externalDriverId": "232322",
             "Status" : "ACTIVE",
             "name" : "Joe Smith",
         "equipment" :
@@ -9445,7 +9448,7 @@ N/A
 |400       |REQUEST_PARAMETER_MISSING | Request Validation  failed| One or more invalid parameters we passed  See the innerErrors collection for a  list of invalid parameters|
 |400       |INVALID_REQUEST |Missing request header 'X-application-key' |
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 
 
 ### Get Dashboard Information [GET]
