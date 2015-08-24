@@ -7213,8 +7213,8 @@ Pagination is supported by this resource.
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |vendorId |Represents the unique tax identification number of the vendor |YES |String|
-|driverType| Represents the type of the driver being requested |YES          |DriverType Enum|
-|onDuty    |Specified if Driver on Duty   |No|Boolean  |If not provided, all the drivers  will be returned  |
+|driverType| Represents the Driver Type ID for GPS Enabled list |NO          |integer|See Driver Type Enumeration for details|
+|onDuty    |Specified if Driver on Duty   |No|Boolean  |  |
 responseType|Represents the level of details needed in response|NO|String|Possible Values:Shallow---returns only the immediate simple child elements like DriverID, Name and Status deep---returns both simple & complex child elements If not provided , default value =shallow|
 
 ###Sample Request URL
@@ -7256,76 +7256,78 @@ HTTP 201 Resource Created
 
     + Body
     
-            { 
-                "totalCount": 16,
-                "offSet": 0,
-                "limit": 2,
-                "results": [
-                {
-                "driverId": 12345,
-                "name": null,
-                "status": null,
-                "equipment": null,
-                "currentLocation": {
-                "address1": null,
-                "address2": null,
-                "crossStreet": null,
-                "landmark": null,
-                "locationType": null,
-                "city": null,
-                "poi1": null,
-                "poi2": null,
-                "state": null,
-                "postalCode": null,
-                "lat": 0,
-                "lng": 0
-                },
-                "gpsTracking": false,
-                "profilePictureUrl": "",
-                "smartPhone": false,
-                "cellPhone": null,
-                "officePhone": null,
-                "officeEmail": "nancy@agero.com",
-                "disablementLocation": null,
-                "serviceType": null,
-                "username": "tomdp5",
-                "onDuty": false,
-                "profileLastUpdatedAt": "0001-01-01T00: 00:00"
-                },
-                {
-                "driverId": 645773,
-                "name": "as sss",
-                "status": "0",
-                "equipment": null,
-                "currentLocation": {
-                "address1": null,
-                "address2": null,
-                "crossStreet": null,
-                "landmark": null,
-                "locationType": null,
-                "city": null,
-                "poi1": null,
-                "poi2": null,
-                "state": null,
-                "postalCode": null,
-                "lat": 0,
-                "lng": 0
-                },
-                "gpsTracking": true,
-                "profilePictureUrl": "profile/picture?driverId=645773",
-                "smartPhone": true,
-                "cellPhone": "215-275-9090",
-                "officePhone": "317-890-9090",
-                "officeEmail": "as@gmail.com",
-                "disablementLocation": null,
-                "serviceType": null,
-                "username": "tommgr1",
-                "onDuty": true,
-                "profileLastUpdatedAt": "2015-01-05T14: 31:17"
-                }
-                ],
-                "links": null
-            } 
+                    {
+                    "totalCount": 16,
+                    "offSet": 0,
+                    "limit": 2,
+                    "results": [
+                        {
+                    "driverId": 12345,
+                    "externalDriverId":"234234",
+                    "name": null,
+                    "status": null,
+                    "equipment": null,
+                    "currentLocation": {
+                        "address1": null,
+                        "address2": null,
+                        "crossStreet": null,
+                        "landmark": null,
+                        "locationType": null,
+                        "city": null,
+                        "poi1": null,
+                        "poi2": null,
+                        "state": null,
+                        "postalCode": null,
+                        "lat": 0,
+                        "lng": 0
+                    },
+                    "gpsTracking": false,
+                    "profilePictureUrl": "",
+                    "smartPhone": false,
+                    "cellPhone": null,
+                    "officePhone": null,
+                    "officeEmail": "nancy@agero.com",
+                    "disablementLocation": null,
+                    "serviceType": null,
+                    "username": "tomdp5",
+                    "onDuty": false,
+                    "profileLastUpdatedAt": "0001-01-01T00: 00:00"
+                        },
+                        {
+                            "driverId": 645773,
+                            "externalDriverId":"32233",
+                            "name": "as sss",
+                            "status": "0",
+                            "equipment": null,
+                            "currentLocation": {
+                                "address1": null,
+                                "address2": null,
+                                "crossStreet": null,
+                                "landmark": null,
+                                "locationType": null,
+                                "city": null,
+                                "poi1": null,
+                                "poi2": null,
+                                "state": null,
+                                "postalCode": null,
+                                "lat": 0,
+                                "lng": 0
+                            },
+                            "gpsTracking": true,
+                            "profilePictureUrl": "profile/picture?driverId=645773",
+                            "smartPhone": true,
+                            "cellPhone": "215-275-9090",
+                            "officePhone": "317-890-9090",
+                            "officeEmail": "as@gmail.com",
+                            "disablementLocation": null,
+                            "serviceType": null,
+                            "username": "tommgr1",
+                            "onDuty": true,
+                            "profileLastUpdatedAt": "2015-01-05T14: 31:17"
+                        }
+                    ],
+                    "links": null
+                    } 
 
 
 ## 7.9 Get Fleet Map Meta Data [/vendors/{id}/fleetmap?lat={lat}&lng={lng}&rad={rad}&calculateTravelTime={calculateTravelTime}]
@@ -7713,72 +7715,69 @@ HTTP 201 Resource Created
 
 ###Description
 
-The "Get Facility list" API returns a list of facilities for a given Vendor. This will allow dispatchers and 
-drivers to see the facility locations on the map and additional facility details such as Facilityname
-and Facility address,
-
-###Sample Request URL
-
-/vendors/5447/facilities
+The "Get Facility list" API returns a list of facilities for a given Vendor. 
+This will allow dispatchers and drivers to see the facility locations on the map and additional facility details such as Facilityname and 
+Facility address, 
 
 
 ###Request Parameters
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
-|vendorId|    Represents the unique tax identification number of the  vendor|YES   |String|
+|vendorId |Represents the unique tax identification number of the vendor |YES |String|
 
-###Response Schema
+
+###Sample Request URL
+
+/vendors/5447/facilities
+
+
+###Response JSON
 
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
-|facilities|    List of facilities|YES   |Facility[]|
+|facilities|List of facilities|YES          |Facility[]|
+
+
+
+###Sample Response
+HTTP 201 Resource Created
 
 ###Errors 
 
-|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
-|:---------|:-----------------|:----------|:--------|:--------|
-|401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|404       | Resource Not Found |NO_DISPATCHER_FOUND |No Dispatcher found     |Drivers did not exist in the database for the current request| 
-|404       | Resource Not Found|NO_VENDOR_FOUND|  |Drivers did not exist in the database for the current request| 
-|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+|HTTP Code |Reason Phrase|Error Code| Message |Reason  | 
+|:---------|:-----------------|:--------|:-------|:--------
+|401      |Unauthorized       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|404      |  Resource Not Found| NO_FACILITIES_FOUND| No facilities found| Returned No facilities exist  in the database for the given vendor (which is a rare case)
+|404      |  Resource Not Found| NO_VENDOR_FOUND| No Vendor found   | Vendor does not exist in the database for the given vendorId
+|500     |Server Error      |UNKNOWN|Unknown Error   |An unknown error occurred at the server|
+       
+### Get Facility list [GET]
 
-  
-###Get Facility list [GET]
-
-+ Request ()
-
-    + Header
-
-            Authorization: 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-            
 + Response 200 (application/json)
 
-    + Body
-    
             [
-            {
-                "id":"1",
-                "name" : "Douglas Transport-ASM",
-                "address" : "275 High Street",
-                "city" : "Medford",
-                "state" : "MA",
-                "zipcode" : "02155",
-                "lat" : "42.0123",
-                "lon" : "80.1153" 
-            },
-            {
-                "id":"2",
-                "name" : "Douglas Transport-VIMS",
-                "address" : "100 Main Street",
-                "city" : "Malden",
-                "state" : "MA",
-                "zipcode" : "02155",
-                "lat" : "42.0123",
-                "lon" : "80.1153"
-            }
+                {
+                    "id": "1",
+                    "name": "Douglas Transport-ASM",
+                    "address": "275 High Street",
+                    "city": "Medford",
+                    "state": "MA",
+                    "zipcode": "02155",
+                    "lat": "42.0123",
+                    "lon": "80.1153"
+                },
+                {
+                    "id": "2",
+                    "name": "Douglas Transport-VIMS",
+                    "address": "100 Main Street",
+                    "city": "Malden",
+                    "state": "MA",
+                    "zipcode": "02155",
+                    "lat": "42.0123",
+                    "lon": "80.1153"
+                }
             ]
-            
             
 
 
