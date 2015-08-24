@@ -11129,14 +11129,14 @@ The basic three-legged flow is:
 
 The app developer must implement an auth code client capable of generating the three requests.
 
-## 15.1 Authorize 3rd Party App [/oauth/authorize?client_id={consumer_key}&response_type=code&scope=READ&state={state_string}] 
+## 15.1 Authorize 3rd Party App [/oauth/authorize?client_id={consumer_key}&response_type=code&scope=READ&state={state_string}&external_Driver_Mgmt=true] 
 ### Description
 
 URI that a client app calls to for authorization . Redirects app end user to Login app, validates client app's consumer key
 
 ### Sample Request URL
 
-/oauth/authorize?client_id=gqg0KozKvJdVRrjSiFsAMwMv0P02gOuq&response_type=code&scope=READ&state=foobar"
+/oauth/authorize?client_id=gqg0KozKvJdVRrjSiFsAMwMv0P02gOuq&response_type=code&scope=READ&state=foobar&external_Driver_Mgmt=true"
 
 ### Request Parameters
 
@@ -11146,6 +11146,7 @@ URI that a client app calls to for authorization . Redirects app end user to Log
 |    response_type        |    Represents the response  type  |YES|Enum| Static Value: code|
 |    scope        |    Represents the privileges being requested   |YES|Enum|PossibleValues: READ WRITE|   
 |    state        |    This parameter is designed  to prevent cross-site request forgery attacks  The server sends this  string back in the|YES|String| 
+|    external_Driver_Mgmt        |    Specifies if the OAuth being generated in the process will provide External Driver ID’s across the API’s where DriverID is allocated|NO|Boolean| Possible Values:true false (Default)
 
 ### Sample Request
 
@@ -11168,8 +11169,9 @@ Location:login.Agero.com?client_id=gqg0KozKvJdVRrjSiFsAMwMv0P02gOuq&scope=READ&s
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|400       |REQUEST_PARAMETER_MISSING|Request Validation failed | One or more invalid parameters  we passed. See the innerErrors collection for a list of invalid parameters. This is returned if latitude / longitude is not provided | 
 |500       | UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+|400       |REQUEST_PARAMETER_MISSING|Request Validation failed | One or more invalid parameters  we passed. See the innerErrors collection for a list of invalid parameters. This is returned if latitude / longitude is not provided | 
+
 
 ### Authorize 3rd Party App [GET]
 
