@@ -7698,8 +7698,8 @@ HTTP 201 Resource Created
 |HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
 |:---------|:-----------------|:----------|:--------|:--------|
 |401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|404       | Resource Not Found |NO_DISPATCHER_FOUND |No Dispatcher found     |Drivers did not exist in the database for the current request| 
-|404       | Resource Not Found|NO_VENDOR_FOUND|  |Drivers did not exist in the database for the current request| 
+|404       | Resource Not Found |NO_DISPATCHER_FOUND |No Dispatcher found     |Dispatcher  does not exist in the database for the current dispatcherId.| 
+|404       | Resource Not Found|NO_VENDOR_FOUND|  |Dispatcher  does not exist in the database for the current dispatcherId.| 
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 
