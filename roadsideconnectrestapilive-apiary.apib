@@ -10235,6 +10235,7 @@ N/A
                 }
             ]
 
+
 ## 12.9 Get Notification Type Codes [/enumerations/notificationTypeCodes] 
 ###Description
 
@@ -10260,126 +10261,125 @@ N/A
         
 ###Sample Repsonse Body
 
-    {
-       "totalCount":28,
-       "offSet":0,
-       "limit":28,
-       "results":[
-          {
-             "code":"1",
-             "description":"NewJobOffered"
-          },
-          {
-             "code":"2",
-             "description":"JobRefused"
-          },
-          {
-             "code":"3",
-             "description":"JobAccepted"
-          },
-          {
-             "code":"4",
-             "description":"JobAssigned"
-          },
-          {
-             "code":"5",
-             "description":"JobCancelled"
-          },
-          {
-             "code":"6",
-             "description":"JobReAssigned"
-          },
-          {
-             "code":"7",
-             "description":"ETARejected"
-          },
-          {
-             "code":"8",
-             "description":"JobApproved"
-          },
-          {
-             "code":"9",
-             "description":"ETAApproaching"
-          },
-          {
-             "code":"10",
-             "description":"TimeToLeave"
-          },
-          {
-             "code":"11",
-             "description":"ETAWillnotMet"
-          },
-          {
-             "code":"12",
-             "description":"ETAExpired"
-          },
-          {
-             "code":"13",
-             "description":"DispatchUpdate"
-          },
-          {
-             "code":"14",
-             "description":"DispatchExpired"
-          },
-          {
-             "code":"15",
-             "description":"DispatchCancelledGOAAllowed"
-          },
-          {
-             "code":"16",
-             "description":"ETA Accepted"
-          },
-          {
-             "code":"17",
-             "description":"Test Notification"
-          },
-          {
-             "code":"20",
-             "description":"SystemNotification"
-          },
-          {
-             "code":"18",
-             "description":"ETAEvaluation"
-          },
-          {
-             "code":"19",
-             "description":"JobAutoAssigned"
-          },
-          {
-             "code":"21",
-             "description":"JobAcceptedAlready"
-          },
-          {
-             "code":"22",
-             "description":"JobRefusedAlready"
-          },
-          {
-             "code":"23",
-             "description":"JobCancelled_Dispatcher"
-          },
-          {
-             "code":"24",
-             "description":"JobCancelledAlready"
-          },
-          {
-             "code":"25",
-             "description":"JobCancelEvaluation"
-          },
-          {
-             "code":"26",
-             "description":"JobCancelEvaluation_Dispatcher"
-          },
-          {
-             "code":"27",
-             "description":"ETAWillnotMet_Dispatcher"
-          },
-          {
-             "code":"28",
-             "description":"TestPush"
-          }
-       ],
-       "links":null
-    }
+     {      "totalCount": 28,
+            "offSet": 0,
+            "limit": 28,
+            "results": [
+                {
+                    "code": "1",
+                    "description": "NewJobOffered"
+                },
+                {
+                    "code": "2",
+                    "description": "JobRefused"
+                },
+                {
+                    "code": "3",
+                    "description": "JobAccepted"
+                },
+                {
+                    "code": "4",
+                    "description": "JobAssigned"
+                },
+                {
+                    "code": "5",
+                    "description": "JobCancelled"
+                },
+                {
+                    "code": "6",
+                    "description": "JobReAssigned"
+                },
+                {
+                    "code": "7",
+                    "description": "ETARejected"
+                },
+                {
+                    "code": "8",
+                    "description": "JobApproved"
+                },
+                {
+                    "code": "9",
+                    "description": "ETAApproaching"
+                },
+                {
+                    "code": "10",
+                    "description": "TimeToLeave"
+                },
+                {
+                    "code": "11",
+                    "description": "ETAWillnotMet"
+                },
+                {
+                    "code": "12",
+                    "description": "ETAExpired"
+                },
+                {
+                    "code": "13",
+                    "description": "DispatchUpdate"
+                },
+                {
+                    "code": "14",
+                    "description": "DispatchExpired"
+                },
+                {
+                    "code": "15",
+                    "description": "DispatchCancelledGOAAllowed"
+                },
+                {
+                    "code": "16",
+                    "description": "ETA Accepted"
+                },
+                {
+                    "code": "17",
+                    "description": "Test Notification"
+                },
+                {
+                    "code": "20",
+                    "description": "SystemNotification"
+                },
+                {
+                    "code": "18",
+                    "description": "ETAEvaluation"
+                },
+                {
+                    "code": "19",
+                    "description": "JobAutoAssigned"
+                },
+                {
+                    "code": "21",
+                    "description": "JobAcceptedAlready"
+                },
+                {
+                    "code": "22",
+                    "description": "JobRefusedAlready"
+                },
+                {
+                    "code": "23",
+                    "description": "JobCancelled_Dispatcher"
+                },
+                {
+                    "code": "24",
+                    "description": "JobCancelledAlready"
+                },
+                {
+                    "code": "25",
+                    "description": "JobCancelEvaluation"
+                },
+                {
+                    "code": "26",
+                    "description": "JobCancelEvaluation_Dispatcher"
+                },
+                {
+                    "code": "27",
+                    "description": "ETAWillnotMet_Dispatcher"
+                },
+                {
+                    "code": "28",
+                    "description": "TestPush"
+                }
+            ],
+            "links": null
+        }
     
 ###Errors 
 
@@ -10387,7 +10387,7 @@ N/A
 |:---------|:--------- |:--------|:--------|
 |400       |INVALID_REQUEST | Missing request header  'X-application-key'|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
     
    
 ###Complete List of Notifications
@@ -10430,132 +10430,133 @@ The table below shows complete list of Notifications
     
             [
                 {
-                   "totalCount":28,
-                   "offSet":0,
-                   "limit":28,
-                   "results":[
-                      {
-                         "code":"1",
-                         "description":"NewJobOffered"
-                      },
-                      {
-                         "code":"2",
-                         "description":"JobRefused"
-                      },
-                      {
-                         "code":"3",
-                         "description":"JobAccepted"
-                      },
-                      {
-                         "code":"4",
-                         "description":"JobAssigned"
-                      },
-                      {
-                         "code":"5",
-                         "description":"JobCancelled"
-                      },
-                      {
-                         "code":"6",
-                         "description":"JobReAssigned"
-                      },
-                      {
-                         "code":"7",
-                         "description":"ETARejected"
-                      },
-                      {
-                         "code":"8",
-                         "description":"JobApproved"
-                      },
-                      {
-                         "code":"9",
-                         "description":"ETAApproaching"
-                      },
-                      {
-                         "code":"10",
-                         "description":"TimeToLeave"
-                      },
-                      {
-                         "code":"11",
-                         "description":"ETAWillnotMet"
-                      },
-                      {
-                         "code":"12",
-                         "description":"ETAExpired"
-                      },
-                      {
-                         "code":"13",
-                         "description":"DispatchUpdate"
-                      },
-                      {
-                         "code":"14",
-                         "description":"DispatchExpired"
-                      },
-                      {
-                         "code":"15",
-                         "description":"DispatchCancelledGOAAllowed"
-                      },
-                      {
-                         "code":"16",
-                         "description":"ETA Accepted"
-                      },
-                      {
-                         "code":"17",
-                         "description":"Test Notification"
-                      },
-                      {
-                         "code":"20",
-                         "description":"SystemNotification"
-                      },
-                      {
-                         "code":"18",
-                         "description":"ETAEvaluation"
-                      },
-                      {
-                         "code":"19",
-                         "description":"JobAutoAssigned"
-                      },
-                      {
-                         "code":"21",
-                         "description":"JobAcceptedAlready"
-                      },
-                      {
-                         "code":"22",
-                         "description":"JobRefusedAlready"
-                      },
-                      {
-                         "code":"23",
-                         "description":"JobCancelled_Dispatcher"
-                      },
-                      {
-                         "code":"24",
-                         "description":"JobCancelledAlready"
-                      },
-                      {
-                         "code":"25",
-                         "description":"JobCancelEvaluation"
-                      },
-                      {
-                         "code":"26",
-                         "description":"JobCancelEvaluation_Dispatcher"
-                      },
-                      {
-                         "code":"27",
-                         "description":"ETAWillnotMet_Dispatcher"
-                      },
-                      {
-                         "code":"28",
-                         "description":"TestPush"
-                      }
-                   ],
-                   "links":null
+                    "totalCount": 28,
+                    "offSet": 0,
+                    "limit": 28,
+                    "results": [
+                        {
+                            "code": "1",
+                            "description": "NewJobOffered"
+                        },
+                        {
+                            "code": "2",
+                            "description": "JobRefused"
+                        },
+                        {
+                            "code": "3",
+                            "description": "JobAccepted"
+                        },
+                        {
+                            "code": "4",
+                            "description": "JobAssigned"
+                        },
+                        {
+                            "code": "5",
+                            "description": "JobCancelled"
+                        },
+                        {
+                            "code": "6",
+                            "description": "JobReAssigned"
+                        },
+                        {
+                            "code": "7",
+                            "description": "ETARejected"
+                        },
+                        {
+                            "code": "8",
+                            "description": "JobApproved"
+                        },
+                        {
+                            "code": "9",
+                            "description": "ETAApproaching"
+                        },
+                        {
+                            "code": "10",
+                            "description": "TimeToLeave"
+                        },
+                        {
+                            "code": "11",
+                            "description": "ETAWillnotMet"
+                        },
+                        {
+                            "code": "12",
+                            "description": "ETAExpired"
+                        },
+                        {
+                            "code": "13",
+                            "description": "DispatchUpdate"
+                        },
+                        {
+                            "code": "14",
+                            "description": "DispatchExpired"
+                        },
+                        {
+                            "code": "15",
+                            "description": "DispatchCancelledGOAAllowed"
+                        },
+                        {
+                            "code": "16",
+                            "description": "ETA Accepted"
+                        },
+                        {
+                            "code": "17",
+                            "description": "Test Notification"
+                        },
+                        {
+                            "code": "20",
+                            "description": "SystemNotification"
+                        },
+                        {
+                            "code": "18",
+                            "description": "ETAEvaluation"
+                        },
+                        {
+                            "code": "19",
+                            "description": "JobAutoAssigned"
+                        },
+                        {
+                            "code": "21",
+                            "description": "JobAcceptedAlready"
+                        },
+                        {
+                            "code": "22",
+                            "description": "JobRefusedAlready"
+                        },
+                        {
+                            "code": "23",
+                            "description": "JobCancelled_Dispatcher"
+                        },
+                        {
+                            "code": "24",
+                            "description": "JobCancelledAlready"
+                        },
+                        {
+                            "code": "25",
+                            "description": "JobCancelEvaluation"
+                        },
+                        {
+                            "code": "26",
+                            "description": "JobCancelEvaluation_Dispatcher"
+                        },
+                        {
+                            "code": "27",
+                            "description": "ETAWillnotMet_Dispatcher"
+                        },
+                        {
+                            "code": "28",
+                            "description": "TestPush"
+                        }
+                    ],
+                    "links": null
                 }
             ]
+              
 
-## 12.29 Get Equipment Types [/enumerations/equipmentTypes] 
 
+## 12.29 Equipment Types [/enumerations/equipmentTypes] 
 ###Description
 
-The "Get User Role Types" API provides a list of Roles that can be assigned to a user.
+This API allows the consumer to retrieve a list of possible equipment types.
 
 ###Sample Request URL
 
@@ -10567,111 +10568,235 @@ N/A
 
 ###Sample Request Body
 
-N/A
+GET https://api-test.enterprise.agero.com/v1/id/enumerations/equipmentTypes
+Host: api-test.enterprise.agero.com 
+
 
 ###Repsonse JSON
 
 | Schema Property|Description   |Is Required |Type|Business Rules|
 |:---------------|:-------------|:-------------|:-------------|:-------------|   
-|  | Array of equipment shift types  |YES   | equipmentShiftType[]|
+|  |     |   |  EnumerationType [ ]   |    |
+        
+###Sample Repsonse Body
+            [
+                {
+                    "code": "5WT",
+                    "description": "5th Wheel Transport"
+                },
+                {
+                    "code": "DW",
+                    "description": "Dolly Wheels"
+                },
+                {
+                    "code": "HDUR",
+                    "description": "Hvy Dty Undereach"
+                },
+                {
+                    "code": "HDW",
+                    "description": "Hvy Dty Wrecker"
+                },
+                {
+                    "code": "LDF",
+                    "description": "Lgt Dty Flatbed"
+                },
+                {
+                    "code": "LDWL",
+                    "description": "Lgt Dty Wheel Lift"
+                },
+                {
+                    "code": "LRS",
+                    "description": "Lockout Roadsvc"
+                },
+                {
+                    "code": "LO",
+                    "description": "Locksmith"
+                },
+                {
+                    "code": "LT",
+                    "description": "Lowboy Trailer"
+                },
+                {
+                    "code": "MDF",
+                    "description": "Med Dty Flatbed"
+                },
+                {
+                    "code": "MDRS",
+                    "description": "Med Dty Roadsvc"
+                },
+                {
+                    "code": "MDUR",
+                    "description": "Med Dty Undereach"
+                },
+                {
+                    "code": "MDW",
+                    "description": "Med Dty Wrecker"
+                },
+                {
+                    "code": "MDRS",
+                    "description": "Med Dty Roadsvc"
+                },
+                {
+                    "code": "MRS",
+                    "description": "Minor Roadsvc"
+                },
+                {
+                    "code": "MP",
+                    "description": "Motorcycle Pickup"
+                },
+                {
+                    "code": "MS",
+                    "description": "Motorcycle Svc"
+                },
+                {
+                    "code": "PAR",
+                    "description": "Primary Towing"
+                },
+                {
+                    "code": "AAR",
+                    "description": "Secondary Towing"
+                },
+                {
+                    "code": "M2",
+                    "description": "Medium Duty mobile Mechanic"
+                },
+                {
+                    "code": "M3",
+                    "description": "heavy Duty Mobile Mechanic"
+                },
+                {
+                    "code": "WLD",
+                    "description": "Winch Lgt Duty"
+                },
+                {
+                    "code": "WMD",
+                    "description": "Winch Med Dty"
+                },
+                {
+                    "code": "WHD",
+                    "description": "Winch Hvy Dty"
+                }
+            ]
 
 ###Errors 
 
-|HTTP Code |Error Code | Message |Reason  | 
-|:---------|:--------- |:--------|:--------|
-|401       |INVALID_CLIENT| Client identifier is required|An API key was not supplied  | 
-|404       |Resource Not Found| NO_VENDOR_FOUND |No vendor exists in the system for the given vendorId| 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|:--------|
+|401       |Unauthorized | invalid_token|oauth.v2.InvalidAccessToken: Invalid access token|A valid OAuth token was not provided.
+|404       |Resource Not Found| NO_VENDOR_FOUND |No Vendor found| No vendor exists  in the system for the given  vendorId
+|500       | SERVER ERROR        |UNKNOWN   |Unknown Error|An unknown error occurred at the server
 
+### Equipment Types [GET]
 
-
-###Get Equipment Types [GET]
-
-+ Request ()
++ Request ()    
 
     + Header
 
             Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            
 
++ Response 200 (application/json)
 
-+ Response 200 ()
-
-  + Body
-             
+    + Body
+    
             [
                 {
-               
-                "code" : "5WT", "description" : "5th Wheel Transport"
+                    "code": "5WT",
+                    "description": "5th Wheel Transport"
                 },
                 {
-                "code" : "HDLB",
-                "description" : "Heavy Duty Lowboy/Flatbed"
+                    "code": "DW",
+                    "description": "Dolly Wheels"
                 },
                 {
-                "code" : "HDRS",
-                "description" : "Heavy Duty Roadservice "
+                    "code": "HDUR",
+                    "description": "Hvy Dty Undereach"
                 },
                 {
-                "code" : "HDTS",
-                "description" : "Heavy Duty Tireservice"
+                    "code": "HDW",
+                    "description": "Hvy Dty Wrecker"
                 },
                 {
-                "code" : "HDUR",
-                "description" : "Heavy Duty Underreach"
+                    "code": "LDF",
+                    "description": "Lgt Dty Flatbed"
                 },
                 {
-                "code" : "HDW",
-                "description" : "Heavy Duty Wrecker"
+                    "code": "LDWL",
+                    "description": "Lgt Dty Wheel Lift"
                 },
                 {
-                "code" : "LDF",
-                "description" : "Light Duty Flatbed"
-                },
-                { "code" : "LDWL",
-                "description" : "Light Duty Wheel Lift"
+                    "code": "LRS",
+                    "description": "Lockout Roadsvc"
                 },
                 {
-                "code" : "LRS",
-                "description" : "Lockout Roadservice"
+                    "code": "LO",
+                    "description": "Locksmith"
                 },
                 {
-                "code" : "MDF",
-                "description" : "Medium Duty Flatbed"
+                    "code": "LT",
+                    "description": "Lowboy Trailer"
                 },
                 {
-                "code" : "MDRS",
-                "description" : "Medium Duty Roadservice"
+                    "code": "MDF",
+                    "description": "Med Dty Flatbed"
                 },
                 {
-                "code" : "MDTS",
-                "description" : "Medium Duty Tireservice"
+                    "code": "MDRS",
+                    "description": "Med Dty Roadsvc"
                 },
                 {
-                "code" : "MDUR",
-                "description" : "Medium Duty Underreach"
+                    "code": "MDUR",
+                    "description": "Med Dty Undereach"
                 },
                 {
-                "code" : "MDW",
-                "description" : "Medium Duty Wrecker"
+                    "code": "MDW",
+                    "description": "Med Dty Wrecker"
                 },
                 {
-                "code" : "MRS",
-                "description" : "Minor Roadservice"
+                    "code": "MDRS",
+                    "description": "Med Dty Roadsvc"
                 },
                 {
-                "code" : "MM",
-                "description" : "Mobile Mechanic"
+                    "code": "MRS",
+                    "description": "Minor Roadsvc"
                 },
                 {
-                "code" : "MP",
-                "description" : "Motorcycle Pickup"
+                    "code": "MP",
+                    "description": "Motorcycle Pickup"
                 },
                 {
-                "code" : "MS",
-                "description" : "Motorcycle Service"
+                    "code": "MS",
+                    "description": "Motorcycle Svc"
+                },
+                {
+                    "code": "PAR",
+                    "description": "Primary Towing"
+                },
+                {
+                    "code": "AAR",
+                    "description": "Secondary Towing"
+                },
+                {
+                    "code": "M2",
+                    "description": "Medium Duty mobile Mechanic"
+                },
+                {
+                    "code": "M3",
+                    "description": "heavy Duty Mobile Mechanic"
+                },
+                {
+                    "code": "WLD",
+                    "description": "Winch Lgt Duty"
+                },
+                {
+                    "code": "WMD",
+                    "description": "Winch Med Dty"
+                },
+                {
+                    "code": "WHD",
+                    "description": "Winch Hvy Dty"
                 }
-                ]            
-
+            ]
 
 # Group 13 Tracking API
 ## 13.1 Get Notify Current Location [/currentLocation]
