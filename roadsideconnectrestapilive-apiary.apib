@@ -6970,9 +6970,12 @@ The Upload Equipment Picture API allows Drivers and Dispatchers to upload a pict
 given vendor id and driver id. This functionality is to be used when the first time user is trying to post a picture. Image is 
 transferred to server by Multipart/Form data (i.e. passing image data as stream) technique by calling REST API.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of
+Agero DriverID.
+
 ###Sample Request URL
 
-/vendors/12345/drivers/1/driverEquipment
+/vendors/12345/drivers/1/driverEquipment/picture
 
 ###Request Header
 
