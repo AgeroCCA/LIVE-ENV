@@ -8338,6 +8338,7 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
 
     {
         "name": "tom123456789 boy",
+        "externalDriverId" : "322232",
          "cellPhone": "201-450-9999",
         "email": "tom123@gmail.com",
         "officeEmail": "tom123@gmail.com",
@@ -8345,6 +8346,13 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
         "profilePictureUrl": null
     }
     
+###Errors 
+
+|HTTP Code |HTTP Reason Phrase| Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|:--------|
+|401      | Unauthorized|INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|404      | Profile not found||  |A profile did not exsist in the database for the current request.|
+|500       | Server Error     |UNKNOWN   |Unknown Error|An unknown error occurred at the server|
     
 ## 8.5 Partial Update
 
@@ -8367,14 +8375,13 @@ The "Partial Update" API allows client apps to update the userInfo and preferenc
     }
 
 
-    
 ###Errors 
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       | REQUEST_PARAMETER_MISSING | Request Validation failed| One or more invalid parameters we passed  See the innerErrors collection for a list of invalid parameters| 
-|500       |      |UNKNOWN   |An unknown error occurred at the server|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       |      |Unknown Error   |An unknown error occurred at the server|
 
 
 ###Partial Get UserInfo [GET]
@@ -8391,6 +8398,7 @@ The "Partial Update" API allows client apps to update the userInfo and preferenc
     
             {
             "name": "tom123456789 boy",
+            "externalDriverId" : "322232",
             "cellPhone": "201-450-9999",
             "email": "tom123@gmail.com",
             "officeEmail": "tom123@gmail.com",
@@ -8445,6 +8453,14 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
         "jobConfirmationExpectedViaEmailOrFax": false
     }
     
+###Errors 
+
+|HTTP Code |HTTP Reason Phrase| Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|:--------|
+|401      | Unauthorized|INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|404      | Profile not found||  |A profile did not exsist in the database for the current request.|
+|500       | Server Error     |UNKNOWN   |Unknown Error|An unknown error occurred at the server|
+    
 ## 8.5.1 Update Preferences
 
 ###Description
@@ -8476,9 +8492,10 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       | REQUEST_PARAMETER_MISSING | Request Validation failed| One or more invalid parameters we passed  See the innerErrors collection for a list of invalid parameters| 
-|500       |      |UNKNOWN   |An unknown error occurred at the server|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       |      |Unknown Error   |An unknown error occurred at the server|
+
 
 
 ###Partial Get Preferences [GET]
@@ -8530,6 +8547,7 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
             }
             
 + Response 200 ()
+
 
 ## 8.6,8.11 Facility List [/profile/facilities]
 
