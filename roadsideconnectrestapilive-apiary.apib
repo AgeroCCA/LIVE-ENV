@@ -7974,7 +7974,7 @@ Host: api-test.enterprise.agero.com
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |userInfo|    User’s Personal and Office Info|YES   |UserInfo||
-|preferences|  User’s application preferences  |YES   |Preferences||
+|preferences|  User’s application preferences  |NO   |Preferences||
 |facilities|  User’s facilities  |NO   |Facility[]||
 |equipment|  User’s authorized equipment  |NO   |DriverEquipment||
 
@@ -8246,7 +8246,6 @@ HTTP 200 OK
 
 
 + Response 200 (application/json)
-
 
 
 ## 8.2 Get Profile [/profile/{profileId}]
@@ -8566,7 +8565,6 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
             
 + Response 200 ()
 
-
 ## 8.6,8.11 Facility List [/profile/facilities]
 
 ## 8.6 Get Facility List for Profile 
@@ -8635,8 +8633,8 @@ Returns an HTTP 500 if a server side exception occurs.
          {
          "message" : "Unknown Error Occurred."
          }
-    
-## 8.11 Add a preferred facility
+
+## 8.11 Add a preferred facility 
 
 ###Description
 
@@ -8746,7 +8744,7 @@ HTTP/1.1 200 OK
             
 + Response 200 ()
 
-## 8.7 - 8.9 Upload, Retrieve and Update Profile API [/profile/picture?driverId={driverId}] 
+## 8.7,8.9 Upload and Update Profile API [/profile/picture?driverId={driverId}] 
 
 ## 8.7 Upload a profile picture 
 
@@ -8801,40 +8799,6 @@ HTTP 201 Resource Created
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       | REQUEST_PARAMETER_MISSING | Request Validation failed| One or more invalid parameters we passed  See the innerErrors collection for a list of invalid parameters| 
 |403       |RESOURCE_EXISTS |A profile exists for  this user  | Once a profile is created for a user,it cannot be created again. A PUT should be made instead to update the current profile|
-|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
-
-## 8.8 Retrieve a profile picture
-
-###Description
-
-The "Retrieve a profile picture "API allows drivers and dispatchers to retrieve a picture for a given vendor 
-id and driver id. driverId query string parameter is optional and is meant to be used only by a dispatcher / owner.
-If not provided, the API will return the profile picture of the logged in user.
-
-A dispatcher / owner can however retrieve the profile pictures of drivers by passing a driverId. 
-If driverId is passed and the logged in user is not a dispatcher / owner, API will return a
-forbidden (HTTP Status Code:403) error.
-
-
-###Request Body
-
-N/A
-
-###Response Body
-
-Binary steam of the picture
-
-###Sample Response
-
-
-
-###Errors 
-
-|HTTP Code |Error Code | Message |Reason  | 
-|:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|403       |NOT_ALLOWED| Driver role cannot request the  profile pictures of other drivers  |
-|404       |RESOURCE_NOT_FOUND  |  No profile picture found        |  
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 ## 8.9 Update a profile picture 
@@ -8919,16 +8883,6 @@ HTTP 200 OK
             --AaB03x--
            
 + Response 201 ()
-
-### Retrieve a profile picture [GET]
-
-+ Request ()
-
-    + Header
-
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-
-+ Response 200 ()
 
 
 
