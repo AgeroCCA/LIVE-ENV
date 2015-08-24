@@ -8254,14 +8254,7 @@ for GPS tracking and Auto Assigned Job to me(for dispatchers only.
 |facilities|  User’s facilities  |NO   |Facility[]|
 |equipment|  User’s authorized equipments  |NO   |DriverEquipment|
 
-###Errors 
 
-|HTTP Code |Error Code | Message |Reason  | 
-|:---------|:--------- |:--------|:--------|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|400       | REQUEST_PARAMETER_MISSING | Request Validation failed| One or more invalid parameters we passed  See the innerErrors collection for a list of invalid parameters| 
-|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
-  
 ##Get Profile [GET]
 + Request ()
 
@@ -8277,6 +8270,7 @@ for GPS tracking and Auto Assigned Job to me(for dispatchers only.
                 "profileId": 645773,
                 "userInfo": {
                 "name": "adfasd",
+                "externalDriverId" : null,
                 "cellPhone": "215-275-9090",
                 "email": "as@gmail.com",
                 "officeEmail": "as@gmail.com",
