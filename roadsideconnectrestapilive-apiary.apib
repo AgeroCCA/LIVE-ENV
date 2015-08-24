@@ -9029,12 +9029,12 @@ HTTP/1.1 200 OK
 
 ###Errors
 
-|HTTP Code |Error Code | Message |Reason  | 
-|:---------|:--------- |:--------|:--------|
-|403       |NOT_ALLOWED |Driver role cannot request the   profile pictures of   other drivers   |
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|404       |NO_RESOURCE_EXISTS| No profile picture found  | 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|:--------|
+|401       |Unauthorized| invalid_token|oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|403       |Forbidden|FORBIDDEN_RESOURCE |The resource is not allowed by the current user.   |Drivers view or refuse job offers.|
+|404       |Job Not Found| | |The requested job record doesn’t exist.|
+|500       |Server Error| UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 
 
 ###Remove a preferred facility[DELETE]
