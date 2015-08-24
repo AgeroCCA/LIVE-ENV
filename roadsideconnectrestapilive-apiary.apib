@@ -8827,6 +8827,9 @@ The "Update a profile picture" API allows drivers and dispatchers to override an
 
 A dispatcher / owner can however update the profile pictures of drivers by passing a driverId. If driverId is passed and the logged in user is not a dispatcher / owner, API will return a forbidden (HTTP Status Code:403) error.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of
+Agero DriverID.
+
 ###Request Header
 
 |HeaderName |Description   |Is Required   |Expected Value  |
@@ -8846,7 +8849,7 @@ A dispatcher / owner can however update the profile pictures of drivers by passi
 | Schema Property    |Description   |Is Required |Type|Business Rules|
 |:---------------|:-------------|:-------------|:-------------|:-------------|  
 |profilePicture|Binary representation  of the profile picture  being uploaded  |YES   |   Byte[] |
-|Filename| Indicates the name of   the file being uploaded  |YES   |   String |
+|filename| Indicates the name of   the file being uploaded  |YES   |   String |
 
     
 ###Sample Request Body
