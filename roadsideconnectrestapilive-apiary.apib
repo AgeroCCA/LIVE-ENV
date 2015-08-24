@@ -9526,8 +9526,8 @@ N/A
 | Schema Property|Description   |Is Required |Type|Business Rules|
 |:---------------|:-------------|:-------------|:-------------|:-------------|  
 |version| Indicates the version  of terms and conditions |YES  |   String |
-|appId| Represents the unique identification   number of the app for which T&C are   being requested   |YES   |   Integer |
-| releasedDateTime  | Indicates the date time at  which this version of terms and conditions is released|YES   |   Integer|
+|appId| Represents the unique identification   number of the app for which T&C are   being requested   |YES   |   String |
+| releasedDateTime  | Indicates the date time at  which this version of terms and conditions is released|DateTime   |   UTC time format|
 | content |  Represents terms of use and  privacy policy to be   accepted by the user |YES   |   String |
 
 
@@ -9621,10 +9621,10 @@ Http 200 Ok
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
 |400       |INVALID_REQUEST |Request is not compliant  with expected schema|
-|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
 |400       |REQUEST_PARAMETER_MISSING| Action parameter cannot  be null or empty     |appId parameter is a required field|
 |400       |REQUEST_PARAMETER_MISSING|  appId parameter cannot be null  or empty| appId parameter is a required field|
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 
 ###Accept or Decline Terms and Conditions [POST]
 
