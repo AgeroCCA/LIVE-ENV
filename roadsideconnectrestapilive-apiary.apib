@@ -7028,6 +7028,9 @@ HTTP 201 Resource Created
 The Retrieve Equipment Picture API allows drivers and dispatchers to retrieve an existing picture 
 of the equipment for a given vendor id and driver id.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External
+DriverID instead of Agero DriverID.
+
 ###Sample Request URL
 
 GET /vendors/12345/drivers/1/driverEquipment/picture
