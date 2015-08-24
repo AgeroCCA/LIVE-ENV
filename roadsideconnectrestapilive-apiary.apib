@@ -9061,7 +9061,7 @@ The "Subscribe to Notifications" API will allow mobile app users to register the
 | Schema Property|Description   |Is Required |Type|Business Rules|
 |:---------------|:-------------|:-------------|:-------------|:-------------|  
 |deviceId| The device id   |YES   |   String |
-|deviceToken|The device Token    |YES   |   String | Android Apps: deviceToken is the registration Id provided to the app by GCM Server iOS Apps:deviceToken is the token provided to the app by APNs   |
+|deviceToken|unique identifier that establishes the identity of the connecting device    |YES   |   String | Android Apps: deviceToken is the registration Id provided to the app by GCM Server iOS Apps:deviceToken is the token provided to the app by APNs   |
 |platform| The Client Platform    |NO   |   String |  Android, iOS, HTML| 
 |osVersion| The version of Android or iOS |NO   |   String | 
 
@@ -9084,10 +9084,10 @@ HTTP 200
 
 |HTTP Code |Error Code | Message |Reason  | 
 |:---------|:--------- |:--------|:--------|
+|400       |REQUEST_PARAMETER_MISSING|   Request Validation failed | One or more invalid parameters we passed See the innerErrors collection for a list of invalid parameters|
 |400       |INVALID_REQUEST |Missing request header 'X-application-key' | One or more invalid parameters we passed See the innerErrors collection for a  list of invalid parameters|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|400       |REQUEST_PARAMETER_MISSING|   Request Validation failed | One or more invalid parameters we passed See the innerErrors collection for a list of invalid parameters|
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 
 
    
@@ -9165,7 +9165,7 @@ HTTP 200
 |:---------|:--------- |:--------|:-------|
 |400       |REQUEST_PARAMETER_MISSING | Request Validation  failed| One or more invalid parameters we passed  See the innerErrors collection for a  list of invalid parameters|
 |401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|500       | SERVER ERROR        |Unknown Error   |An unknown error occurred at the server|
+|500       | UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
 
 ### Receive a Notification [POST]
 
