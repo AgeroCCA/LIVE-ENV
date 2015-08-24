@@ -6866,6 +6866,9 @@ The Equipment will return some of the following values based on the vendor type:
 The "Get Driver Equipment Assignment" API will retrieve the equipment assigned to certain driver. This API will allow 
 client app to display the vehiclename, equipment type and equipment ID.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID
+instead of Agero DriverID.
+
 ###Sample Request URL
 
 /vendors/12345/drivers/1/driverEquipment
