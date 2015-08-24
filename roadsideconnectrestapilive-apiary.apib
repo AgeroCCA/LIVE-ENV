@@ -7120,6 +7120,9 @@ HTTP 200 Ok
 The Remove equipment picture API allows drivers and dispatchers to remove the picture of the equipment for a given 
 vendor id and driver id.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External
+DriverID instead of Agero DriverID.
+
 ###Sample Url
 
 /vendors/3355345/drivers/345345/driverEquipment/picture
