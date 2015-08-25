@@ -6920,11 +6920,11 @@ DriverID instead of Agero DriverID.
                             
 ###Errors 
 
-|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
-|:---------|:----------------|:----------|:------- |:--------|
-|400       | |REQUEST_PARAMETER_MISSING |     Request Validation failed.         | One or more invalid parameters we passed.  See the innerErrors collection for a list of invalid parameters.| 
-|401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+|HTTP Code |Error Code | Message |Reason  | 
+|:---------|:----------|:------- |:--------|
+|400       |REQUEST_PARAMETER_MISSING |     Request Validation failed.         | One or more invalid parameters we passed.  See the innerErrors collection for a list of invalid parameters.| 
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 
 ###Get Driver Equipment Assignment [GET]
