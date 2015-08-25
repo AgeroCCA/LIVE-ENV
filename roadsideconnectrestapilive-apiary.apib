@@ -7874,7 +7874,7 @@ The"Retrieve Equipments for a given Facility" API allows user to retrieve  equip
 |Schema Property |Description   |Is Required   |Type   |Business Rules|
 |:---------------|:-------------|:-------------|:------|:-------------| 
 |vendorId|    Represents the unique tax identification number of the  vendor|YES   |String|
-|facilityId|  Represents the unique identifier  of the facility |YES   |String|
+|facilityId|  Represents the unique id of the facility the equipment needs to be added to |YES   |String|
 
 ###Sample Request
 
@@ -7901,7 +7901,6 @@ The"Retrieve Equipments for a given Facility" API allows user to retrieve  equip
 |403       |Forbidden      |FORBIDDEN| Request is forbidden for the current user |User making this request does not have enough privileges to submit / approve an addition of equipment to a facility | 
 |404       | Resource Not Found|NO_VENDOR_FOUND|No Vendor found  |Dispatcher  does not exist in the database for the current dispatcherId.| 
 |404       | Resource Not Found |NO_FACILITY_FOUND |No Facility found     |A facility does not exist in the system with provided facilityId| 
-
 |500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
    
