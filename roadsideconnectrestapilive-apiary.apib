@@ -11881,6 +11881,8 @@ HTTP 20O Ok
 The "Get Server Notifications Subscriptions" API allows internal apps to 
 retrieve a list of server notification subscriptions for a given vendor
 
+NOTE: This API just requires ConsumerKey to be provided in the Authorization header
+
 ### Sample Request URL
 
 GET /vendors/57515 /serverNotifications/subscriptions
@@ -11890,7 +11892,7 @@ GET /vendors/57515 /serverNotifications/subscriptions
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|     |   Represents a list  |YES| ServerNotificationSubscription[]  |
+|     |   Represents a list of server notification subscription  |YES| ServerNotificationSubscription[]  |
 
 ### Sample Request
 
