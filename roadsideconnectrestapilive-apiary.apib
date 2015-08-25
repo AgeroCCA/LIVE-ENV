@@ -8915,6 +8915,9 @@ the API will return the profile picture of the logged in user. A dispatcher / ow
 profile pictures of drivers by passing a driverId. If driverId is passed and the logged in user is not a 
 dispatcher / owner, API will return a forbidden error.
 
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID
+instead of Agero DriverID.
+
 
 ###Request Parameters
 
