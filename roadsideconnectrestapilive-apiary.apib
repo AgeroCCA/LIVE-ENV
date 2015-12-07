@@ -27,6 +27,54 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 
 • Mobile Instant Dispatch – allow user(s) with appropriate ‘dispatcher’ credentials to accept/reject dispatch requests for other users/drivers and assign jobs to drivers o This includes profile management (add, edit, view a list of drivers)   
 
+# Revision History
+
+| Version|Date  |Changes|
+|:--------------|:-------------|:----------|   
+|1.1|06/07/2013|<ul><li>Added Dashboard API</li><li>Modified "Get Dispatch List"" from Dispatch API  to support filters</li><li>Updated Driver data model to add the following:<ul><li>profilePictureURL  data element</li><li>gpsEnabled data element</li></ul></li><li>Modified ""Get List of Drivers"" from Vendor API to support  :<ul><li>filters</li><li>reflect the updated driver data model</li></ul></li><li>Added following data models:<ul><li>Driver Type</li><li>SigneeType</li><li>SignatureReasonType</li></ul></li><li>Added Enumerations API to provide all the possible enumeration types</li><li>Added signature capability to Dispatch API</li><li>Enhanced profile API to allow:<ul><li>CRUD operations on profile picture</li></ul></li><li>Updated UserInfo DataModel---profilePictureURL element added</li><li>Modified ""URIs and supported methods""  to include  new resources</li></ul>|
+|1.2|06/12/2013|<ul><li>Modified Login functionality of the "Security API" to return a flag that indicates the availability of  new version of  terms & conditions</li><li>Modified "Get Dispatch List" functionality of Dispatch API to support DateRange filters. This is for JobHistory functionality.</li><li>Added "Get Signatures"(Section 5.14) and "Get a signature" (Section 5.15) functionalities to Signature API</li><li>Added "Signature" data model</li><li>Added Equipment picture upload /retrieve /update / remove functionalities (Sections 7.4 -7.7)</li></ul>|
+|1.3|06/19/2013|<ul><li>Modified  response schema  / sample response for "Accept / Decline Terms and Conditions" functionality (section 11.2)</li><li>Removed Finaltags. Unless a functionality has "Draft" tag  it is to be considered final</li><li>Added Dispatcher data model (Section 3.20)</li><li>Added "Get List of Dispatchers" (7.10) & "Get a Dispatcher" (7.11)  functionality to Vendor API</li><li>Modified Dashboard API to include: List of Dispatchers( for Driver role), List of facilities(for Dispatcher role), Agero PhoneNumber (for both Dispatcher & Driver roles)</li>Added "Facility" data model (3.21)</li><li>Added "Get Facility List" (7.12) & "Get a facility"(7.13) functionalities to Vendor API</li><li>Updated section 2.5 to included new URIs and supported methods</li></ul>|
+|1.4|06/27/2013|<ul><li>Extended "Get a Single Dispatch" (Section 5.2) API to include list of signatures (if available).</li><li>Extended "Dispatch" data model  (Section 3.1)to include signatures data element</li><li>Extended "Login" functionality to return a flag if the user accepted terms and conditions or not</li><li>Extended "UserClaim" data model to include accepted VersionOfTermsAndConditions data element</li><li>Extended "Driver" data model & "Get List of Drivers" (7.8) functionality to include the current Location of the driver</li></ul>|
+|1.5|07/16/2013|<ul><li>Removed "TowDestination" data element from "Driver" data model as TowDestination is an attribute of a dispatch instead.</li><li>Added new data model "FleetMapDriver" (3.23)</li><li>Extended "Get FleetMap Metadata" (7.9) functionality to retrun FleetMapDriver[] instead of Driver[]</li><li>Replace "image" keyword  with "picture" keyword to be consistent all across for profile / equipment / signature</li></ul>|
+|1.6|07/25/2013|<ul><li>Extended Login functionality to include ClientId as part of login request</li><li>Extended "Facility" (3.21) data model to include name of the facility</li><li>Modified "Get Facility List for Profile"(8.6)  functionality of Profile API to return a list of Facilities</li></ul>|
+|1.7|08/05/2013|<ul><li>Extended Dashboard API (10.1) to return a list of facilities for Driver role as well.</li></ul>|
+|1.8|08/09/2013|<ul><li>Added high level functional overview for each API.</li></ul>|
+|1.9|10/04/2013|<ul><li><ul><li>Added Application metadata API (14)</li><li>Added "travelTimeToLocation" data element to FleetDriver datamodel</li><li>Extended FleetMap metadata (7.9) to include  "travelTimeToLocation" as part of FleetMapDriver entity</li><li>Modified "dispatchStatus" filter of  "Get Dispatch List" (5.1) functionality to "dispatchStatusList" in order to allow a list of dispatch statuses</li></ul>|
+|1.10|10/25/2013|<ul><li>Extended Fleetmap Metadata (7.9) to include a "calculateTravelTime" request querystring parameter</li><li>Added  new data model: ETA Status(3.26)</li><li>Added  new Enum lookup "Get ETA Statuses" (12.9)</li><li>Extended all the sample responses that has a reference to dispatch datamodel to include ETAStatus</li></ul>|
+|1.11|11/11/2013|<ul><li>Extended Logout functionality(4.3) to include the client identifier the user is logging out from</li><li>Extended Dispatch Model (3.1) to include additional data elements : revisedEta, revisedEtaInMinutes, for ETA management</li><li>Revised sample responses in "Get Dispatch List" (5.1), "Get a single Dispatch"(5.2) and "Get Dashboard Information"(10.1) to reflect the new Dispatch data model</li></ul>|
+|1.12|11/13/2013|<ul><li>Added DispatchSummary data model (3.26)</li><li>Added "Get Dispatch Summary" (5.16) functionality</li><li>Added OAuth2.0 Security API (15)</li></ul>|
+|1.13|12/04/2013|<ul><li>Revised "Get Application Metadata" (14).</li></ul>|
+|1.14|12/06/2013|<ul><li>Added "Server-To-Server Notifications" API (16).</li><li>Added "Get Notification Types" Enum (12.10)</li></ul>|
+|1.15|12/26/2013|<ul><li>Added Dispatch Document management functionality to include the following features:<ul><li>Add a Dispatch Document ( 5.17)</li><li>Get Dispatch Documents (5.18)</li><li>Get a Dispatch Document (5.19)</li><li>Remove a Dispatch Document(5.20)</li></ul></li><li>Added UserGuide API to include the following features:<ul><li>Get User Guide List( 17.1)</li><li>Get a User Guide(17.2)</li></ul></li><li>Added Route  API to include the following features:<ul><li>Get Mapped Route( 18.1)</li></ul></li><li>Extended Profile API to include the following functionalities:<ul><li>Remove Profile Picture (8.11)</li><li>Add a Preferred Facility (8.12)</li><li>Remove a Preferred Facility (8.13)</li></ul></li><li>Added new data models: Document(3.27) , UserGuide(3.28),Point(3.29),RouteSummary(3.30) & Route(3.31)</li><li>Added DocumentType Enumeration (12.11)</li><li>Added UserGuide Type Enumeration </li></ul>|
+|1.16|1/14/2013|<ul><li>Extended "Update profile picture" (8.10) functionality to allow a dispatcher / manager be able to update drivers’ profile pictures</li><li>Added "ETAExtensionReason" data model(3.27)</li><li>Added "Request Phone Call" (5.21) & "ExtendETA" (5.22) functionaliies</li><li>Added "Get ETA Extension Reasons" (12.13) for retrieving a list of possible reasons for extending ETA</li></ul>|
+|1.17|2/11/2014|<ul><li>Extended  data models :Driver (3.7), Dispatcher(3.20) to include the onDuty flag & profileLastUpdatedAt data element</li><li>Extended   Driver Equipment(3.9) data model to include the time stamp the equipment was last updated</li><li>Extended Sample Responses in sections: 7.8,1.10,7.11 reflect the updated data models (3.7,3.9 & 3.20)</li><li>Extended "Get List of Drivers" (7.8) , "Get List of Dispatchers"(7.10", "Get a Dispatcher" (7.11) functionalities of Vendor API to accommodate onDuty flag in filter criteria & response</li><li>Added data models : "ServiceType" (3.33) & "DispatchCountBreakdownItem" (3.34)</li> <li>Modified Dispatch Summary Data model (3.26) to accommodate new requirements as per US#: 1143, 1145</li><li>Added "Get Service Types"(12.21)</li><li>Modified "Get Dispatch Summary" (5.16) to provide Dispatch Summary information segregated by service type</li></ul>|
+
+| Version |Changes|
+|:--------------|:----------|   
+|2.0|<ul><li>Added new data models to Support Agero Support requirements: sections 3.32 to 3.57</li><li>Enhanced "Get Facility List" (7.12) & "Get a Facility" (7.13) to reflect the enhanced Facility data model</li><li>Extended "Vendor API " to add new functionalities : sections 7.14 -7.22</li><li>Extended Enumeration APIs to add new Agero Support functionalities: sections 12.13-12.23</li><li>Added User Management API ( Section 18) and related data models to support these APIs</li><li>Enhanced Terms & Conditions API to retrieve / acknowledge app specific T&C ( Section 11)</li><li>Enhanced "VendorEquipment"(3.12) data model to accommodate equipment quantity, shift and effective date</li><li>Extended "Receive Server Notification" API (16.2) to include VendorId in the outgoing notification messages</li><li>Added new functionalities of updating an existing Server to Server notification subscription(16.4) and Unsubscribing from server to Server notifications (16.5)</li></ul>|
+|2.1|<ul><li>Extended Performance API(20) to include retrieval of 13 month trend data (20.2) and associated data models (3.58-3.61)</li><li>Added Baseline version of Billing API(21.1 – 21.6) and associated data models(3.62-3.66)</li><li>Modified "Get Performance category Types"(12.17) to include All ( an all-inclusive) performance category</li><li>Added additional enumerations(12.25-12.19) in support of 13 month trend data API</li><li>Reinstated "Track PTO"  API (6.6)</li><li>Revised  "Security Type" Enum(12.29) to correct the Resource URI</li></ul>|
+|2.2|<ul><li>Added  new data models(12.48-12.49) & resources(22.1-22.4)  to support Feedback functionality</li><li>Extended Enumerations API(12) to include additional resources (12.30-12.47)needed for Billing API</li><li>Extended Login / Authenticate User functionalities to include additional data elements for ProfileCompleteness </li><li>Extended UserManagement API to include "Add an Owner" resource</li><li>Extended Dispatch data model to include Dispatcher details</li><li>Service Location data model revised to have consistent naming convention for data elements</li><li>Service Location data model extended to include an additional boolean data element : "isRestrictedRoadway"</li><li>Extended "Get Dispatch List"(5.1) resource to support additional filters: poNumbers,serviceTypes</li><li>Extended "Get a single Dispatch" resource to support querying a dispatch by either DispatchRequest# OR PO#</li><li>Revised "Get Dispatch List" & "Get a single Dispatch" resources to reflect the updated data models ( Dispatch, ServiceLocation)</li></ul>|
+|2.3|<ul><li>Extended Vendot API to include "Remove Driver Equipment Assignment"</li><li>Added "Get Server  Notification Subscriptions"(16.6) and "Get a Server Notification Subscription"(16.7)</li><li>Added new Data Models: clientNotificationSubscription(3.65) and serverNotificationSubscription(3.66)</li><li>Revised PushNotifications API ---"Subscribe to Notifications"(9.1)</li><li>Added "Notification Subscriptions" API (23.1-23.3) </li></ul>|
+|2.4|<ul><li>Corrected the Response Schema of "Get Time Period Types" (12.29)</li><li>Corrected the Response Schema of "Get Business Unit Types" (12.28)</li><li>Added HeatMap API(24.1 – 24.8) and corresponding data models(3.67 – 3.70)</li><li>Added Additional data models (3.70-3.75) for AgeroSupport API</li></ul>|
+|2.4.1|<ul><li>Added Dispatch Status to HeatMapDataItem data model (3.69)</li><li>Updated "Post HeatMap data" (24.7) and "Get HeatMap data"(24.8) to reflect the updated heatMapDataItem data model</li></ul>|
+|2.5|<ul><li>Revised "Performance Data"(3.51) data model</li><li>Extended "Get Performance Data" (20.1) to add startDate & endDate parameters</li><li>Revised Enumerations API (12.30-12.47 )  to make responses consistent</li><li>Revised "Get TrendCategory Types" (12.25) to change the codes</li><li>Extended Claim Data Model to include driverName data element</li><li>Extended Billing API to reflect the additional data element driverName added to claim data model</li><li>Revised "Validate Vendor Info" (7.15), "Retrieve Identity Questionnaire"(19.12) & "Validate Identity Questionnaire" (19.13) and "Create an Owner"(19.17) to include  Authorization details in order to avoid any confusion</li><li>Updated the Request schema of "Create Profile" API (8.1)</li><li>Removed "Export Profile" API</li><li>Added new API "Get Claim Eligible POs"(21.6)</li><li>Extended "Retrieve Users" (19.4) API to accommodate a new filter: passwordManagementPrivilege</li><li>Added additional data models  3.76-3.83 for AgeroSupport functionality</li><li>Added Work In progress version of Reporting API</li></ul>|
+|2.6|<ul><li>Revised "Retrieve Identity Questionnaire" (19.xx) to remove vendorId in the resource URI</li><li>Revised UserClaim data model to include a new data elements that represents the # of times a user has not accepted the terms and conditions</li><li>Revised "Authenticate User" API (19.15) to reflect the revised UserClaim data model. Also corrected the sample request body</li><li>Added "Accept User Invitation" (19.19) </li><li>Added "Get User’s Manager Info " (19.18)</li><li>Extended OAuth Security API(15) to include Signin(15.6) & Signout (15.7) APIs</li><li>Cleaned up the description of HeatMap API (24)</li><li>Extended "HeatMapDataRequest" data model (3.68)  to accommodate new dataelement :vendorList</li><li>Revised "Receive HeatMap Request"(24.6) to reflect the revised "HeatMapDataRequest" data model</li><li>Added HeatMapDataResponse (3.84)</li><li>Revised "Post HeatMapData"  (24.7) to use HeatMapDataResponse data model</li></ul>|
+|2.7|<ul><li>Added new performance related Data models (3.85-3.88)</li><li>Revised Performance data models</li><li>Revised "Retrieve Performance Data" (20.1),"Retrieve 13 month Trend data"(20.2)  and "Get KPI Metric Tree"(20.3) to reflect the revised performance data models</li></ul>|
+|2.8|<ul><li>Extended  User Management API to include new resources for Invitation Management---19.20 – 19.27</li><li>Updated Driver  data model to include office ph#/email</li><li>Added new API : "3rd Party Partner / Vendor Driver Profile Management API" (26) with 10 resources (26.1 – 26.13)</li></ul>|
+|2.9|<ul><li>Renamed Enum "Get CancellationFilterTypes"912.52) to "Get CancellationTypes"</li><li>Renamed Enum "Get CancellationFilterTypes"912.52) to "Get CancellationFlags"</li><li>Renamed "CallAcceptance" enumeration(12.37) to "CallAcceptance Flags" enum</li><li>Added new enums: "CallAcceptanceFlags"(12.57)</li><li>Added Reporting API (25.1-25.17)</li><li>Modified Resource URIs of 3rd Party Partner / Vendor Driver Profile Management API (26.1-26.13)</li><li>Replaced occurences of “privelage” keyword with “privelege”</li><li>Revised HeatMap API to remove redundant ErrorCodes</li><li>Updated the response schema of “Validate Identity Questionnaire”(19.13)</li><li>Revised the HeatMapData Request</li><li>Fixed sample requests of “Create User”(19.1),”Invite User”(19.8)</li></ul>|
+|2.10|<ul><li>Revised “Get Equipment”(7.1) ,”Get Facility List” (7.12) to allows these resources to abe accessed in public mode</li><li>Added new Resources to Vendor API: “Get Cities”(7.24),”Get State”(7.25) and ”Get ZipCodes”(7.26)</li><li>Revised Facility data model(3.21) to remove “InsurancePolicies” at facility level</li><li>Renamed “InsuranceInfo”(3.40) data model to “InsurancePolicy”</li><li>Revised  Vendor(3.32) data model to associate insurance info at Vendor level rather than Facility level</li><li>Updated  sample response of“Get Vendor Info”(7.15) to reflect the updated Vendor data model</li><li>Added “Retrieve Equipments for a given Facility” API</li><li>Revised Facility(3.21) data model to add Rates</li><li>Revised VendorEquipment(3.12) data model to decouple rates from equipment</li></ul>|
+|2.11|<ul><li>Added Rate GET/POST/PUT/DELETE<li>Added InsurancePolicy GET/POST/PUT/DELETE</li><li>Added Vendor Request History GET</li><li>Refactored JSON for camelCase naming convention</li><li>Removed the Status description from POST/PUT/GET methods for Rates, Insurance Policy and Vendor Request History</li><li>Revised Error Msgs for the Insurance Policy 7.x</li><li>Revised Reporting API Specs (25.x)</li><li>Renamed InsuranceInfo to InsurancePolicies</li><li>Revised Certificate URL naming convention for 7.40 and 7.41</li><li>Added Equipment Shift Type Enumeration for 3.104</li><li>Revised Vendor Request Status Codes to AlphaNumeric for 12.41</li><li>Added Update Billing Feature to 21.4</li><li>Added Pending History for Vendor Updates 7.44</li><li>Added Data models for VendorRequest and RequestStatus Types and RequestHistory for 3.105/6/7</li></ul>|
+|2.12|<ul><li>Updated GPS Tracking for Driver Data Model and API samples</li><li>Adding COI Expiration retrieval within last 30 days for 7.407</li><li>Updated/added the action for the SecurityInfo for forgot password scenario for 19.14</li><li>Updated Heat Map API’s for 21.x</li><li>Added Vendor Contact Info data for 7.31/32/33</li><li>Updatd Rate & InsurancePolicy Model 3.39/40</li><li>Updated Feedback post param 3.70</li><li>Updated 19.12 & 19.13 Retrieve & Validate Security Questionnaire and removed the VendorID.</li><li>Refactored 3.107 and 7.44</li><li>Added 12.63/64 enumeration types for pending request status and type codes</li><li>Updated 7.8 Get List of Drivers for adding the Response Type, to conserver bandwidth to be used for Reporting API 25.x</li><li>Updated User Management Specs 19.12/13/14</li><li>Updating Fleet Map sample response for 7.9</li><li>Updated 22.x Feedback API’s URI’s as the code aligns differently.</li><li>Added the 3.23 OnDuty Param for the Driver</li><li>Added 5.3 API Route for the Get Dispatch details by PO Number</li><li>Updating the Terms and Conditions API 11.x</li><li>Updating the Get Checks API 21.5 and the Checks data model to reflect the new parameter addition (i.e. originalPONumber</li><li>Addition new API Get a single Dispatch by PO 5.2</li><li>Updating Feedback API’s</li><li>Updating the entire SPECS document and making major API Changes in the Routes comparing to the discrepancies observed in the code implementation.</li><li>OLD Routes to be maintained for the backward compatibility</li><li>New Routes to be added conforming with the REST API guidelines.</li>Updates to be done only to the new Routes. Old routes will not be maintained and will be deprecated/obsolete at some point.</ul>|
+|2.13|Added 7.47 Get Vendor Pending Request History Specs<br>Updated Claim API’s for adding the towInformation to the Claim Object (Updated Claim Datamodel and added TowInfo model for the same)|
+|2.14|<ul><li>Updating the Spec gaps.</li><li>Updating the SPEC Request Schema, Parameters, Responses with what’s specified.</li><li>Adding new Routes to existing API’s conforming the REST Protocols</li><li>New API for Giving HeatMap Consent, COI Vendor Request History</li><li>Updated correct JSON Sample for 7.16</li><li>Added missing Certificate URL to InsurancePolicy model</li></ul>|
+|2.15|<ul><li>Updated NotificationTypeCodes Enumeration</li><li>Added/Updated new Data Models</li><li>Updated Request Phone Call api’s</li><li>Other misceallaneous changes</li></ul>|
+|2.16|<ul><li>Added 5.9 Assign External Driver API</li><li>Added Business Rule update for Driver Profile “onDuty is not required”</li></ul>|
+|2.17|<ul><li>External Driver ID updates across all the API where Driver and UserInfo Model is Found</li><li>OAuth Changes to allow External Driver Management</li><li>XtrnlParty API Updates to support External Driver ID</li></ul>|
+|2.18|<ul><li>Updating AssignDriver 5.8 API to support External DriverID’s.</li></ul>|
+|2.19|<ul><li>Adding DriverProfile Model to DispatchStatus Model</li><li>Updating the same for relevant API response samples like Dispatch Status Updates across 6.x </li><li>Adding DriverProfile Model to Tracking API’s</li><li>Updating the app to apps in the API URL route for 11.1 and 11.2 as part of new route updates</li></ul>|
+|2.20|<ul><li>Updated section 5.19 for extension to request a phone call api</li><li>Updated events for 12.9 including new event for Callback Requested</li><li>Updated for US 2297 3.1, 5.1, 5.2, 5.3, 12.48 and 16.2 for Dispatch Acceptance Source</li></ul>|
+
+
 # 3 Data Models
 
 ## 3.1 Dispatch
@@ -34,6 +82,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |    dispatchRequestNumber           |The dispatch Request ID from OneRoad  |YES|String||
+|    dispatchSource           |Call Acceptance Source from enum Call Method Type 12.48  |YES/NO|String|Null for events until SP accepted For e.g. NewJobOffer|
 |    referenceNumber           |The reference number from OneRoad |NO|String||
 |    poNumber           |The PO Number from OneRoad |NO|String|Jobs in the "NEW" status  will not have PO Numbers|
 |    currentStatus           | The current status of the job|YES|DispatchStatus||
@@ -60,7 +109,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |    signatures           |An array of signatures  captured for the dispatch|                NO |                 Signature[]|
 |    dispatcherContactNumber           |  Represents the dispatcher Contact Details |        NO    |              String|Phone number of the Dispatcher|
 |    dispatcher           |  Represents the Dispatcher Complete details    |        NO    | Dispatcher||
-     equipmentList           |  Array of equipments used    |        NO    | Equipment[]||
+|     equipmentList           |  Array of equipments used    |        NO    | Equipment[]||
 
 
 
@@ -4171,7 +4220,7 @@ Pagination is available and enforced for this request.
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
    
 
 + Response 200 (application/json)
@@ -4193,6 +4242,7 @@ Pagination is available and enforced for this request.
                         "serviceType": "Tow",
                         "coverage": "",
                         "dispatchRequestNumber": "457460776",
+                        "dispatchSource": "IVR",
                         "urgency": "STANDARD",
                         "referenceNumber": null,
                         "poNumber": "115315731",
@@ -4380,7 +4430,7 @@ The "Get a Single Dispatch by DispatchRequestNumber " API will return informatio
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
    
 
 + Response 200 (application/json)
@@ -4397,6 +4447,7 @@ The "Get a Single Dispatch by DispatchRequestNumber " API will return informatio
             "serviceType": "Tow",
             "coverage": "",
             "dispatchRequestNumber": "457460776",
+            "dispatchSource": "eDispatch",
             "urgency": "STANDARD",
             "referenceNumber": null,
             "poNumber": "115315731",
@@ -4585,7 +4636,7 @@ The "Get a Single Dispatch by PO Number" API will return information related to 
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
    
 
 + Response 200 (application/json)
@@ -4602,6 +4653,7 @@ The "Get a Single Dispatch by PO Number" API will return information related to 
                     "serviceType": "Tow",
                     "coverage": "",
                     "dispatchRequestNumber": "457460776",
+                    "dispatchSource": "eDispatch",
                     "urgency": "STANDARD",
                     "referenceNumber": null,
                     "poNumber": "115315731",
@@ -4747,6 +4799,7 @@ The "Get a Single Dispatch by PO Number" API will return information related to 
                         }
                     ]
                 }
+
 
             
 ## 5.4 Submit Dispatch Acceptance [/dispatches/{dispatchRequestNumber}/acceptDispatchRequest]
@@ -5037,6 +5090,14 @@ The profile data sent along will be used to create a new external driver profile
 If the profile already exists but and update is found while comparing the existing profile data with the request body profile data, then the existing profile will be updated.
 
 This API also provides an alternative for external/3rd parties with maintaining (create/update) of the driver Profiles on the fly at runtime
+
+###Request URL
+
+OLD Route: PUT /dispatches/{id}/assignedDriver
+
+New Route: PUT /dispatches/{id}/assignDriver 
+
+OLD Route will be deprecated in future releases
 
 ###Sample Request URL
 /dispatches/329345447/assignedDriver
@@ -5540,6 +5601,15 @@ Schema Property  | Description | Is Required | Type |Business Rules|
 
 The "Get Dispatch History Sumary"API provides aggregated information of dispatch count by date for last 5 days. Information provided depends on the role of the user as a dispatcher gets to see more information compared to information a driver can see
 
+###Request URL
+
+OLD Route: GET  /dispatchesSummary
+
+New Route: GET  /dispatchSummary  
+
+OLD Route will be deprecated in future releases
+
+
 ###Sample Request URL
 
 /dispatchesSummary
@@ -5945,6 +6015,32 @@ HTTP 200 OK
 
 The "Request Phone Call" API is used to request an Agero agent to call back the SP
 
+This resource is allowed to call only once per dispatch and if the DispatchStatus is “NEW”. 
+Once this resource is called, dispatcher cannot accept/refuse the job electronically via API.
+
+Calling this resource will set the CurrentStatus collection (typeOf DispatchStatus Model) as part of Dispatch Model to
+
+    "currentStatus": {
+        "code": "2",
+        "description": "NEW",
+        "eta": 0,
+        "reason": "Phone Call request by SP",
+        "reasonCode": 1012,
+        "source": null,
+        "extJobId": "240888148",
+        "latitude": 0,
+        "longitude": 0,
+        "statusTime": "0001-01-01T00: 00: 00",
+        "driverId": 0,
+        "reportedBy": "Dispatcher",
+        "event": null,
+        "externalDriverId": null,
+        "driverProfile": null
+    }
+
+Highlighted fields will be updated to these static values referencing that a call back is requested by SP whenever this recource 
+is called and as long as the currentStatus/Dispatch Status on the call remains “NEW”
+
 ###Sample Request URL
 
 /dispatches/{id}/requestPhoneCall
@@ -5992,7 +6088,7 @@ An Agero agent will contact you shortly
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
             
     + Body
     
@@ -6005,52 +6101,7 @@ An Agero agent will contact you shortly
             
 + Response 200 ()
 
-## 5.20 Extend ETA v4.x [/dispatches/{id}?action=extendedETA]
 
-###Description
-
-The "Extend ETA" API allows a Service Provider to extend the original ETA provided.Verb was PUT and POST. POST will be deprecated eventually.
-
-###Sample Request URL
-
-/dispatches/329345447?action=extendETA
-
-###Request Schema
-
-
-Schema Property  | Description | Is Required | Type |Business Rules| 
-|:---------------|:------------|:------------|:-----|:-------------|
-|delayReason|Represents the reason  for delay| YES|Enum| Please refer to DelayReasonTypes Enum for possible values|
-|etaExtensionInMinutes|Represents the Amount of time(in mins) to be added to original ETA| YES|Integer
-
-###Sample Request
-N/A
-    
-###Response Schema
-N/A
-
-###Sample Response
-HTTP 200 OK    
-
-###Errors 
-
-|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
-|:---------|:-----------------|:----------|:--------|:--------|
-|400       |Invalid Request  |Invalid Request| Dispatch Request number/Revised ETA is required|| 
-|401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|403       |Forbidden         |FORBIDDEN_RESOURCE|The resource is not allowed by the current user|Since drivers cannot accept view or accept offers,drivers also cannot request more time to accept job offers|  
-|404       | Job Not Found    |             |       |The requested job record doesn’t exist| 
-|500       | Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server| 
-
-### Extend ETA [PUT]
-
-+ Request ()
-
-    + Header
-
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-            
-+ Response 200 ()
 
 ## Group 6 Dispatch Status API
 
@@ -8564,9 +8615,7 @@ The "Partial Get" API allows client apps to retrieve the userInfoand preferences
             
 + Response 200 ()
 
-## 8.6,8.11 Facility List [/profile/facilities]
-
-## 8.6 Get Facility List for Profile 
+## 8.6 Get Facility List for Profile [/profile/facilities]
 
 ###Description
 
@@ -8633,56 +8682,6 @@ Returns an HTTP 500 if a server side exception occurs.
          "message" : "Unknown Error Occurred."
          }
 
-## 8.11 Add a preferred facility 
-
-###Description
-
-The "Add a preferred facility" API allows a dispatcher to add a facility to his preferred list of facilities for which he wants to receive jobs .
-
-###Sample Request URL
-
-/profile/facilities
-
-###Response JSON
-
-|Schema Property |Description   |Is Required   |Type   |Business Rules|
-|:---------------|:-------------|:-------------|:------|:-------------| 
-|facilityId|Unique identifier of the  facility to be added to the preferred list  |YES   |String|
-
-###Sample Request Body
-
-    {
-    "facilityId" : "1"
-    }
-
-###Sample Request 
-
-    POST https://test.enterprise.agero.com/v1/id/profile/facilities HTTP/1.1
-    Host: test.enterprise.agero.com
-    Content-Type: application/json
-    Content-Length:
-    Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-    
-    {
-    "facilityId" : "1"
-    }
-    
-###Response JSON
-
-N/A
-
-###Sample Response Body
-
-HTTP/1.1 200 OK
-
-###Errors 
-
-|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
-|:---------|:----------------|:----------|:--------|:--------|
-|401       |Unauthorized      |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|403       |Forbidden  |FORBIDDEN |Request is forbidden for the  current user    |User making this request does not have enough privileges to submit / approve an addition of additional territories   for a facility| 
-|404       |Job Not Found  |   |  |  The requested job record  doesn’t exist| 
-|500       |Server Error     |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
 ###Get Facility List for Profile [GET]
 
@@ -8726,24 +8725,8 @@ HTTP/1.1 200 OK
                ]
             }
             
-### Add a preferred facility [POST]
-                                                                                                     
-+ Request (application/json)
 
-    + Header
-
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-    
-    + Body
-    
-            {
-                 "facilityId" : "1"
-            }
-            
-            
-+ Response 200 ()
-
-## 8.7,8.9 Upload and Update Profile API [/profile/picture?driverId={driverId}] 
+## 8.7 - 8.9 Upload,Retrieve and Update Profile API [/profile/picture?driverId={driverId}] 
 
 ## 8.7 Upload a profile picture 
 
@@ -8755,6 +8738,14 @@ REST API.
 
 If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of
 Agero DriverID.
+
+###Request URL
+
+OLD Route: POST  /profile/picture?driverId={driverId}
+
+New Route: POST /profile/{profileId}/picture 
+
+OLD Route will be deprecated in future releases
 
 ###Request Header
 
@@ -8800,6 +8791,47 @@ HTTP 201 Resource Created
 |403       |RESOURCE_EXISTS |A profile exists for  this user  | Once a profile is created for a user,it cannot be created again. A PUT should be made instead to update the current profile|
 |500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
 
+## 8.8 Retrieve a profile picture 
+
+###Description
+
+The "Retrieve  a profile picture "API allows drivers and dispatchers to retrieve a picture for a given vendor id and driver id.
+driverId query string parameter is optional and is meant to be used only by a dispatcher / owner. If not provided, the API will return 
+the profile picture of the logged in user. 
+
+A dispatcher / owner can however retrieve the profile pictures of drivers by passing a driverId. If driverId is passed and the logged in
+user is not a dispatcher / owner, API will return a forbidden (HTTP Status Code:403) error.
+
+If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against
+External DriverID instead of Agero DriverID.
+
+###Request URL
+
+OLD Route: GET /profile/picture?driverId={driverId}
+
+New Route: GET /profile/{profileId}/picture  
+
+OLD Route will be deprecated in future releases
+
+###Request Body
+
+N/A
+
+###Response Body
+Binary steam of the picture
+
+###Sample Response
+
+###Errors 
+
+|HTTP Code |Error Code | Message |Reason  | 
+|:---------|:--------- |:--------|:--------|
+|404       |RESOURCE_NOT_FOUND| No profile picture found || 
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|403       |NOT_ALLOWED |Driver role cannot request the profile pictures of other drivers  | |
+|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+
+
 ## 8.9 Update a profile picture 
 
 ###Description
@@ -8810,6 +8842,14 @@ A dispatcher / owner can however update the profile pictures of drivers by passi
 
 If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID instead of
 Agero DriverID.
+
+###Request URL
+
+OLD Route: PUT  /profile/picture?driverId={driverId}
+
+New Route: PUT /profile/{profileId}/picture 
+
+OLD Route will be deprecated in future releases
 
 ###Request Header
 
@@ -8918,6 +8958,13 @@ dispatcher / owner, API will return a forbidden error.
 If the OAuth Token used is managing the External Drivers, then the DriverID in the URL will be used to lookup against External DriverID
 instead of Agero DriverID.
 
+###Request URL
+
+OLD Route: DELETE /profile/picture?driverId={driverId}
+
+New Route: DELETE /profile/{profileId}/picture
+
+OLD Route will be deprecated in future releases
 
 ###Request Parameters
 
@@ -8964,62 +9011,6 @@ HTTP 200 OK
 + Response 200 ()
 
 
-## 8.12 Remove a preferred facility [/profile/facilities/{facilityId}] 
-
-###Description
-
-The "Remove a preferred facility" API allows a dispatcher to remove a facility from his preferred list 
-of facilities for which he wants to receive jobs.
-
-###Sample Request URL
-/profile/facilities/3
-
-###Request Parameters
-
-| Schema Property|Description   |Is Required |Type|Business Rules|
-|:---------------|:-------------|:-----------|:-------------|:-------------| 
-|facilityId|  Unique identifier of the facility  to be added to the preferred list    |YES   |   String |
-
-###Sample Request Body
-
-N/A
-
-###Sample Request
-
-    DELETE https://test.enterprise.agero.com/v1/id/profile/facilities/3 HTTP/1.1
-    
-    Host: test.enterprise.agero.com
-    
-    Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-
-###Response JSON
-
-N/A
-
-###Sample Response Body
-
-HTTP/1.1 200 OK
-
-
-###Errors
-
-|HTTP Code |HTTP Reason Phrase|Error Code | Message |Reason  | 
-|:---------|:--------- |:--------|:--------|:--------|
-|401       |Unauthorized| invalid_token|oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
-|403       |Forbidden|FORBIDDEN_RESOURCE |The resource is not allowed by the current user.   |Drivers view or refuse job offers.|
-|404       |Job Not Found| | |The requested job record doesn’t exist.|
-|500       |Server Error| UNKNOWN        |Unknown Error   |An unknown error occurred at the server|
-
-
-###Remove a preferred facility[DELETE]
-
-+ Request ()
-
-    + Header
-
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
-
-+ Response 200 ()
 
 # Group 9 Push Notification API
 ## 9.1 Subscribe to Notifications [/pushNotification/subscribe] 
@@ -9536,6 +9527,14 @@ N/A
 
 The "Accept/Decline Terms & Conditions " API allows the user to accept / decline the terms of use and privacy policy. 
 Besides accepted / declined flag, other metadata such as deviceId, username,apikey…etc are also captured in the backend.
+
+###Request URL
+
+OLD Route: POST /termsAndConditions?action={accept/decline}?appId={appId}
+
+New Route: POST /termsAndConditions/app/{appId}/{action}
+
+OLD Route will be deprecated in future releases
 
 ### Sample Request URL
 
@@ -10353,6 +10352,42 @@ N/A
                 {
                     "code": "28",
                     "description": "TestPush"
+                },
+                {
+                    "code": "29",
+                    "description": "JobComplete"
+                },
+                {
+                    "code": "30",
+                    "description": "ServiceTimeout"
+                },
+                {
+                    "code": "31",
+                    "description": "EnRoute"
+                },
+                {
+                    "code": "32",
+                    "description": "OnScene"
+                },
+                {
+                    "code": "33",
+                    "description": "TowInProgress"
+                },
+                {
+                    "code": "34",
+                    "description": "DestinationArrival"
+                },
+                {
+                    "code": "35",
+                    "description": "JobUndo"
+                },
+                {
+                    "code": "36",
+                    "description": "Job Extended"
+                },
+                {
+                    "code": "37",
+                    "description": "SPCallbackRequested"
                 }
             ],
             "links": null
@@ -10398,7 +10433,7 @@ The table below shows complete list of Notifications
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
             
 
 + Response 200 (application/json)
@@ -10522,6 +10557,42 @@ The table below shows complete list of Notifications
                         {
                             "code": "28",
                             "description": "TestPush"
+                        },
+                        {
+                            "code": "29",
+                            "description": "JobComplete"
+                        },
+                        {
+                            "code": "30",
+                            "description": "ServiceTimeout"
+                        },
+                        {
+                            "code": "31",
+                            "description": "EnRoute"
+                        },
+                        {
+                            "code": "32",
+                            "description": "OnScene"
+                        },
+                        {
+                            "code": "33",
+                            "description": "TowInProgress"
+                        },
+                        {
+                            "code": "34",
+                            "description": "DestinationArrival"
+                        },
+                        {
+                            "code": "35",
+                            "description": "JobUndo"
+                        },
+                        {
+                            "code": "36",
+                            "description": "Job Extended"
+                        },
+                        {
+                            "code": "37",
+                            "description": "SPCallbackRequested"
                         }
                     ],
                     "links": null
@@ -11597,6 +11668,8 @@ https://yourServerName/…/ serverNotifications/notify
 |    notificationEventId |  Uniquely identifies this  particular event notification  across all notifications sent,    |YES| number |This can be used to identify duplicates received due to failure-retry process|
 |    notificationCode |    Notification Code      |YES |  Integer  |  Possible Values: 1,2,3,... |
 |    vendorId | Represents the unique identifier of the Vendor   the notification is meant for         |YES| String |
+|    facilityId | FacilityID in the AgeroSystem for a given VendorID|YES| String |
+|    dispatchSource | Call Acceptance Source from enum Call Method Type 12.48|YES/NO| String |Null for events until SP accepted For e.g. NewJobOffer|
 |    dispatchRequestNumber | The dispatchRequestNumber         |YES| Integer |
 |    title |  Title of the Notification   |NO | String |
 |    message |   The message body of the notification          |NO|  String | 
@@ -11607,6 +11680,9 @@ https://yourServerName/…/ serverNotifications/notify
     {
         "notificationEventId" : "123456789",
         "notificationCode" : "1",
+        "vendorId": "50230",
+        "facilityId": "1",
+        "dispatchSource": "eDispatch",
         "dispatchRequestNumber" : 123456789,
         "title" : "New Offer",
         "message" : "You have a new job."
@@ -11637,6 +11713,9 @@ https://yourServerName/…/ serverNotifications/notify
             {
                 "notificationEventId" : "123456789",
                 "notificationCode" : "1",
+                "vendorId": "50230",
+                "facilityId": "1",
+                "dispatchSource": "eDispatch",
                 "dispatchRequestNumber" : 123456789,
                 "title" : "New Offer",
                 "message" : "You have a new job."
