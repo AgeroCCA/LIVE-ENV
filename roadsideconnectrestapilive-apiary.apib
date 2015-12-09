@@ -72,7 +72,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |2.17|<ul><li>External Driver ID updates across all the API where Driver and UserInfo Model is Found</li><li>OAuth Changes to allow External Driver Management</li><li>XtrnlParty API Updates to support External Driver ID</li></ul>|
 |2.18|<ul><li>Updating AssignDriver 5.8 API to support External DriverID’s.</li></ul>|
 |2.19|<ul><li>Adding DriverProfile Model to DispatchStatus Model</li><li>Updating the same for relevant API response samples like Dispatch Status Updates across 6.x </li><li>Adding DriverProfile Model to Tracking API’s</li><li>Updating the app to apps in the API URL route for 11.1 and 11.2 as part of new route updates</li></ul>|
-|2.20|<ul><li>Updated section 5.19 for extension to request a phone call api</li><li>Updated events for 12.9 including new event for Callback Requested</li><li>Updated for US 2297 3.1, 5.1, 5.2, 5.3, 12.48 and 16.2 for Dispatch Acceptance Source</li></ul>|
+|2.20|<ul><li>Updated section 5.19 for extension to request a phone call api</li><li>Updated events for 12.9 including new event for Callback Requested</li><li>Updated for US 2297 3.1, 5.1, 5.2, 5.3, 12.48 and 16.2 for Dispatch Acceptance Source</li><li>Added description to 5.19 callback request api</li><li>Updated the dispatch source parameter details for dispatch model under 3.1</li></ul>|
 
 
 # 3 Data Models
@@ -82,7 +82,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
 |    dispatchRequestNumber           |The dispatch Request ID from OneRoad  |YES|String||
-|    dispatchSource           |Call Acceptance Source from enum Call Method Type 12.48  |YES/NO|String|Null for events until SP accepted For e.g. NewJobOffer|
+|    dispatchSource           |Call Acceptance Source from enum Call Method Type 12.48  |NO|String|Null for some events<br>For e.g. NewJobOffer|
 |    referenceNumber           |The reference number from OneRoad |NO|String||
 |    poNumber           |The PO Number from OneRoad |NO|String|Jobs in the "NEW" status  will not have PO Numbers|
 |    currentStatus           | The current status of the job|YES|DispatchStatus||
@@ -6059,6 +6059,13 @@ Schema Property  | Description | Is Required | Type |Business Rules|
             "name": "BRENDA  MORGAN",
             "phone": "1111111111"
         }
+        
+#### Description
+
+- Callbacknumber refers to the preferred number Agero Agent should call back when requesting phone callback request by Agero
+- Name refers to the SP Dispatcher or designated person who the Agero Agent expects to speak but is an optional field
+- Phone refers to the secondary number for the service provider
+
     
 ###Response Schema
 N/A
@@ -10845,6 +10852,72 @@ Host: api-test.enterprise.agero.com
                     "description": "Winch Hvy Dty"
                 }
             ]
+            
+## 12.48 Get Call Method Types [/enumerations/callmethodTypes] 
+
+###Description
+
+The "Get Call Method Types" API provides a list of possible ways a service provider can be dispatched a job.    
+
+###Sample Request URL
+
+/enumerations/callmethodTypes
+
+
+###Request JSON
+
+N/A
+
+###Sample Request Body
+
+N/A
+
+###Response JSON
+
+| Schema Property|Description  |Is Required|Type|Business Rules|
+|:--------------|:-------------|:----------|:---|:-------------|   
+|               |Array of service types|YES|EnumerationType|
+
+###Errors 
+
+|HTTP Code |Error Code | Message |Reason  | 
+|:---------|:----------|:--------|:--------|
+|401       |INVALID_TOKEN| oauth.v2.InvalidAccessToken: Invalid access token |A valid OAuth token was not provided| 
+|500       |UNKNOWN      |Unknown Error   |An unknown error occurred at the server|
+
+
+
+###Get Call Method Types [GET]
+
++ Request ()
+
+    + Header
+
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
+
++ Response 200 (application/json)
+
+    + Body
+                    
+            [
+            {
+            "code" : "%",
+            "description" : "All"
+            },
+            {
+            "code" : "eDispatch",
+            "description" : "eDispatch"
+            },
+            {
+            "code" : "IVR",
+            "description" : "IVR Calls"
+            },
+            {
+            "code" : "LivePhone",
+            "description" : "Live Phone"
+            }
+            ]
+            
 
 # Group 13 Tracking API
 ## 13.1 Get Notify Current Location [/currentLocation]
