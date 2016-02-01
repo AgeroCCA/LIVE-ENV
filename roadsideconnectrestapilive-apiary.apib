@@ -72,8 +72,8 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |2.17|7/31/2015|<ul><li>External Driver ID updates across all the API where Driver and UserInfo Model is Found</li><li>OAuth Changes to allow External Driver Management</li><li>XtrnlParty API Updates to support External Driver ID</li></ul>|
 |2.18|8/5/2015|<ul><li>Updating AssignDriver 5.8 API to support External DriverID’s.</li></ul>|
 |2.19|11/12/2015|<ul><li>Adding DriverProfile Model to DispatchStatus Model</li><li>Updating the same for relevant API response samples like Dispatch Status Updates across 6.x </li><li>Adding DriverProfile Model to Tracking API’s</li><li>Updating the app to apps in the API URL route for 11.1 and 11.2 as part of new route updates</li></ul>|
-|2.20|12/8/2015|<ul><li>Updated section 5.19 for extension to request a phone call api</li><li>Updated events for 12.9 including new event for Callback Requested</li><li>Updated for US 2297 3.1, 5.1, 5.2, 5.3, 12.48 and 16.2 for Dispatch Acceptance Source</li><li>Added description to 5.19 callback request api</li><li>Updated the dispatch source parameter details for dispatch model under 3.1</li></ul>|
-
+|2.20|12/8/2015|<ul><li>Updated section 5.19 for extension to request a phone call api</li><li>Updated events for 12.9 including new event for Callback Requested</li><li>Updated for US 2297 3.1, 5.1, 5.2, 5.3, 12.48 and 16.2 for Dispatch Acceptance Source</li><li>Added description to 5.19 callback request api</li><li>Updated the dispatch source parameter details for dispatch model under 3.1</li><li>Updated towDestination BusinessRule for Dispatch Model 3.1</li></ul>|
+|2.21|01/27/2016|<ul><li>Updated Section 5.4/5.5 Dispatch Acceptance/Refusal with correct Sample Request JSON Body</li><li>Updating Model for 5.4 and 5.5 with required fields</li></ul>|
 
 # 3 Data Models
 
@@ -4831,8 +4831,8 @@ has been accepted or rejected by Agero. The push notification process is documen
 | Schema Property | Description | Is Required | Type |Business Rules| 
 |:--------------- |:-----------|:-----------|:----|:-------------|
 |eta              |Estimated ETA|YES          |Integer| 
-|reason           |Any special circumstances if applicable |YES/NO |String |Required if ETA is beyond the maximum allowable. Possible Values: * None * Weather Emergency * Extreme Traffic in the Area|
-|reasonCode           |Allowed ReasonCodes |YES/NO |Integer |401/403/0| 
+|reason           |Any special circumstances if applicable |NO |String |Required if ETA is beyond the maximum allowable. Possible Values: * None * Weather Emergency * Extreme Traffic in the Area|
+|reasonCode           |Allowed ReasonCodes |YES |Integer |401/403/0| 
 
 ###Errors 
 
@@ -4854,13 +4854,14 @@ has been accepted or rejected by Agero. The push notification process is documen
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
     
     + Body
     
             {
-                "eta" : "80",
-                "reason" : "Extreme Traffic in the Area"
+                "eta" : 80,
+                "reason" : "Extreme Traffic in the Area",
+                "reasonCode" : 401
             }
    
 
@@ -4892,7 +4893,7 @@ Dispatcher can select one of the following Rejection reasons codes:
 
 | Schema Property | Description | Is Required | Type |Business Rules| 
 |:--------------- |:-----------|:-----------|:----|:-------------|
-|reasonCode       |represents the reason code why a job is being refused|YES|String|
+|reasonCode       |represents the reason code why a job is being refused|YES|Integer|
 
 ###Sample Request
 
@@ -4918,12 +4919,12 @@ Dispatcher can select one of the following Rejection reasons codes:
 
     + Header
 
-            Authorization: Bearer 7z9ZeGyweG98YMAyB0iSm2EiB6bD
+            Authorization: Bearer JncHi6TZZFXidwEtlqGDxRApopAF
     
     + Body
     
             {
-                "reasonCode" : "406"
+                "reasonCode" : 406
             }
    
 
