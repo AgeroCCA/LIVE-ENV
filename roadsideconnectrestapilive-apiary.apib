@@ -74,6 +74,7 @@ Agero will convey Dispatch Status information to its customers via 5 different m
 |2.19|11/12/2015|<ul><li>Adding DriverProfile Model to DispatchStatus Model</li><li>Updating the same for relevant API response samples like Dispatch Status Updates across 6.x </li><li>Adding DriverProfile Model to Tracking API’s</li><li>Updating the app to apps in the API URL route for 11.1 and 11.2 as part of new route updates</li></ul>|
 |2.20|12/8/2015|<ul><li>Updated section 5.19 for extension to request a phone call api</li><li>Updated events for 12.9 including new event for Callback Requested</li><li>Updated for US 2297 3.1, 5.1, 5.2, 5.3, 12.48 and 16.2 for Dispatch Acceptance Source</li><li>Added description to 5.19 callback request api</li><li>Updated the dispatch source parameter details for dispatch model under 3.1</li><li>Updated towDestination BusinessRule for Dispatch Model 3.1</li></ul>|
 |2.21|01/27/2016|<ul><li>Updated Section 5.4/5.5 Dispatch Acceptance/Refusal with correct Sample Request JSON Body</li><li>Updating Model for 5.4 and 5.5 with required fields</li></ul>|
+|2.22|05/17/2016|<ul><li>Updated Security section 15.x to distinguish client_id and clientId for OAuth authorize (request parameters section) API’s</li></ul>|
 
 # 3 Data Models
 
@@ -11245,7 +11246,7 @@ URI that a client app calls to for authorization . Redirects app end user to Log
 
 | Schema Property|Description  |Is Required|Type|Business Rules|
 |:--------------|:-------------|:----------|:---|:-------------|   
-|    client_id           |   Represents the consumer  key of the app        |YES|String|
+|    client_id           |   Represents the consumer  key of the app        |YES|String| This is the consumer key which is common across all the calls for this API. It can also be retrieved from the https://apiportal.agero.com under “My Apps” menu section. |
 |    response_type        |    Represents the response  type  |YES|Enum| Static Value: code|
 |    scope        |    Represents the privileges being requested   |YES|Enum|PossibleValues: READ WRITE|   
 |    state        |    This parameter is designed  to prevent cross-site request forgery attacks  The server sends this  string back in the|YES|String| 
@@ -13627,5 +13628,3 @@ N/A
                 " notificationEvents" : "1,2,3,…"
                 }
             ]
-                    
-
